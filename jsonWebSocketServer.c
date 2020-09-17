@@ -360,7 +360,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				// Expect {"type":"read"|"write","data":["varName","varName"]|{}}
 				// Need type in one string and pointer to data string
 				char *pMessageData = (char*)t->internal.client[index].wsDecode.pPayloadData;
-				STRING requestType[7+1], data[4+1];
+				STRING requestType[20+1], data[4+1];
 			
 				// {
 				pMessageData = skip(pMessageData);
@@ -460,6 +460,21 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 					if (t->internal.client[index].writeVariable.Status != 0) { jsonInternalSetWSServerError(t->internal.client[index].writeVariable.Status, t); continue; }
 				
 					strcpy(responseType, "writeresponse");
+					pResponseData = pMessageData; // NOTE: This echoes the received data. Might want to do something different later.
+					responseDataLength = dataLength;
+				
+				} else if (requestType[0] == 'm') {
+				
+					// Write
+					t->internal.client[index].writeVariable.pJSONObject = (UDINT)pMessageData;
+					t->internal.client[index].writeVariable.MaxJSONObjectLength = t->BufferSize;
+					t->internal.client[index].writeVariable.MaxIterations = t->MaxIterations;
+				
+					jsonWriteVariable(&t->internal.client[index].writeVariable);
+				
+					if (t->internal.client[index].writeVariable.Status != 0) { jsonInternalSetWSServerError(t->internal.client[index].writeVariable.Status, t); return; }
+				
+					strcpy(responseType, "momentaryresponse");
 					pResponseData = pMessageData; // NOTE: This echoes the received data. Might want to do something different later.
 					responseDataLength = dataLength;
 				
