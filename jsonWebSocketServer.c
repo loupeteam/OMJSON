@@ -79,6 +79,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				// Allocate send and receive memory and initialize message buffer
 				if (	(TMP_alloc( t->BufferSize, (void**)&(t->internal.client[index].pReceiveData) ) != 0)				
 					||	(TMP_alloc( t->BufferSize, (void**)&(t->internal.client[index].pSendData) ) != 0)				
+					||	(TMP_alloc( t->BufferSize, (void**)&(t->internal.client[index].pRecieveDataBuffer) ) != 0)
 					||	(datbufInitBuffer( (UDINT)&(t->internal.client[index].messageBuffer), t->BufferSize ) != 0)
 				) {
 					jsonInternalSetWSServerError( JSON_ERR_MEMALLOC, t );
@@ -90,6 +91,8 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			
 			// Set up tcpServer
 			t->internal.tcpServer.IN.CFG.Mode = TCPCOMM_MODE_SERVER;
+			t->internal.tcpServer.IN.CFG.UseSSL = 1; // Lets try it ¯\_(?)_/¯
+			t->internal.tcpServer.IN.CFG.SSLCertificate = t->CertID;
 			strcpy(t->internal.tcpServer.IN.CFG.LocalIPAddress, t->ServerIP);
 			t->internal.tcpServer.IN.CFG.LocalPort = t->ServerPort;
 			t->internal.tcpServer.IN.CFG.SendBufferSize = t->BufferSize;
@@ -156,6 +159,9 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			t->internal.client[t->internal.iClient].tcpStream.IN.CMD.Receive = 1;
 		
 			t->internal.client[t->internal.iClient].wsConnected = 0;
+			
+			t->internal.client[index].recieveDataBufferLen = 0;
+			((char*)t->internal.client[index].pRecieveDataBuffer)[0] = '\0';
 			
 			// Clear cache
 			t->internal.client[t->internal.iClient].pCache = &(((jsonCache_typ*)t->pCacheArray)[t->internal.iClient]);
@@ -245,51 +251,77 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 				t->internal.client[index].wsConnected = 0;
 				t->internal.client[index].debug.socketDisconnectCountRecvLength0++;
+				
+				//t->internal.client[index].tcpStream.IN.PAR.pReceiveData = t->internal.client[index].pReceiveData;
 		
 				continue;
 		
 			}
-		
+					
 			t->internal.client[index].tcpStream.IN.CMD.AcknowledgeData = 1;
 		
-			// Check for connection attempt
-			BOOL shouldConnect = 0;
 		
-			// Option 1: Check entire receive data with a strstr() for "Sec-WebSocket-Key:"
-			// This could be slow for very large receive data lengths
-			// Receive length for HTTP request to open websocket from Chrome is 486 bytes
-			// Small websocket request receive length is < 100 bytes
-			//shouldConnect = (strstr((char*)t->internal.client[index].tcpStream.IN.PAR.pReceiveData, "Sec-WebSocket-Key:") != 0);
-
-			// Option 2: Copy first 500 bytes and check with a strstr() for "Sec-WebSocket-Key:"
-			// This could be faster for very large receive data lengths
-			//STRING messageBeginning[500+1];
-			//memset(&messageBeginning, 0, sizeof(messageBeginning));
-			//memcpy(&messageBeginning, (char*)t->internal.client[index].tcpStream.IN.PAR.pReceiveData, sizeof(messageBeginning)-1);
-			//shouldConnect = (strstr(messageBeginning, "Sec-WebSocket-Key:") != 0);
-		
-			// Option 3: Check first 3 bytes for GET
-			// This should be the fastest for small and large receive lengths
-			// Could break down with weirdly formatted request (shouldn't happen)
-			shouldConnect = (memcmp((char*)t->internal.client[index].pReceiveData, "GET", 3) == 0);
 			
-			if (shouldConnect) {
-			
-				// Establish WebSocket connection
-				t->internal.client[index].wsConnect.pInputMessage = t->internal.client[index].pReceiveData;
-				t->internal.client[index].wsConnect.pOutputMessage = t->internal.client[index].pSendData;
-				t->internal.client[index].wsConnect.MaxOutputMessageLength = t->BufferSize;
-				jsonWSConnect(&t->internal.client[index].wsConnect);
-			
-				if (t->internal.client[index].wsConnect.Status == 0) {
-					t->internal.client[index].tcpStream.IN.PAR.SendLength = t->internal.client[index].wsConnect.OutputMessageLength;
-					t->internal.client[index].tcpStream.IN.CMD.Send = 1;
-					t->internal.client[index].wsConnected = 1;
-					t->internal.client[index].debug.websocketConnectCount++;
-				} else {
-					jsonInternalSetWSServerError(t->internal.client[index].wsConnect.Status, t);
+			if (!t->internal.client[index].wsConnected) {
+				
+				// If partial packet
+				// TODO: We need to do something here to handle recieving the HTTP frame in multiple packets
+				// TODO: This is a hacky solution and probably doesnt work in all cases but it does for fire fox in my test case
+				if (t->internal.client[index].tcpStream.OUT.ReceivedDataLength < 10) {
+					t->internal.client[index].tcpStream.IN.PAR.pReceiveData = t->internal.client[index].pReceiveData + t->internal.client[index].tcpStream.OUT.ReceivedDataLength;
+					t->internal.client[index].tcpStream.IN.PAR.MaxReceiveLength = t->BufferSize - (t->internal.client[index].tcpStream.IN.PAR.pReceiveData - t->internal.client[index].pReceiveData);
+					t->internal.client[index].debug.connectSplit++;
+					continue;
 				}
+				
+				
+				
+				// Check for connection attempt
+				BOOL shouldConnect = 0;
+		
+				// Option 1: Check entire receive data with a strstr() for "Sec-WebSocket-Key:"
+				// This could be slow for very large receive data lengths
+				// Receive length for HTTP request to open websocket from Chrome is 486 bytes
+				// Small websocket request receive length is < 100 bytes
+				//shouldConnect = (strstr((char*)t->internal.client[index].tcpStream.IN.PAR.pReceiveData, "Sec-WebSocket-Key:") != 0);
+
+				// Option 2: Copy first 500 bytes and check with a strstr() for "Sec-WebSocket-Key:"
+				// This could be faster for very large receive data lengths
+				//STRING messageBeginning[500+1];
+				//memset(&messageBeginning, 0, sizeof(messageBeginning));
+				//memcpy(&messageBeginning, (char*)t->internal.client[index].tcpStream.IN.PAR.pReceiveData, sizeof(messageBeginning)-1);
+				//shouldConnect = (strstr(messageBeginning, "Sec-WebSocket-Key:") != 0);
+		
+				// Option 3: Check first 3 bytes for GET
+				// This should be the fastest for small and large receive lengths
+				// Could break down with weirdly formatted request (shouldn't happen)
+				shouldConnect = (memcmp((char*)t->internal.client[index].pReceiveData, "GET", 3) == 0);
+				
 			
+
+				
+				if (shouldConnect) {
+					
+					// Reset partial packet
+					t->internal.client[index].tcpStream.IN.PAR.pReceiveData = t->internal.client[index].pReceiveData;
+					t->internal.client[index].tcpStream.IN.PAR.MaxReceiveLength = t->BufferSize;
+			
+					// Establish WebSocket connection
+					t->internal.client[index].wsConnect.pInputMessage = t->internal.client[index].pReceiveData;
+					t->internal.client[index].wsConnect.pOutputMessage = t->internal.client[index].pSendData;
+					t->internal.client[index].wsConnect.MaxOutputMessageLength = t->BufferSize;
+					jsonWSConnect(&t->internal.client[index].wsConnect);
+			
+					if (t->internal.client[index].wsConnect.Status == 0) {
+						t->internal.client[index].tcpStream.IN.PAR.SendLength = t->internal.client[index].wsConnect.OutputMessageLength;
+						t->internal.client[index].tcpStream.IN.CMD.Send = 1;
+						t->internal.client[index].wsConnected = 1;
+						t->internal.client[index].debug.websocketConnectCount++;
+					} else {
+						jsonInternalSetWSServerError(t->internal.client[index].wsConnect.Status, t);
+					}
+			
+				}
 			}
 			else /*if (t->internal.client[index].wsConnected)*/ {
 			
@@ -306,37 +338,59 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 				// NOTE: A lot of things cause the parsing to bonk with no response to the client[index].
 				// We might want to generate an error response to the client instead.
+				
+				UDINT existingLen = t->internal.client[index].tcpStream.IN.PAR.pReceiveData - t->internal.client[index].pReceiveData;
+				UDINT totalLen = t->internal.client[index].tcpStream.OUT.ReceivedDataLength + existingLen;
 			
 				// Decode frame
-				t->internal.client[index].wsDecode.pFrame = t->internal.client[index].tcpStream.IN.PAR.pReceiveData;
-				jsonWSDecode(&t->internal.client[index].wsDecode);
-			
+				// Note: even though the header may be greater than 8 bytes, the payload length information will be a contained within the first 8
+				if(totalLen >= 8) {
+					t->internal.client[index].wsDecode.pFrame = t->internal.client[index].pReceiveData;//t->internal.client[index].tcpStream.IN.PAR.pReceiveData;
+					jsonWSDecode(&t->internal.client[index].wsDecode);
+				}
+				else {
+					t->internal.client[index].tcpStream.IN.PAR.pReceiveData = t->internal.client[index].pReceiveData + totalLen;
+					t->internal.client[index].tcpStream.IN.PAR.MaxReceiveLength = t->BufferSize - totalLen;
+					t->internal.client[index].debug.tooSmallCount++;
+					jsonInternalSetWSServerError(JSON_ERR_TCP_FRAGMENT, t);
+					continue;
+				}
+					
 				// Check frame
 				// NOTE: For now, set some errors if we get an unexpected frame
 				// Might need to replace these with an error response to the client
 				if (t->internal.client[index].wsDecode.Status != 0) { jsonInternalSetWSServerError(t->internal.client[index].wsDecode.Status, t); continue; }
-				if (t->internal.client[index].wsDecode.FIN == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_FRAGMENT, t); continue; }
+				// TODO: We need to use this (FIN) to reconstruct messages. With TLS messages are split up frequently and is unusable without this feature
+				//if (t->internal.client[index].wsDecode.FIN == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_FRAGMENT, t); continue; }
 				if (t->internal.client[index].wsDecode.RSV != 0) { jsonInternalSetWSServerError(JSON_ERR_WS_RSV, t); continue; }
-				if (t->internal.client[index].wsDecode.OpCode != JSON_WS_OPCODE_TEXT) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; }
-				if (t->internal.client[index].wsDecode.MASK == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].tcpStream.IN.CMD.Close = 1; continue; }
+				if (t->internal.client[index].wsDecode.OpCode != JSON_WS_OPCODE_TEXT 
+					&& t->internal.client[index].wsDecode.FIN == 1
+				&& t->internal.client[index].recieveDataBufferLen == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; }
+				//if (t->internal.client[index].wsDecode.MASK == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].tcpStream.IN.CMD.Close = 1; continue; }
 
 				// Check WS frame length against received TCP message length
-				t->internal.client[index].excessDataLength = t->internal.client[index].tcpStream.OUT.ReceivedDataLength - t->internal.client[index].wsDecode.FrameLength;
+				t->internal.client[index].excessDataLength = totalLen - t->internal.client[index].wsDecode.FrameLength;
 			
 				if (t->internal.client[index].excessDataLength == 0) {
+					
+					t->internal.client[index].tcpStream.IN.PAR.pReceiveData = t->internal.client[index].pReceiveData;
+					t->internal.client[index].tcpStream.IN.PAR.MaxReceiveLength = t->BufferSize;
 		
 					t->internal.client[index].debug.justRightCount++;
 		
 				} else if (t->internal.client[index].excessDataLength > 0) {
 		
+					t->internal.client[index].tcpStream.IN.PAR.pReceiveData = t->internal.client[index].pReceiveData;
+					t->internal.client[index].tcpStream.IN.PAR.MaxReceiveLength = t->BufferSize;
+					
 					t->internal.client[index].debug.tooBigCount++;
 		
 				} else {
-		
+					t->internal.client[index].tcpStream.IN.PAR.pReceiveData = t->internal.client[index].pReceiveData + totalLen;
+					t->internal.client[index].tcpStream.IN.PAR.MaxReceiveLength = t->BufferSize - totalLen;
 					t->internal.client[index].debug.tooSmallCount++;
 					jsonInternalSetWSServerError(JSON_ERR_TCP_FRAGMENT, t);
-					continue;			
-		
+					continue;
 				}
 			
 			
@@ -352,16 +406,35 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				// Unmask data - NOTE: Make this a public FUB
 				UDINT i;
 				char *pPayloadData = (char*)t->internal.client[index].wsDecode.pPayloadData;
+				char *pRecieveBuffer = &((char*)t->internal.client[index].pRecieveDataBuffer)[t->internal.client[index].recieveDataBufferLen];
 				for (i = 0; i < t->internal.client[index].wsDecode.PayloadLength; i++) {
 					pPayloadData[i] = pPayloadData[i] ^ t->internal.client[index].wsDecode.MaskingKey[i % 4];
+				}
+				for (i = 0; i < t->internal.client[index].wsDecode.PayloadLength; i++) {
+					pRecieveBuffer[i] = pPayloadData[i];
+				}
+				t->internal.client[index].recieveDataBufferLen += t->internal.client[index].wsDecode.PayloadLength;
+				((char*)t->internal.client[index].pRecieveDataBuffer)[t->internal.client[index].recieveDataBufferLen] = '\0';
+				
+				if(t->internal.client[index].wsDecode.FIN == 0) {
+					// We have recieved a partial message
+					// So let us wait for the full message :)
+					continue;
 				}
 
 				// Parse data - NOTE: Make this a private function
 				// Expect {"type":"read"|"write","data":["varName","varName"]|{}}
 				// Need type in one string and pointer to data string
-				char *pMessageData = (char*)t->internal.client[index].wsDecode.pPayloadData;
+				char *pMessageData = (char*)t->internal.client[index].pRecieveDataBuffer;
 				STRING requestType[7+1], data[4+1];
+				UDINT dataLength = t->internal.client[index].recieveDataBufferLen;
 			
+				// If we get here
+				// We have used the buffered message data
+				// Clear it
+				t->internal.client[index].recieveDataBufferLen = 0;
+				//((char*)t->internal.client[index].pRecieveDataBuffer)[0] = '\0';
+				
 				// {
 				pMessageData = skip(pMessageData);
 				if (*pMessageData != '{') { jsonInternalSetWSServerError(JSON_ERR_PARSE, t); continue; }
@@ -412,7 +485,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			
 				// Determine data length
 				// Data length = total payload length - message beginning length '{type...' - message ending length '}'
-				UDINT dataLength = t->internal.client[index].wsDecode.PayloadLength - ((UDINT)pMessageData - (UDINT)pPayloadData) - 1;
+				dataLength = dataLength - ((UDINT)pMessageData - t->internal.client[index].pRecieveDataBuffer) - 1;
 			
 				// Replace ending '}' with a null.
 				pMessageData[dataLength] = 0;
@@ -421,7 +494,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				// This can be put into the jsonRead or jsonWrite functions
 			
 				//UDINT debugDataLength = strlen(pMessageData);
-			
+
 			
 				// Process request - NOTE: Make this a private function
 				//--------------------------------------------
@@ -512,6 +585,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			
 				//i = 0;//temp for debug
 				//char *pResponseData = (char*)t->internal.client[index].messageBuffer.pData;//temp for debug
+				
 			
 			}// Connected
 		
