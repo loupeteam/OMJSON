@@ -160,6 +160,7 @@ TYPE
 	jsonCacheItem_typ : 	STRUCT 
 		prefix : STRING[JSON_STRLEN_PREFIX];
 		variable : varVariable_typ;
+		prevValue : REAL;
 		suffix : STRING[JSON_STRLEN_SUFFIX];
 	END_STRUCT;
 	jsonReadVarNoCache_Int_typ : 	STRUCT 

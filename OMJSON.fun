@@ -119,6 +119,7 @@ FUNCTION_BLOCK jsonReadVariableList (*Convert a list of variables into a JSON ob
 		pCache : UDINT;
 		BufferSize : UDINT;
 		MaxIterations : UDINT;
+		useChangeDetection : BOOL;
 	END_VAR
 	VAR_OUTPUT
 		Status : UINT;
@@ -136,6 +137,7 @@ FUNCTION_BLOCK jsonReadVariable (*Convert a variable into a JSON object*) (*$GRO
 		pCache : UDINT;
 		BufferSize : UDINT;
 		MaxIterations : UDINT;
+		useChangeDetection : BOOL;
 	END_VAR
 	VAR_OUTPUT
 		Status : UINT;

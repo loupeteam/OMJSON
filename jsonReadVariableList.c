@@ -121,6 +121,7 @@ void jsonReadVariableList(struct jsonReadVariableList* t)
 		t->internal.readVariable.pCache = t->pCache;
 		t->internal.readVariable.BufferSize = t->BufferSize;
 		t->internal.readVariable.MaxIterations = t->MaxIterations;
+		t->internal.readVariable.useChangeDetection = t->useChangeDetection;
 			
 		jsonReadVariable(&t->internal.readVariable);
 		

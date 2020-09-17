@@ -29,6 +29,37 @@
 // Convert a variable into a JSON object			 				*
 //*******************************************************************
 
+plcbit itemChanged(struct jsonCacheItem_typ* item) {
+	if(!item) return;
+	
+	float value;
+	plcbit change = 0;
+	
+	switch(item->variable.dataType) {
+		case VAR_TYPE_REAL:
+		case VAR_TYPE_LREAL:
+		case VAR_TYPE_BOOL:
+		case VAR_TYPE_DINT:
+		case VAR_TYPE_INT:
+		case VAR_TYPE_SINT:
+		case VAR_TYPE_TIME:
+		case VAR_TYPE_DATE:
+		case VAR_TYPE_DATE_AND_TIME:
+		case VAR_TYPE_USINT:
+		case VAR_TYPE_UINT:
+			varGetRealValue((UDINT)&item->variable, &value);
+			change = (item->prevValue != value);
+			item->prevValue = value;
+			break;
+		
+		default:
+			change = 1;
+			break;
+	}
+	
+	return change;
+}
+
 void jsonReadVariable(struct jsonReadVariable* t)
 {
 	
@@ -90,7 +121,7 @@ void jsonReadVariable(struct jsonReadVariable* t)
 	UDINT i = 0;
 	DINT iVariable = -1;
 		
-	for( i = 0; i < pCache->iVariable; i++ ){
+	for( i = 0; i <= JSON_MAI_CACHEVAR; i++ ){
 		if( strcmp( varName, pCache->variable[i].name ) == 0 ) iVariable = i;
 	} // search cache
 	
@@ -128,6 +159,13 @@ void jsonReadVariable(struct jsonReadVariable* t)
 		
 		// Check i
 		if( i > JSON_MAI_CACHEITEM ){ jsonInternalSetReadError(JSON_ERR_CACHEFULLITEMS, t); return; }
+
+		// Get value
+		//		UINT valueStatus = varGetValue( (UDINT)&(pCache->item[i].variable) );
+		//		if( valueStatus != 0 ){ jsonInternalSetReadError(valueStatus, t); return; }
+		varGetValue((UDINT)&(pCache->item[i].variable));
+		
+		if(t->useChangeDetection && !itemChanged(&pCache->item[i])) continue;
 		
 		// Append prefix
 		appendStatus = datbufAppendToBuffer( (UDINT)&(t->internal.outputBuffer), 
