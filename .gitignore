@@ -1,0 +1,51 @@
+# OMJSON
+
+# Backup projects
+/ASProjects/Backups
+
+# Build directories
+# **/Build/
+# **/ElectronBuild/
+# **/Output/
+# /Installer/Output/*.exe
+
+# AS temporary directories
+Binaries/
+Diagnosis/
+Temp/
+TempObjects/
+
+# AS transfer files
+*artransfer.br
+*arTrsfmode.nv
+
+# 'ignored' directory
+ignored/
+
+# ARNC0ext
+*arnc0ext.br
+
+# Auto-generated safety file
+**/BusNavigator.xostd
+
+# File types
+*.bak
+*.isopen
+*.DS_Store
+*.orig
+*.log
+*.asar
+*.csvlog*
+*.set
+!**/Physical/**/*.set
+
+# RevInfo variables
+*RevInfo.var
+
+# Misc
+**/MPLogs/*
+**/DLFiles/*
+**/node_modules/
+
+# Python
+**/__pycache__/
