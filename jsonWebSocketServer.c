@@ -225,6 +225,18 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			
 			jsonInternalSetWSServerError(JSON_ERR_HUH, t);
 		}
+		else if (t->internal.client[index].tcpStream.out.error) {
+			// TODO: we need to do something better here
+			// Handle remaining errors
+			// Probably will require a reboot or code changes 
+			t->internal.client[index].tcpStream.in.cmd.receive = 0;
+			t->internal.client[index].tcpStream.in.cmd.close = 1;
+			t->internal.client[index].tcpStream.in.cmd.acknowledgeError = 1;
+	
+			t->internal.client[index].wsConnected = 0;
+			
+			jsonInternalSetWSServerError(JSON_ERR_HUH, t);
+		}
 	
 		// Note: I dont know the original intent of this but seems wrong
 //		if (t->internal.client[index].tcpStream.Internal.debug.receive.status[0] == tcpERR_NO_DATA) {
@@ -270,10 +282,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			// NOTE: A lot of things cause the parsing to bonk with no response to the client[index].
 			// We might want to generate an error response to the client instead.
 		
-			// Decode frame
-			t->internal.client[index].wsDecode.pFrame = t->internal.client[index].tcpStream.in.par.pReceiveData;
-			jsonWSDecode(&t->internal.client[index].wsDecode);
-		
 			// Check frame
 			// NOTE: For now, set some errors if we get an unexpected frame
 			// Might need to replace these with an error response to the client
@@ -286,23 +294,24 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			if (t->internal.client[index].tcpStream.out.header.mask == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].tcpStream.in.cmd.close = 1; continue; }
 
 			// Check WS frame length against received TCP message length
-			t->internal.client[index].excessDataLength = t->internal.client[index].tcpStream.out.receivedDataLength - t->internal.client[index].wsDecode.FrameLength;
-		
-			if (t->internal.client[index].excessDataLength == 0) {
-	
-				t->internal.client[index].debug.justRightCount++;
-	
-			} else if (t->internal.client[index].excessDataLength > 0) {
-	
-				t->internal.client[index].debug.tooBigCount++;
-	
-			} else {
-	
-				t->internal.client[index].debug.tooSmallCount++;
-				jsonInternalSetWSServerError(JSON_ERR_TCP_FRAGMENT, t);
-				continue;			
-	
-			}
+			// TODO: This check does not work now. I dont think it makes sense either
+//			t->internal.client[index].excessDataLength = t->internal.client[index].tcpStream.out.receivedDataLength - t->internal.client[index].tcpStream.out.header.frameLength;
+//		
+//			if (t->internal.client[index].excessDataLength == 0) {
+//	
+//				t->internal.client[index].debug.justRightCount++;
+//	
+//			} else if (t->internal.client[index].excessDataLength > 0) {
+//	
+//				t->internal.client[index].debug.tooBigCount++;
+//	
+//			} else {
+//	
+//				t->internal.client[index].debug.tooSmallCount++;
+//				//jsonInternalSetWSServerError(JSON_ERR_TCP_FRAGMENT, t);
+//				//continue;			
+//	
+//			}
 		
 		
 			//			if (t->internal.client[index].wsDecode.PayloadLength != 
