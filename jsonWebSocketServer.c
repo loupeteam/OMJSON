@@ -18,7 +18,6 @@
 #include "OMJSON.h"
 #include <string.h>
 #include "jsonAux.h"
-#include "sha1.h"
 #include "jsonInternal.h"
 
 #ifdef __cplusplus
