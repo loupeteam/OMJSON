@@ -64,14 +64,10 @@ TYPE
 		pReceiveData : UDINT;
 		pSendData : UDINT;
 		messageBuffer : datbufBuffer_typ;
-		wsConnect : jsonWSConnect;
 		wsConnected : BOOL;
-		wsDecode : jsonWSDecode;
-		wsEncode : jsonWSEncode;
 		writeVariable : jsonWriteVariable;
 		readVariableList : jsonReadVariableList;
 		debug : jsonWSS_client_debug_typ;
-		excessDataLength : DINT;
 		requestTimer : TON_10ms;
 		pCache : REFERENCE TO jsonCache_typ;
 	END_STRUCT;
