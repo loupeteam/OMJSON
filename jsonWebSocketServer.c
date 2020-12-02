@@ -76,7 +76,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			
 			unsigned int index;
 			for (index = 0; index < t->internal.maxClients; index++) {
-				t->internal.client[index].tcpStream.in.cfg.bufferSize = t->BufferSize;
+				t->internal.client[index].wsStream.in.cfg.bufferSize = t->BufferSize;
 				// Allocate send and receive memory and initialize message buffer
 				if (	(TMP_alloc( t->BufferSize, (void**)&(t->internal.client[index].pReceiveData) ) != 0)				
 					||	(TMP_alloc( t->BufferSize, (void**)&(t->internal.client[index].pSendData) ) != 0)				
@@ -90,12 +90,12 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			// TODO: Clear buffers on init
 			
 			// Set up ws server
-			t->internal.tcpServer.in.cfg.mode = TCPCOMM_MODE_SERVER;
-			strcpy(t->internal.tcpServer.in.cfg.localIPAddress, t->ServerIP);
-			t->internal.tcpServer.in.cfg.localPort = t->ServerPort;
-			t->internal.tcpServer.in.cfg.sendBufferSize = t->BufferSize;
+			t->internal.wsServer.in.cfg.mode = TCPCOMM_MODE_SERVER;
+			strcpy(t->internal.wsServer.in.cfg.localIPAddress, t->ServerIP);
+			t->internal.wsServer.in.cfg.localPort = t->ServerPort;
+			t->internal.wsServer.in.cfg.sendBufferSize = t->BufferSize;
 
-			t->internal.tcpServer.in.cmd.enable = 1;
+			t->internal.wsServer.in.cmd.enable = 1;
 			
 			t->internal.initialized = 1;
 		
@@ -123,16 +123,16 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 	// Manage TCP server
 	//-------------------
 
-	webSocketConnection(&t->internal.tcpServer);
+	webSocketConnection(&t->internal.wsServer);
 
-	if (t->internal.tcpServer.out.newConnectionAvailable) {
+	if (t->internal.wsServer.out.newConnectionAvailable) {
 		
-		t->internal.tcpServer.in.cmd.acknowledgeConnection = 1;
+		t->internal.wsServer.in.cmd.acknowledgeConnection = 1;
 		
 		unsigned int index;
 		// Find the first inactive client
 		for (index = 0; index < t->internal.maxClients; index++) {
-			if(t->internal.client[index].tcpStream.out.active != 1) {
+			if(t->internal.client[index].wsStream.out.active != 1) {
 				t->internal.iClient = index;
 				break;
 			}
@@ -143,19 +143,19 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			jsonInternalSetWSServerError(JSON_ERR_WS_MAX_CLIENTS, t);
 		}
 		else {
-			memcpy(&t->internal.client[t->internal.iClient].tcpStream.in.par.connection, &t->internal.tcpServer.out.connection, sizeof(t->internal.tcpServer.out.connection));
+			memcpy(&t->internal.client[t->internal.iClient].wsStream.in.par.connection, &t->internal.wsServer.out.connection, sizeof(t->internal.wsServer.out.connection));
 		
-			t->internal.client[t->internal.iClient].tcpStream.in.par.allowContinuousSend = 1; // TODO: Think about this. If you set it to 0, then you cannot handle back to back client requests.
-			t->internal.client[t->internal.iClient].tcpStream.in.par.sendFlags = 0;
-			t->internal.client[t->internal.iClient].tcpStream.in.par.pSendData = t->internal.client[t->internal.iClient].pSendData;
+			t->internal.client[t->internal.iClient].wsStream.in.par.allowContinuousSend = 1; // TODO: Think about this. If you set it to 0, then you cannot handle back to back client requests.
+			t->internal.client[t->internal.iClient].wsStream.in.par.sendFlags = 0;
+			t->internal.client[t->internal.iClient].wsStream.in.par.pSendData = t->internal.client[t->internal.iClient].pSendData;
 		
-			t->internal.client[t->internal.iClient].tcpStream.in.par.allowContinuousReceive = 1;	// NOTE: This probably warrants thought, but 1 seems to work better than 0.
-			t->internal.client[t->internal.iClient].tcpStream.in.par.receiveFlags = 0;
-			t->internal.client[t->internal.iClient].tcpStream.in.par.pReceiveData = t->internal.client[t->internal.iClient].pReceiveData;
-			t->internal.client[t->internal.iClient].tcpStream.in.par.maxReceiveLength = t->BufferSize;
-			t->internal.client[t->internal.iClient].tcpStream.in.cfg.bufferSize = t->BufferSize;
+			t->internal.client[t->internal.iClient].wsStream.in.par.allowContinuousReceive = 1;	// NOTE: This probably warrants thought, but 1 seems to work better than 0.
+			t->internal.client[t->internal.iClient].wsStream.in.par.receiveFlags = 0;
+			t->internal.client[t->internal.iClient].wsStream.in.par.pReceiveData = t->internal.client[t->internal.iClient].pReceiveData;
+			t->internal.client[t->internal.iClient].wsStream.in.par.maxReceiveLength = t->BufferSize;
+			t->internal.client[t->internal.iClient].wsStream.in.cfg.bufferSize = t->BufferSize;
 		
-			t->internal.client[t->internal.iClient].tcpStream.in.cmd.receive = 1;
+			t->internal.client[t->internal.iClient].wsStream.in.cmd.receive = 1;
 		
 			t->internal.client[t->internal.iClient].wsConnected = 0;
 			
@@ -166,8 +166,8 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 			t->internal.client[t->internal.iClient].debug.socketConnectCount++;
 		
-			strcpy(t->ClientInfo[t->internal.iClient].ClientIP, t->internal.tcpServer.out.connection.parameters.IPAddress);
-			t->ClientInfo[t->internal.iClient].ClientPort = t->internal.tcpServer.out.connection.parameters.Port;
+			strcpy(t->ClientInfo[t->internal.iClient].ClientIP, t->internal.wsServer.out.connection.parameters.IPAddress);
+			t->ClientInfo[t->internal.iClient].ClientPort = t->internal.wsServer.out.connection.parameters.Port;
 		}
 	}
 
@@ -181,57 +181,57 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		// Start timer by default. It is reset when a request is properly processed.
 		t->internal.client[index].requestTimer.IN = 1;
 		
-		if(t->internal.client[index].tcpStream.out.active) t->internal.connectedClients++;
+		if(t->internal.client[index].wsStream.out.active) t->internal.connectedClients++;
 		
-		t->internal.client[index].debug.oldDataReceived = t->internal.client[index].tcpStream.out.dataReceived;
+		t->internal.client[index].debug.oldDataReceived = t->internal.client[index].wsStream.out.dataReceived;
 	
-		webSocketRecv(&t->internal.client[index].tcpStream);
-		t->internal.client[index].wsConnected = t->internal.client[index].tcpStream.out.connected;
+		webSocketRecv(&t->internal.client[index].wsStream);
+		t->internal.client[index].wsConnected = t->internal.client[index].wsStream.out.connected;
 	
-		if (t->internal.client[index].debug.oldDataReceived && t->internal.client[index].tcpStream.out.dataReceived) {
+		if (t->internal.client[index].debug.oldDataReceived && t->internal.client[index].wsStream.out.dataReceived) {
 			// Break here to figure out what happens
 			t->internal.client[index].debug.doubleDataCount++;
 		}
 		
 		// Check for client disconnected
-		if (t->internal.client[index].tcpStream.out.error && t->internal.client[index].tcpStream.out.errorID == tcpERR_NOT_CONNECTED) {
+		if (t->internal.client[index].wsStream.out.error && t->internal.client[index].wsStream.out.errorID == tcpERR_NOT_CONNECTED) {
 	
-			t->internal.client[index].tcpStream.in.cmd.receive = 0;
-			t->internal.client[index].tcpStream.in.cmd.close = 1;
-			t->internal.client[index].tcpStream.in.cmd.acknowledgeError = 1;
+			t->internal.client[index].wsStream.in.cmd.receive = 0;
+			t->internal.client[index].wsStream.in.cmd.close = 1;
+			t->internal.client[index].wsStream.in.cmd.acknowledgeError = 1;
 	
 			t->internal.client[index].wsConnected = 0;
 			t->internal.client[index].debug.socketDisconnectCountError++;
 	
 		}
-		else if (t->internal.client[index].tcpStream.out.error && t->internal.client[index].tcpStream.out.errorID == tcpERR_INVALID_IDENT) {
+		else if (t->internal.client[index].wsStream.out.error && t->internal.client[index].wsStream.out.errorID == tcpERR_INVALID_IDENT) {
 			
-			t->internal.client[index].tcpStream.in.cmd.receive = 0;
-			t->internal.client[index].tcpStream.in.cmd.close = 1;
-			t->internal.client[index].tcpStream.in.cmd.acknowledgeError = 1;
+			t->internal.client[index].wsStream.in.cmd.receive = 0;
+			t->internal.client[index].wsStream.in.cmd.close = 1;
+			t->internal.client[index].wsStream.in.cmd.acknowledgeError = 1;
 	
 			t->internal.client[index].wsConnected = 0;
 			t->internal.client[index].debug.socketInvalidCountError++;
 			
 		}
-		else if (t->internal.client[index].tcpStream.out.error && t->internal.client[index].tcpStream.out.errorID == tcpERR_PARAMETER) {
+		else if (t->internal.client[index].wsStream.out.error && t->internal.client[index].wsStream.out.errorID == tcpERR_PARAMETER) {
 			// This is an internal problem
 			// Probably will require a reboot or code changes 
-			t->internal.client[index].tcpStream.in.cmd.receive = 0;
-			t->internal.client[index].tcpStream.in.cmd.close = 1;
-			t->internal.client[index].tcpStream.in.cmd.acknowledgeError = 1;
+			t->internal.client[index].wsStream.in.cmd.receive = 0;
+			t->internal.client[index].wsStream.in.cmd.close = 1;
+			t->internal.client[index].wsStream.in.cmd.acknowledgeError = 1;
 	
 			t->internal.client[index].wsConnected = 0;
 			
 			jsonInternalSetWSServerError(JSON_ERR_HUH, t);
 		}
-		else if (t->internal.client[index].tcpStream.out.error) {
+		else if (t->internal.client[index].wsStream.out.error) {
 			// TODO: we need to do something better here
 			// Handle remaining errors
 			// Probably will require a reboot or code changes 
-			t->internal.client[index].tcpStream.in.cmd.receive = 0;
-			t->internal.client[index].tcpStream.in.cmd.close = 1;
-			t->internal.client[index].tcpStream.in.cmd.acknowledgeError = 1;
+			t->internal.client[index].wsStream.in.cmd.receive = 0;
+			t->internal.client[index].wsStream.in.cmd.close = 1;
+			t->internal.client[index].wsStream.in.cmd.acknowledgeError = 1;
 	
 			t->internal.client[index].wsConnected = 0;
 			
@@ -239,7 +239,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		}
 	
 		// Note: I dont know the original intent of this but seems wrong
-//		if (t->internal.client[index].tcpStream.Internal.debug.receive.status[0] == tcpERR_NO_DATA) {
+//		if (t->internal.client[index].wsStream.Internal.debug.receive.status[0] == tcpERR_NO_DATA) {
 //			t->internal.client[index].debug.noDataCount++;
 //		}
 	
@@ -248,15 +248,15 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		// TODO: This is probably causing problems. When did this get changed?
 		// The !sending check looks like it has always been there.
 		// The only checking for received does not appear to be committed anywhere without being commented out.
-		//	if (t->internal.client[index].tcpStream.out.DataReceived && !t->internal.client[index].tcpStream.out.Sending) {
-		if (t->internal.client[index].tcpStream.out.dataReceived) {
+		//	if (t->internal.client[index].wsStream.out.DataReceived && !t->internal.client[index].wsStream.out.Sending) {
+		if (t->internal.client[index].wsStream.out.dataReceived) {
 		
 			t->internal.client[index].debug.dataCount++;
 		
-			if (t->internal.client[index].tcpStream.out.receivedDataLength == 0) {
+			if (t->internal.client[index].wsStream.out.receivedDataLength == 0) {
 		
-				t->internal.client[index].tcpStream.in.cmd.receive = 0;
-				t->internal.client[index].tcpStream.in.cmd.close = 1;
+				t->internal.client[index].wsStream.in.cmd.receive = 0;
+				t->internal.client[index].wsStream.in.cmd.close = 1;
 		
 				t->internal.client[index].wsConnected = 0;
 				t->internal.client[index].debug.socketDisconnectCountRecvLength0++;
@@ -265,7 +265,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 			}
 		
-			t->internal.client[index].tcpStream.in.cmd.acknowledgeData = 1;
+			t->internal.client[index].wsStream.in.cmd.acknowledgeData = 1;
 		
 		
 			// NOTE: Sometimes wsConnected doesn't work properly.
@@ -285,17 +285,17 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			// Check frame
 			// NOTE: For now, set some errors if we get an unexpected frame
 			// Might need to replace these with an error response to the client
-			if (t->internal.client[index].tcpStream.out.error != 0) { jsonInternalSetWSServerError(t->internal.client[index].tcpStream.out.errorID, t); continue; }
-			if (t->internal.client[index].tcpStream.out.header.fin == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_FRAGMENT, t); continue; }
-			if (t->internal.client[index].tcpStream.out.header.rsv != 0) { jsonInternalSetWSServerError(JSON_ERR_WS_RSV, t); continue; }
-			if (t->internal.client[index].tcpStream.out.header.opCode != JSON_WS_OPCODE_TEXT) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; }
+			if (t->internal.client[index].wsStream.out.error != 0) { jsonInternalSetWSServerError(t->internal.client[index].wsStream.out.errorID, t); continue; }
+			if (t->internal.client[index].wsStream.out.header.fin == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_FRAGMENT, t); continue; }
+			if (t->internal.client[index].wsStream.out.header.rsv != 0) { jsonInternalSetWSServerError(JSON_ERR_WS_RSV, t); continue; }
+			if (t->internal.client[index].wsStream.out.header.opCode != JSON_WS_OPCODE_TEXT) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; }
 			// TODO: Masks are required for clients according to websocket specs
 			// 		This should be moved to websocket lib
-			if (t->internal.client[index].tcpStream.out.header.mask == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].tcpStream.in.cmd.close = 1; continue; }
+			if (t->internal.client[index].wsStream.out.header.mask == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].wsStream.in.cmd.close = 1; continue; }
 
 			// Check WS frame length against received TCP message length
 			// TODO: This check does not work now. I dont think it makes sense either
-//			t->internal.client[index].excessDataLength = t->internal.client[index].tcpStream.out.receivedDataLength - t->internal.client[index].tcpStream.out.header.frameLength;
+//			t->internal.client[index].excessDataLength = t->internal.client[index].wsStream.out.receivedDataLength - t->internal.client[index].wsStream.out.header.frameLength;
 //		
 //			if (t->internal.client[index].excessDataLength == 0) {
 //	
@@ -315,7 +315,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		
 			//			if (t->internal.client[index].wsDecode.PayloadLength != 
-			//				t->internal.client[index].tcpStream.out.ReceivedDataLength - 
+			//				t->internal.client[index].wsStream.out.ReceivedDataLength - 
 			//				(t->internal.client[index].wsDecode.pPayloadData - t->internal.client[index].wsDecode.pFrame)) {
 			//			
 			//				jsonInternalSetWSServerError(JSON_ERR_TCP_FRAGMENT, t);
@@ -333,7 +333,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			// Parse data - NOTE: Make this a private function
 			// Expect {"type":"read"|"write","data":["varName","varName"]|{}}
 			// Need type in one string and pointer to data string
-			char *pMessageData = (char*)t->internal.client[index].tcpStream.in.par.pReceiveData;
+			char *pMessageData = (char*)t->internal.client[index].wsStream.in.par.pReceiveData;
 			STRING requestType[7+1], data[4+1];
 		
 			// {
@@ -386,7 +386,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 			// Determine data length
 			// Data length = total payload length - message beginning length '{type...' - message ending length '}'
-			UDINT dataLength = t->internal.client[index].tcpStream.out.receivedDataLength - ((UDINT)pMessageData - t->internal.client[index].tcpStream.in.par.pReceiveData) - 1;
+			UDINT dataLength = t->internal.client[index].wsStream.out.receivedDataLength - ((UDINT)pMessageData - t->internal.client[index].wsStream.in.par.pReceiveData) - 1;
 		
 			// Replace ending '}' with a null.
 			pMessageData[dataLength] = 0;
@@ -478,9 +478,9 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 
 //			if (t->internal.client[index].wsEncode.Status != 0) { jsonInternalSetWSServerError(t->internal.client[index].wsEncode.Status, t); continue; }
 
-			t->internal.client[index].tcpStream.in.par.pSendData = t->internal.client[index].messageBuffer.pData;
-			t->internal.client[index].tcpStream.in.par.sendLength = t->internal.client[index].messageBuffer.currentLength;
-			t->internal.client[index].tcpStream.in.cmd.send = 1;
+			t->internal.client[index].wsStream.in.par.pSendData = t->internal.client[index].messageBuffer.pData;
+			t->internal.client[index].wsStream.in.par.sendLength = t->internal.client[index].messageBuffer.currentLength;
+			t->internal.client[index].wsStream.in.cmd.send = 1;
 		
 			// Reset request timer
 			t->internal.client[index].requestTimer.IN = 0;
@@ -494,9 +494,9 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		} // NewDataAvailable && !Sending
 	
-		webSocketSend(&t->internal.client[index].tcpStream);
+		webSocketSend(&t->internal.client[index].wsStream);
 	
-		t->internal.client[index].tcpStream.in.cmd.send = 0;
+		t->internal.client[index].wsStream.in.cmd.send = 0;
 		
 		
 		// Handle request timer
@@ -504,7 +504,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		TON_10ms(&t->internal.client[index].requestTimer);
 		
 		t->ClientInfo[index].TimeSinceLastRequest_ms = t->internal.client[index].requestTimer.ET * 10;
-		t->ClientInfo[index].Connected = t->internal.client[index].tcpStream.out.active;
+		t->ClientInfo[index].Connected = t->internal.client[index].wsStream.out.active;
 		
 	} // End For Clients
 		
