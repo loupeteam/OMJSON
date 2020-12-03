@@ -287,7 +287,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			if (t->internal.client[index].wsStream.out.error != 0) { jsonInternalSetWSServerError(t->internal.client[index].wsStream.out.errorID, t); continue; }
 			if (t->internal.client[index].wsStream.out.header.fin == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_FRAGMENT, t); continue; }
 			if (t->internal.client[index].wsStream.out.header.rsv != 0) { jsonInternalSetWSServerError(JSON_ERR_WS_RSV, t); continue; }
-			if (t->internal.client[index].wsStream.out.header.opCode != JSON_WS_OPCODE_TEXT) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; }
+			if (t->internal.client[index].wsStream.out.header.opCode != WS_OPCODE_TEXT) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; }
 			// TODO: Masks are required for clients according to websocket specs
 			// 		This should be moved to websocket lib
 			if (t->internal.client[index].wsStream.out.header.mask == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].wsStream.in.cmd.close = 1; continue; }
@@ -321,13 +321,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			//				continue;
 			//			
 			//			}
-
-//			// Unmask data - NOTE: Make this a public FUB
-//			UDINT i;
-//			char *pPayloadData = (char*)t->internal.client[index].wsDecode.pPayloadData;
-//			for (i = 0; i < t->internal.client[index].wsDecode.PayloadLength; i++) {
-//				pPayloadData[i] = pPayloadData[i] ^ t->internal.client[index].wsDecode.MaskingKey[i % 4];
-//			}
 
 			// Parse data - NOTE: Make this a private function
 			// Expect {"type":"read"|"write","data":["varName","varName"]|{}}
@@ -398,7 +391,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 			// Process request - NOTE: Make this a private function
 			//--------------------------------------------
-		
 			STRING responseType[13+1];
 			char *pResponseData;
 			UDINT responseDataLength;
@@ -462,20 +454,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			appendStatus = datbufAppendToBuffer( (UDINT)&t->internal.client[index].messageBuffer, (UDINT)pResponseData, responseDataLength);
 			appendStatus = datbufAppendToBuffer( (UDINT)&t->internal.client[index].messageBuffer, (UDINT)&"}", 1);
 			if( appendStatus != 0 ){ jsonInternalSetWSServerError(appendStatus, t); continue; }
-		
-			// Encode frame
-//			t->internal.client[index].wsEncode.pFrame = t->internal.client[index].pSendData;
-//			t->internal.client[index].wsEncode.MaxFrameLength = t->BufferSize;
-//			t->internal.client[index].wsEncode.FIN = 1;
-//			t->internal.client[index].wsEncode.RSV = 0;
-//			t->internal.client[index].wsEncode.OpCode = JSON_WS_OPCODE_TEXT;
-//			t->internal.client[index].wsEncode.MASK = 0;
-//			t->internal.client[index].wsEncode.PayloadLength = t->internal.client[index].messageBuffer.currentLength;
-//			memset(&(t->internal.client[index].wsEncode.MaskingKey), 0, sizeof(t->internal.client[index].wsEncode.MaskingKey));
-//			t->internal.client[index].wsEncode.pPayloadData = t->internal.client[index].messageBuffer.pData;
-//			jsonWSEncode(&t->internal.client[index].wsEncode);
-
-//			if (t->internal.client[index].wsEncode.Status != 0) { jsonInternalSetWSServerError(t->internal.client[index].wsEncode.Status, t); continue; }
 
 			t->internal.client[index].wsStream.in.par.pSendData = t->internal.client[index].messageBuffer.pData;
 			t->internal.client[index].wsStream.in.par.sendLength = t->internal.client[index].messageBuffer.currentLength;
@@ -483,10 +461,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 			// Reset request timer
 			t->internal.client[index].requestTimer.IN = 0;
-		
-			//i = 0;//temp for debug
-			//char *pResponseData = (char*)t->internal.client[index].messageBuffer.pData;//temp for debug
-		
 		
 			memset((void*)t->internal.client[index].pReceiveData, 0, t->BufferSize);
 		

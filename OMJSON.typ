@@ -10,10 +10,6 @@
  ********************************************************************)
 
 TYPE
-	JSON_WS_OPCODE_enum : 
-		(
-		JSON_WS_OPCODE_TEXT := 1
-		);
 	JSON_ERR_enum : 
 		(
 		JSON_ERR_INVALIDINPUT := 50000,
