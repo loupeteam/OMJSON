@@ -289,6 +289,8 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				} else {
 					jsonInternalSetWSServerError(t->internal.client[index].wsConnect.Status, t);
 				}
+				
+				t->internal.client[index].requestTimer.IN = 0;
 			
 			}
 			else /*if (t->internal.client[index].wsConnected)*/ {
@@ -531,19 +533,20 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		TCPStreamSend(&t->internal.client[index].tcpStream);
 	
 		t->internal.client[index].tcpStream.IN.CMD.Send = 0;
+				
+		// Handle request timer
+		t->internal.client[index].requestTimer.PT = 4000000000u; // Set timer to a long time
+		TON_10ms(&t->internal.client[index].requestTimer);
 		
 		// Handle timeout
 		// NOTE: We will likely want to consider doing a ping here instead of just disconnecting
-		if(t->internal.client[index].requestTimer.ET * 10 > (t->Timeout ? t->Timeout : JSON_DEFAULT_TIMEOUT)) {
+		if(t->internal.client[index].wsConnected && t->internal.client[index].requestTimer.ET * 10 > (t->Timeout ? t->Timeout : JSON_DEFAULT_TIMEOUT)) {
 			t->internal.client[index].tcpStream.IN.CMD.Receive = 0;
 			t->internal.client[index].tcpStream.IN.CMD.Close = 1;
 			t->internal.client[index].wsConnected = 0;
 			continue;
 		}
 		
-		// Handle request timer
-		t->internal.client[index].requestTimer.PT = 4000000000u; // Set timer to a long time
-		TON_10ms(&t->internal.client[index].requestTimer);
 		
 		t->ClientInfo[index].TimeSinceLastRequest_ms = t->internal.client[index].requestTimer.ET * 10;
 		t->ClientInfo[index].Connected = t->internal.client[index].tcpStream.OUT.Active;
