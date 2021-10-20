@@ -321,7 +321,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				if (t->internal.client[index].wsDecode.MASK == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].tcpStream.IN.CMD.Close = 1; continue; }
 
 				// Check for close frame
-				if (t->internal.client[index].wsDecode.OpCode != JSON_WS_OPCODE_CLOSE) {
+				if (t->internal.client[index].wsDecode.OpCode == JSON_WS_OPCODE_CLOSE) {
 					t->internal.client[index].tcpStream.IN.CMD.Receive = 0;
 					t->internal.client[index].tcpStream.IN.CMD.Close = 1;
 					t->internal.client[index].wsConnected = 0;
