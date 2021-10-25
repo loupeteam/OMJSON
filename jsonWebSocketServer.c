@@ -289,6 +289,8 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				} else {
 					jsonInternalSetWSServerError(t->internal.client[index].wsConnect.Status, t);
 				}
+				
+				t->internal.client[index].requestTimer.IN = 0;
 			
 			}
 			else /*if (t->internal.client[index].wsConnected)*/ {
@@ -317,9 +319,17 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 				if (t->internal.client[index].wsDecode.Status != 0) { jsonInternalSetWSServerError(t->internal.client[index].wsDecode.Status, t); continue; }
 				if (t->internal.client[index].wsDecode.FIN == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_FRAGMENT, t); continue; }
 				if (t->internal.client[index].wsDecode.RSV != 0) { jsonInternalSetWSServerError(JSON_ERR_WS_RSV, t); continue; }
-				if (t->internal.client[index].wsDecode.OpCode != JSON_WS_OPCODE_TEXT) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; }
+				if (t->internal.client[index].wsDecode.OpCode != JSON_WS_OPCODE_TEXT && t->internal.client[index].wsDecode.OpCode != JSON_WS_OPCODE_CLOSE) { jsonInternalSetWSServerError(JSON_ERR_WS_OPCODE, t); continue; } // TODO: Handle other opcode 
 				if (t->internal.client[index].wsDecode.MASK == 0) { jsonInternalSetWSServerError(JSON_ERR_WS_MASK, t); t->internal.client[index].tcpStream.IN.CMD.Close = 1; continue; }
 
+				// Check for close frame
+				if (t->internal.client[index].wsDecode.OpCode == JSON_WS_OPCODE_CLOSE) {
+					t->internal.client[index].tcpStream.IN.CMD.Receive = 0;
+					t->internal.client[index].tcpStream.IN.CMD.Close = 1;
+					t->internal.client[index].wsConnected = 0;
+					continue;
+				}
+				
 				// Check WS frame length against received TCP message length
 				t->internal.client[index].excessDataLength = t->internal.client[index].tcpStream.OUT.ReceivedDataLength - t->internal.client[index].wsDecode.FrameLength;
 			
@@ -523,11 +533,20 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		TCPStreamSend(&t->internal.client[index].tcpStream);
 	
 		t->internal.client[index].tcpStream.IN.CMD.Send = 0;
-		
-		
+				
 		// Handle request timer
 		t->internal.client[index].requestTimer.PT = 4000000000u; // Set timer to a long time
 		TON_10ms(&t->internal.client[index].requestTimer);
+		
+		// Handle timeout
+		// NOTE: We will likely want to consider doing a ping here instead of just disconnecting
+		if(t->internal.client[index].wsConnected && t->internal.client[index].requestTimer.ET * 10 > (t->Timeout ? t->Timeout : JSON_DEFAULT_TIMEOUT)) {
+			t->internal.client[index].tcpStream.IN.CMD.Receive = 0;
+			t->internal.client[index].tcpStream.IN.CMD.Close = 1;
+			t->internal.client[index].wsConnected = 0;
+			continue;
+		}
+		
 		
 		t->ClientInfo[index].TimeSinceLastRequest_ms = t->internal.client[index].requestTimer.ET * 10;
 		t->ClientInfo[index].Connected = t->internal.client[index].tcpStream.OUT.Active;

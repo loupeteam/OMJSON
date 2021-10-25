@@ -12,7 +12,12 @@
 TYPE
 	JSON_WS_OPCODE_enum : 
 		(
-		JSON_WS_OPCODE_TEXT := 1
+		JSON_WS_OPCODE_CONTINUATION := 0, (*Not supported*)
+		JSON_WS_OPCODE_TEXT := 1,
+		JSON_WS_OPCODE_BINARY := 2, (*Not supported*)
+		JSON_WS_OPCODE_CLOSE := 8,
+		JSON_WS_OPCODE_PING := 9, (*Not supported*)
+		JSON_WS_OPCODE_PONG := 10 (*Not supported*)
 		);
 	JSON_ERR_enum : 
 		(
