@@ -47,6 +47,7 @@ TYPE
 	END_STRUCT;
 	jsonWSS_client_debug_typ : 	STRUCT 
 		socketConnectCount : DINT;
+		connectSplit : DINT;
 		websocketConnectCount : DINT;
 		socketDisconnectCountError : DINT;
 		socketDisconnectCountRecvLength0 : DINT;
@@ -63,6 +64,8 @@ TYPE
 		tcpStream : TCPStream_typ;
 		pReceiveData : UDINT;
 		pSendData : UDINT;
+		pRecieveDataBuffer : UDINT;
+		recieveDataBufferLen : UDINT;
 		messageBuffer : datbufBuffer_typ;
 		wsConnect : jsonWSConnect;
 		wsConnected : BOOL;

@@ -18,6 +18,7 @@ FUNCTION_BLOCK jsonWebSocketServer (*Serve variables via JSON and WebSockets*) (
 		BufferSize : UDINT; (*Size of buffers. N buffers will be allocated, so the total memory requirement is N*BufferSize.*)
 		MaxIterations : UDINT; (*Maximum number of iterations for looping through variables.*)
 		AcknowledgeError : BOOL; (*Acknowledge errors. Automatically reset by FUB.*)
+		CertID : UDINT;
 	END_VAR
 	VAR_OUTPUT
 		ClientInfo : ARRAY[0..JSON_MAI_CLIENTS] OF jsonWSS_client_info_typ;
