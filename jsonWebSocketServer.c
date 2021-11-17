@@ -327,6 +327,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 					t->internal.client[index].tcpStream.IN.CMD.Receive = 0;
 					t->internal.client[index].tcpStream.IN.CMD.Close = 1;
 					t->internal.client[index].wsConnected = 0;
+					t->internal.client[index].debug.socketDisconnectCountOpcode++;
 					continue;
 				}
 				
@@ -544,6 +545,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			t->internal.client[index].tcpStream.IN.CMD.Receive = 0;
 			t->internal.client[index].tcpStream.IN.CMD.Close = 1;
 			t->internal.client[index].wsConnected = 0;
+			t->internal.client[index].debug.socketDisconnectCountTimeout++;
 			continue;
 		}
 		

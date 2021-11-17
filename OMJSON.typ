@@ -53,6 +53,8 @@ TYPE
 	jsonWSS_client_debug_typ : 	STRUCT 
 		socketConnectCount : DINT;
 		websocketConnectCount : DINT;
+		socketDisconnectCountTimeout : DINT;
+		socketDisconnectCountOpcode : DINT;
 		socketDisconnectCountError : DINT;
 		socketDisconnectCountRecvLength0 : DINT;
 		socketInvalidCountError : DINT;
