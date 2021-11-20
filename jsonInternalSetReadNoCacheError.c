@@ -14,7 +14,8 @@
 	extern "C"
 	{
 #endif
-
+	
+	#include "omjsonInternal.h"
 	#include "OMJSON.h"
 	#include <string.h>
 

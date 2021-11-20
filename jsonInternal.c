@@ -17,6 +17,7 @@
 	{
 #endif
 
+#include "omjsonInternal.h"
 #include "OMJSON.h"
 #include "jsonInternal.h"
 #include <string.h>
