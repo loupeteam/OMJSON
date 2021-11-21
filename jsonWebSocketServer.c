@@ -475,7 +475,18 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 					pResponseData = pMessageData; // NOTE: This echoes the received data. Might want to do something different later.
 					responseDataLength = dataLength;
 				
-				} else {
+				} 
+				else if(requestType[0] == 't'){
+					// Write
+					t->internal.client[index].readTaskList.MaxIterations = t->MaxIterations;
+					jsonReadTaskList(&t->internal.client[index].readTaskList);
+								
+					strcpy(responseType, "taskresponse");
+					pResponseData = (char*)t->internal.client[index].readTaskList.pJSONObject; // NOTE: This echoes the received data. Might want to do something different later.
+					responseDataLength = t->internal.client[index].readTaskList.JSONObjectLength;
+				
+				}
+				else {
 				
 					// BONK! NOTE: Do something better here.
 					jsonInternalSetWSServerError(JSON_ERR_PARSE, t);

@@ -77,6 +77,7 @@ TYPE
 		wsEncode : jsonWSEncode;
 		writeVariable : jsonWriteVariable;
 		readVariableList : jsonReadVariableList;
+		readTaskList : jsonReadTaskList;
 		debug : jsonWSS_client_debug_typ;
 		excessDataLength : DINT;
 		requestTimer : TON_10ms;
@@ -147,6 +148,10 @@ TYPE
 		outputBuffer : datbufBuffer_typ;
 		variableName : STRING[VAR_STRLEN_NAME];
 		addVariableToCache : jsonAddVariableToCache;
+	END_STRUCT;
+	jsonReadTasks_Int_typ : 	STRUCT 
+		initialized : BOOL;
+		outputBuffer : datbufBuffer_typ;
 	END_STRUCT;
 	jsonAddVariableToCache_Int_typ : 	STRUCT 
 		initialized : BOOL;

@@ -148,6 +148,21 @@ FUNCTION_BLOCK jsonReadVariable (*Convert a variable into a JSON object*) (*$GRO
 	END_VAR
 END_FUNCTION_BLOCK
 
+FUNCTION_BLOCK jsonReadTaskList
+	VAR_INPUT
+		BufferSize : UDINT;
+		MaxIterations : UDINT;
+	END_VAR
+	VAR_OUTPUT
+		Status : UINT;
+		pJSONObject : UDINT;
+		JSONObjectLength : UDINT;
+	END_VAR
+	VAR
+		internal : jsonReadTasks_Int_typ;
+	END_VAR
+END_FUNCTION_BLOCK
+
 FUNCTION_BLOCK jsonAddVariableToCache (*Add a variable to the JSON variable cache*) (*$GROUP=User*)
 	VAR_INPUT
 		pVariableName : UDINT;

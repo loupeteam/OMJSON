@@ -19,6 +19,7 @@
     <File Description="Write variable values received as a JSON object">jsonWriteVariable.c</File>
     <File Description="Convert a list of variables into a JSON object">jsonReadVariableList.c</File>
     <File Description="Convert a variable into a JSON object">jsonReadVariable.c</File>
+    <File Description="Read the list of Tasks on the PLC">jsonReadTasks.c</File>
     <File Description="Add a variable to the JSON variable cache">jsonAddVariableToCache.c</File>
     <File Description="Convert a variable into a JSON object without caching">jsonReadVariableNoCache.c</File>
     <File>jsonInternal.h</File>
