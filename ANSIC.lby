@@ -30,6 +30,7 @@
     <File Description="Internal: Set error status on a jsonReadVariableNoCache FUB instance">jsonInternalSetReadNoCacheError.c</File>
     <File>jsonInternal.c</File>
     <File>jsonInternalWrapper.c</File>
+    <File>omjsonInternal.h</File>
   </Files>
   <Dependencies>
     <Dependency ObjectName="VarTools" FromVersion="0.09.1" ToVersion="0.10.9" />
