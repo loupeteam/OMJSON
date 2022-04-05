@@ -122,7 +122,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 	// Manage TCP server
 	//-------------------
 
-	webSocketConnection(&t->internal.wsServer);
+	wsManageConnection(&t->internal.wsServer);
 
 	if (t->internal.wsServer.out.newConnectionAvailable) {
 		
@@ -184,7 +184,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		t->internal.client[index].debug.oldDataReceived = t->internal.client[index].wsStream.out.dataReceived;
 	
-		webSocketRecv(&t->internal.client[index].wsStream);
+		wsReceive(&t->internal.client[index].wsStream);
 		t->internal.client[index].wsConnected = t->internal.client[index].wsStream.out.connected;
 	
 		if (t->internal.client[index].debug.oldDataReceived && t->internal.client[index].wsStream.out.dataReceived) {
@@ -467,7 +467,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		} // NewDataAvailable && !Sending
 	
-		webSocketSend(&t->internal.client[index].wsStream);
+		wsSend(&t->internal.client[index].wsStream);
 	
 		t->internal.client[index].wsStream.in.cmd.send = 0;
 		
