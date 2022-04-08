@@ -56,7 +56,7 @@ TYPE
 		oldDataReceived : BOOL;
 	END_STRUCT;
 	jsonWSServer_int_client_typ : 	STRUCT 
-		wsStream : WebSocStream_typ;
+		wsStream : WSStream_typ;
 		pReceiveData : UDINT;
 		pSendData : UDINT;
 		messageBuffer : datbufBuffer_typ;
@@ -69,7 +69,7 @@ TYPE
 	END_STRUCT;
 	jsonWSServer_Internal_typ : 	STRUCT 
 		initialized : BOOL;
-		wsServer : WebSocketConnection_typ;
+		wsServer : WSConnectionManager_typ;
 		client : ARRAY[0..JSON_MAI_CLIENTS]OF jsonWSServer_int_client_typ;
 		requestTimer : TON_10ms;
 		iClient : UINT;
