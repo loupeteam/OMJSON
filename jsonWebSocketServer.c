@@ -16,7 +16,6 @@
 #endif
 
 #include "OMJSON.h"
-#include <rtkCriticalSection.h>
 #include <string.h>
 #include "jsonAux.h"
 #include "sha1.h"
@@ -89,9 +88,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			
 			// TODO: Clear buffers on init
 			
-			RtkCreateCriticalSection( NULL, &t->lock.key );
-			t->lock.active = 1;
-			memcpy( &t->unlock, &t->lock, sizeof(t->lock));
 			
 			// Set up tcpServer
 			t->internal.tcpServer.IN.CFG.Mode = TCPCOMM_MODE_SERVER;
@@ -113,9 +109,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 
 	} // if(!initialized)
 
-	memcpy( &t->unlock, &t->lock, sizeof(t->lock));
-
-
 	// Check license
 	//---------------
 
@@ -129,9 +122,9 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 	// Manage TCP server
 	//-------------------
 	
-	lockComms( &t->lock );
+	lockComms( 0 );
 	TCPManageConnection(&t->internal.tcpServer);
-	unlockComms( &t->unlock );
+	unlockComms( 0 );
 
 	if (t->internal.tcpServer.OUT.NewConnectionAvailable) {
 		
@@ -192,11 +185,11 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		t->internal.client[index].debug.oldDataReceived = t->internal.client[index].tcpStream.OUT.DataReceived;
 	
-		lockComms( &t->lock );
+		lockComms( 0 );
 		
 		TCPStreamReceive(&t->internal.client[index].tcpStream);
 
-		unlockComms( &t->unlock );
+		unlockComms( 0 );
 	
 		if (t->internal.client[index].debug.oldDataReceived && t->internal.client[index].tcpStream.OUT.DataReceived) {
 			// Break here to figure out what happens
@@ -544,11 +537,9 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		} // NewDataAvailable && !Sending
 	
-		lockComms( &t->lock );
-
+		lockComms( 0 );
 		TCPStreamSend(&t->internal.client[index].tcpStream);
-
-		unlockComms( &t->unlock );
+		unlockComms( 0 );
 	
 		t->internal.client[index].tcpStream.IN.CMD.Send = 0;
 				
@@ -575,14 +566,4 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 } // End Fn
 
 
-void lockComms(struct lockComms* inst){
-	if( inst->key && inst->active){	
-		RtkEnterCriticalSection( inst->key );
-	}
-}
-void unlockComms(struct unlockComms* inst){
 
-	if( inst->key && inst->active ){	
-		RtkLeaveCriticalSection( inst->key );
-	}
-}

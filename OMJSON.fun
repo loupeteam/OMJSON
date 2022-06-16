@@ -22,8 +22,6 @@ FUNCTION_BLOCK jsonWebSocketServer (*Serve variables via JSON and WebSockets*) (
 	END_VAR
 	VAR_OUTPUT
 		ClientInfo : ARRAY[0..JSON_MAI_CLIENTS] OF jsonWSS_client_info_typ;
-		lock : lockComms;
-		unlock : unlockComms;
 		Error : BOOL;
 		ErrorID : UINT;
 		ErrorString : STRING[JSON_STRLEN_ERROR];
@@ -199,16 +197,3 @@ FUNCTION jsonEscape : UDINT (*Escape JSON string*)
 	END_VAR
 END_FUNCTION
 
-FUNCTION_BLOCK lockComms
-	VAR_INPUT
-		key : UDINT;
-		active : BOOL;
-	END_VAR
-END_FUNCTION_BLOCK
-
-FUNCTION_BLOCK unlockComms
-	VAR_INPUT
-		key : UDINT;
-		active : BOOL;
-	END_VAR
-END_FUNCTION_BLOCK
