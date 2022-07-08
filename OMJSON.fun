@@ -196,3 +196,4 @@ FUNCTION jsonEscape : UDINT (*Escape JSON string*)
 		reentry : UDINT;
 	END_VAR
 END_FUNCTION
+

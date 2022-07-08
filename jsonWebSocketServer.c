@@ -88,6 +88,7 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			
 			// TODO: Clear buffers on init
 			
+			
 			// Set up tcpServer
 			t->internal.tcpServer.IN.CFG.Mode = TCPCOMM_MODE_SERVER;
 			strcpy(t->internal.tcpServer.IN.CFG.LocalIPAddress, t->ServerIP);
@@ -108,7 +109,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 
 	} // if(!initialized)
 
-
 	// Check license
 	//---------------
 
@@ -121,8 +121,10 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 
 	// Manage TCP server
 	//-------------------
-
+	
+	lockComms( 0 );
 	TCPManageConnection(&t->internal.tcpServer);
+	unlockComms( 0 );
 
 	if (t->internal.tcpServer.OUT.NewConnectionAvailable) {
 		
@@ -183,7 +185,11 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		t->internal.client[index].debug.oldDataReceived = t->internal.client[index].tcpStream.OUT.DataReceived;
 	
+		lockComms( 0 );
+		
 		TCPStreamReceive(&t->internal.client[index].tcpStream);
+
+		unlockComms( 0 );
 	
 		if (t->internal.client[index].debug.oldDataReceived && t->internal.client[index].tcpStream.OUT.DataReceived) {
 			// Break here to figure out what happens
@@ -531,7 +537,9 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		
 		} // NewDataAvailable && !Sending
 	
+		lockComms( 0 );
 		TCPStreamSend(&t->internal.client[index].tcpStream);
+		unlockComms( 0 );
 	
 		t->internal.client[index].tcpStream.IN.CMD.Send = 0;
 				
@@ -556,3 +564,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 	} // End For Clients
 		
 } // End Fn
+
+
+
