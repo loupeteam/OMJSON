@@ -32,7 +32,7 @@
     <File>jsonInternalWrapper.c</File>
   </Files>
   <Dependencies>
-    <Dependency ObjectName="VarTools" FromVersion="0.09.1" ToVersion="0.10.9" />
+    <Dependency ObjectName="VarTools" FromVersion="0.09.1" ToVersion="0.11.9" />
     <Dependency ObjectName="sys_lib" />
     <Dependency ObjectName="DataBuffer" FromVersion="0.01.0" ToVersion="0.01.9" />
     <Dependency ObjectName="AsHttp" />
