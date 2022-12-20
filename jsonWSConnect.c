@@ -39,7 +39,7 @@ void jsonWSConnect(struct jsonWSConnect* t)
 	USINT digest[20];
 	
 	// Get key out of receive data
-	pKey = strstr((char*)t->pInputMessage, "Sec-WebSocket-Key:");
+	pKey = strcasestr((char*)t->pInputMessage, "Sec-WebSocket-Key:");
 	if (pKey == 0) {
 		t->Status = JSON_ERR_WS_KEYNOTFOUND;
 		return;
