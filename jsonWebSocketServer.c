@@ -176,6 +176,11 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 	
 	unsigned int index;
 	for (index = 0; index < t->internal.maxClients; index++) {
+		// Set iClient to index here to keep it up to date
+		// We want to be able to access this deeper in reading / replying to messages
+		// So make sure this stays near the top
+		t->internal.iClient = index;
+
 		// Start timer by default. It is reset when a request is properly processed.
 		t->internal.client[index].requestTimer.IN = 1;
 		
