@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio FileVersion="4.9"?>
-<Library Version="1.03.8" SubType="ANSIC" xmlns="http://br-automation.co.at/AS/Library">
+<Library Version="1.04.0" SubType="ANSIC" xmlns="http://br-automation.co.at/AS/Library">
   <Files>
     <File>LICENSE.txt</File>
     <File>VersionHistory.txt</File>
@@ -28,7 +28,6 @@
     <File Description="Internal: Set error status on a jsonReadVariable FUB instance">jsonInternalSetReadError.c</File>
     <File Description="Internal: Set error status on a jsonAddVariableToCache FUB instance">jsonInternalSetAddError.c</File>
     <File Description="Internal: Set error status on a jsonReadVariableNoCache FUB instance">jsonInternalSetReadNoCacheError.c</File>
-    <File>jsonInternal.c</File>
     <File>jsonInternalWrapper.c</File>
   </Files>
   <Dependencies>

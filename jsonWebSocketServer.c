@@ -97,9 +97,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			t->internal.tcpServer.IN.CMD.Enable = 1;
 			
 			t->internal.initialized = 1;
-		
-			// Presumably this is run in the init, so register the license
-			jsonInternalLicenseIsOk();
 			
 			// NOTE: I don't think you have to return here...
 			return;
@@ -107,16 +104,6 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		} // !error
 
 	} // if(!initialized)
-
-
-	// Check license
-	//---------------
-
-	// Do not allow anything for now
-	if (!jsonInternalLicenseIsOk()) {
-		jsonInternalSetWSServerError(JSON_ERR_NO_LICENSE, t);
-		return;
-	}
 
 
 	// Manage TCP server
