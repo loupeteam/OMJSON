@@ -1,8 +1,10 @@
-//*********************************************************************************
-// Copyright:  
-// Author:    dfblackburn
-// Created:   December 04, 2015
-//********************************************************************************
+/*
+ * File: jsonWSDecode.c
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of OMJSON, licensed under the MIT License.
+ */
 
 #include <bur/plctypes.h>
 #ifdef __cplusplus

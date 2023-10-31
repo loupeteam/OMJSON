@@ -1,13 +1,10 @@
-/********************************************************************
- * COPYRIGHT --  
- ********************************************************************
- * Library: OMJSON
- * File: jsonReadVariableFromCache.c
- * Author: dfblackburn
- * Created: March 26, 2015
- ********************************************************************
- * Implementation of library OMJSON
- ********************************************************************/
+/*
+ * File: jsonReadVariable.c
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of OMJSON, licensed under the MIT License.
+ */
 
 #include <bur/plctypes.h>
 #ifdef __cplusplus

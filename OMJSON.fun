@@ -1,13 +1,10 @@
-(********************************************************************
- * COPYRIGHT --  
- ********************************************************************
- * Library: OMJSON
+(*
  * File: OMJSON.fun
- * Author: davidblackburn
- * Created: September 22, 2014
- ********************************************************************
- * Functions and function blocks of library OMJSON
- ********************************************************************)
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of OMJSON, licensed under the MIT License.
+ *)
 
 FUNCTION_BLOCK jsonWebSocketServer (*Serve variables via JSON and WebSockets*) (*$GROUP=User*)
 	VAR_INPUT

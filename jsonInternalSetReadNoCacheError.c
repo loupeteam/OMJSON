@@ -1,13 +1,10 @@
-/********************************************************************
- * COPYRIGHT --  
- ********************************************************************
- * Library: OMJSON
- * File: jsonInternalSetReadError.c
- * Author: davidblackburn
- * Created: November 12, 2014
- ********************************************************************
- * Implementation of library OMJSON
- ********************************************************************/
+/*
+ * File: jsonInternalSetReadNoCacheError.c
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of OMJSON, licensed under the MIT License.
+ */
 
 #include <bur/plctypes.h>
 #ifdef __cplusplus

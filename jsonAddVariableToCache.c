@@ -1,13 +1,10 @@
-/********************************************************************
- * COPYRIGHT --  
- ********************************************************************
- * Library: OMJSON
+/*
  * File: jsonAddVariableToCache.c
- * Author: dfblackburn
- * Created: February 03, 2015
- ********************************************************************
- * Implementation of library OMJSON
- ********************************************************************/
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of OMJSON, licensed under the MIT License.
+ */
 
 #include <bur/plctypes.h>
 #ifdef __cplusplus

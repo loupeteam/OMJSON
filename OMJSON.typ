@@ -1,13 +1,10 @@
-(********************************************************************
- * COPYRIGHT --  
- ********************************************************************
- * Library: OMJSON
+(*
  * File: OMJSON.typ
- * Author: davidblackburn
- * Created: September 22, 2014
- ********************************************************************
- * Data types of library OMJSON
- ********************************************************************)
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of OMJSON, licensed under the MIT License.
+ *)
 
 TYPE
 	JSON_WS_OPCODE_enum : 

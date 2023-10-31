@@ -1,13 +1,10 @@
-/********************************************************************
- * COPYRIGHT --  
- ********************************************************************
- * Library: OMJSON
+/*
  * File: jsonInternal.h
- * Author: davidblackburn
- * Created: September 22, 2014
- ********************************************************************
- * Implementation of library OMJSON
- ********************************************************************/
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of OMJSON, licensed under the MIT License.
+ */
 
 #ifndef __JSON_INTERNAL_H__
 #define __JSON_INTERNAL_H__
