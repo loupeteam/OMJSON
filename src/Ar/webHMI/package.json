@@ -1,0 +1,30 @@
+{
+    "name": "@loupeteam/webhmiprog",
+    "version": "0.1.0",
+    "description": "This is a program package. It includes a task that runs the OMJSON FUB and acts as a server on the PLC for the webHMI application",
+    "author": "Loupe",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/loupeteam/OMJSON"
+    },
+    "dependencies": {
+      "@loupeteam/omjson": "^1.4.0",
+      "@loupeteam/firstinitprog": ">=0.1.0"
+    },
+    "lpm": {
+      "type": "program",
+      "logical": {
+        "source": "*",
+        "destination": "webHMI"
+      },
+      "physical": {
+        "cpu": [
+          {
+            "source": "webHMIProg",
+            "destination": "TC8"
+          }
+        ]
+      }
+    }
+  }
