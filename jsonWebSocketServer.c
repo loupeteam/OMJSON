@@ -483,8 +483,8 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		// Handle timeout
 		// NOTE: We will likely want to consider doing a ping here instead of just disconnecting
 		if(t->internal.client[index].wsConnected && t->internal.client[index].requestTimer.ET * 10 > (t->Timeout ? t->Timeout : JSON_DEFAULT_TIMEOUT)) {
-			t->internal.client[index].tcpStream.IN.CMD.Receive = 0;
-			t->internal.client[index].tcpStream.IN.CMD.Close = 1;
+			t->internal.client[index].wsStream.in.cmd.receive = 0;
+			t->internal.client[index].wsStream.in.cmd.close = 1;
 			t->internal.client[index].wsConnected = 0;
 			t->internal.client[index].debug.socketDisconnectCountTimeout++;
 			continue;
