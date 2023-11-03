@@ -1,0 +1,59 @@
+<script src="js/atn.js" />
+<div style="height: 300px;" data-read-group="ATN">
+    <span data-var-name="AtnHmi:AtnPLCOpenCall"/>
+    <span data-var-name="AtnHmi:readState"/>
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Command<span class="caret"></span></button>
+        <ul class="dropdown-menu" id="atnCommand">
+        </ul>
+      </div>
+      <input type="text" class="form-control webhmi-text-value" aria-label="..." data-var-name="AtnHmi:AtnPLCOpenCall[0].Command">
+      <span type="button" class="webhmi-btn-toggle webhmi-led input-group-addon" data-var-name="AtnHmi:AtnPLCOpenCall[0].Execute" id="basic-addon2"> Execute </span>
+    </div>
+    <table class="table">
+      <thead>
+        <th>Status</th>
+        <th>Busy</th>
+        <th>Done</th>
+        <th>Error</th>    
+      </thead>  
+      <tbody>
+        <tr>
+          <td class="webhmi-num-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].Status"></td>
+          <td class="webhmi-num-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].Busy"></td>
+          <td class="webhmi-num-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].Done"></td>
+          <td class="webhmi-num-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].Error"> </td>      
+        </tr>
+        <tr>
+        </tr>
+      </tbody>
+    </table>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[0]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[1]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[2]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[3]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[4]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[5]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[6]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:AtnPLCOpenCall[0].StatusMessage[7]"></div>
+
+</div>
+<div data-read-group="ATN">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Status<span class="caret"></span></button>
+        <ul class="dropdown-menu" id="atnState">
+        </ul>
+      </div>
+      <input type="text" class="form-control webhmi-text-value" aria-label="..." data-var-name="AtnHmi:readState[0].State">
+    </div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[0]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[1]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[2]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[3]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[4]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[5]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[6]"></div>
+    <div class="webhmi-text-value" data-var-name="AtnHmi:readState[0].Status[7]"></div>
+</div>

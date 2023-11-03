@@ -1,0 +1,73 @@
+<!-- codemirror -->
+<script src="./app/libraries/codemirror/codemirror.js"></script>
+<link href="./app/libraries/codemirror/codemirror.css" rel="stylesheet">
+
+<!-- Editor -->
+<div id="floatingEditor" class="/*windows-page*/">
+	<div id="alerts"></div>
+	<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editorDOM">
+		<div class="btn-group">
+			<button class="btn" type="button" onclick="editor.upload();" data-edit="save/upload" title="Save">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+			</button>
+			<button class="btn" type="button" onclick="editor.download();" data-edit="download/load" title="Load">
+				<span class="glyphicon glyphicon-folder-open"></span>
+			</button>
+		</div>
+		<div class="btn-group">
+			<button class="btn" type="button" onclick="editor.import();" title="Import File">
+				<span class="glyphicon glyphicon-open-file"></span>
+			</button>
+			<button class="btn" type="button" onclick="editor.export();" title="Export File">
+				<i class="glyphicon glyphicon-save-file"></i>
+			</button>
+		</div>
+		<div class="ftp-editor-toolbar-3 btn-group">
+			<button class="btn led-on" type="button" onclick="editor.toggleLineFollowing($(this));" title="Line Following">
+				<i class="glyphicon glyphicon-console"></i>
+			</button>
+			<!-- Toggle Keyboard Placeholder -->
+		</div>
+		<div id="EditorFileSelector" class="btn-group">
+			<div class="btn-group">
+				<button type="button" onclick="editor.getDir()" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+				</button>
+				<ul id="editorDropdown" class="dropdown-menu editorDropdown">
+					<li>
+						<a class="btn">
+							<div class="text">0</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<input id="editorfilename" class="btn editorfilename" keyboard="qwerty" height="44" onchange="editor.filter($(this).val());"></input>
+		</div>
+		<div id="editorStatus" class="text-vertical" style="float:right;">ready</div>
+		<button class="btn" type="button" style="float:right;" onclick="editor.delete();" title="Delete">
+			<i class="glyphicon glyphicon-trash"></i>
+		</button>
+	</div>
+	<div id="editorDOM" class="CodeMirror" contenteditable="true">
+		{{!-- The G-Code Editor requires running in electron --}}
+	</div>
+</div>
+<!-- Include JS files -->
+<script src="./app/libraries/ftpEditor/ftpEditor.js"></script>
+<!-- Include CSS files -->
+{{!-- <div css-include="./app/libraries/ftpEditor/ftpEditor.css"></div> --}}
+<link href="./app/libraries/ftpEditor/ftpEditor.css" rel="stylesheet">
+
+<template template-include=".ma-cnc-control-buttons">
+	<button type="button" class="btn " onclick="editor.toggle($('#cncfileinput').val());">
+		<span class="glyphicon glyphicon-pencil" />
+	</button>
+</template>
+
+<script>
+	$(function () {
+		// TODO: This needs to be tested
+		if(jQuery.resizable)
+			$(".CodeMirror").resizable({});
+	});
+</script>

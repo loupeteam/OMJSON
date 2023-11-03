@@ -1,0 +1,77 @@
+
+<!-- Building template with handle bars -->
+<script id="CNCModule" type="text/x-handlebars-template">
+    <div data-read-group="directory">
+    {{widget 'DirectoryBrowser' data-var-name="HMI_CNC_Co:f.in.cwd" data-var-name-files="HMI_CNC_Co:Directory" data-var-name-willopen="HMI_CNC_Co:f.in.refresh"}}
+    </div>
+</script>
+<script id="CncConfig" type="text/x-handlebars-template">
+<div class="">
+    <table>
+        <thead>
+            <col width='400'>
+        </thead>
+        <tbody>
+            <tr>
+                <b>Auto Mode CNC Limits</b>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" role="group">
+                        <span class="input-group-addon cnc-config">Speed [mm/s]</span>
+                        <input type="text" keyboard="num" class="webhmi-num-value form-control" data-var-name="CNCKernel:Configuration.Mode[0].limit.v">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" role="group">
+                        <span class="input-group-addon cnc-config">Acceleration [mm/s^2]</span>
+                        <input type="text" keyboard="num" class="webhmi-num-value form-control" data-var-name="CNCKernel:Configuration.Mode[0].limit.a_pos">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" role="group">
+                        <span class="input-group-addon cnc-config">Deceleration [mm/s^2]</span>
+                        <input type="text" keyboard="num" class="webhmi-num-value form-control" data-var-name="CNCKernel:Configuration.Mode[0].limit.a_neg">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" role="group">
+                        <span class="input-group-addon cnc-config">Jolt Time [s]</span>
+                        <input type="text" keyboard="num" class="webhmi-num-value form-control" data-var-name="CNCKernel:Configuration.Mode[0].limit.t_jolt">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" role="group">
+                        <span class="input-group-addon cnc-config">Speed Jump [mm/s]</span>
+                        <input type="text" keyboard="num" class="webhmi-num-value form-control" data-var-name="CNCKernel:Configuration.Mode[0].limit.v_jump">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" role="group">
+                        <span class="input-group-addon cnc-config">Acceleration Jump [mm/s^2]</span>
+                        <input type="text" keyboard="num" class="webhmi-num-value form-control" data-var-name="CNCKernel:Configuration.Mode[0].limit.a_jump">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" role="group">
+                        <span class="input-group-addon cnc-config">Tangential Path Threshold [degrees]</span>
+                        <input type="text" keyboard="num" class="webhmi-num-value form-control" data-var-name="CNCKernel:Configuration.Mode[0].limit.s_jump_t">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</script>

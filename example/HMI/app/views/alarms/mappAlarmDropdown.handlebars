@@ -1,0 +1,59 @@
+<style>
+    .has-error{
+        background:lightcoral;
+    }
+</style>
+
+<div>
+    <div class="btn-group inline-right">
+        <button type="button" class="btn btn-default webhmi-btn-set" data-var-name="AlarmWrap:alarmWrapper.in.cmd.acknowledgeAllAlarms">Acknowledge</button>
+        <button type="button" class="btn btn-default dropdown-toggle webhmi-led" data-var-name="AlarmWrap:alarmWrapper.out.activeAlarms"
+            data-led-true="has-error" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="webhmi-num-value" data-var-name="AlarmWrap:alarmWrapper.out.activeAlarms" data-led-true="has-error">0</span>
+            Errors
+            <span class="caret"></span>
+        </button>
+        <ul id="alarmList" class="dropdown-menu">
+            <li class="list-group-item">
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    
+var updateMachineErrors = function() {
+    
+    if (
+      machine === undefined ||
+      machine["AlarmWrap:alarmWrapper"] === undefined ||
+      machine["AlarmWrap:alarmWrapper"].out === undefined ||
+      machine["AlarmWrap:alarmWrapper"].out.activeAlarms === undefined
+    ) {
+      machine.initCyclicRead("AlarmWrap:alarmWrapper.out.activeAlarms");
+      return;
+    }
+    if (
+      machine["AlarmWrap:alarmWrapper"] === undefined ||
+      machine["AlarmWrap:alarmWrapper"].out.activeAlarmInfo === undefined
+    ) {
+        machine.initCyclicRead("AlarmWrap:alarmWrapper.out.activeAlarmInfo");
+      return;
+    }
+  
+    var errorCount = machine["AlarmWrap:alarmWrapper"].out.activeAlarms;
+    var errorList = "";
+    for (var i = 0; i < errorCount; i++) {
+      errorList =
+        errorList +
+        '<li class = "list-group-item">' +
+        machine["AlarmWrap:alarmWrapper"].out.activeAlarmInfo[i].message +
+        "</li>";
+    }
+    $("#alarmList").html(errorList);
+}
+
+    setInterval(function(){ updateMachineErrors(); }, 100); 
+</script>
+

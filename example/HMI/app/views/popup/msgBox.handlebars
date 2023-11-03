@@ -1,0 +1,72 @@
+<!-- Modal -->
+<style>
+    .msg-btn-hidden {visibility: hidden;}
+    .msg-btn-visible {visibility: visible;}
+    #ModalPopUp div.webhmi-text-value {min-width: 1px;}
+</style>
+
+<div class="modal fade" id="ModalPopUp" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <span data-var-name="MsgBox:MessageBox.Layer.Active"></span>
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="webhmi-text-value" data-var-name="MsgBox:MessageBox.TextSnippets.Message"></p>
+            </div>
+            <div class="modal-footer">
+                <span class="webhmi-led" data-var-name="MsgBox:MessageBox.Buttons1.StatusDP" data-set-value="1" data-reset-value="0"
+                    data-led-true="msg-btn-hidden" data-led-false="msg-btn-visible">
+					<button type="button" class="btn btn-default webhmi-btn-set btn1" data-var-name="MsgBox:MessageBox.Buttons1.CMD">
+						<div class="webhmi-text-value" data-var-name="MsgBox:MessageBox.TextSnippets.Buttons1">Button 1</div>
+                    </button>
+                </span>
+                <span class="webhmi-led" data-var-name="MsgBox:MessageBox.Buttons2.StatusDP" data-set-value="1" data-reset-value="0"
+                    data-led-true="msg-btn-hidden" data-led-false="msg-btn-visible">
+						<button type="button" class="btn btn-default webhmi-btn-set btn2" data-var-name="MsgBox:MessageBox.Buttons2.CMD">
+							<div class="webhmi-text-value" data-var-name="MsgBox:MessageBox.TextSnippets.Buttons2">Button 2</div>
+                        </button>
+                </span>
+                <span class="webhmi-led" data-var-name="MsgBox:MessageBox.Buttons3.StatusDP" data-set-value="1" data-reset-value="0"
+                    data-led-true="msg-btn-hidden" data-led-false="msg-btn-visible">
+						<button type="button" class="btn btn-default webhmi-btn-set btn2" data-var-name="MsgBox:MessageBox.Buttons3.CMD">
+							<div class="webhmi-text-value" data-var-name="MsgBox:MessageBox.TextSnippets.Buttons3">Button 3</div>
+                        </button>
+                </span>
+                <span class="webhmi-led" data-var-name="MsgBox:MessageBox.Buttons4.StatusDP" data-set-value="1" data-reset-value="0"
+                    data-led-true="msg-btn-hidden" data-led-false="msg-btn-visible">
+						<button type="button" class="btn btn-default webhmi-btn-set btn2" data-var-name="MsgBox:MessageBox.Buttons4.CMD">
+							<div class="webhmi-text-value" data-var-name="MsgBox:MessageBox.TextSnippets.Buttons4">Button 3</div>
+                        </button>
+                </span>
+                <span class="webhmi-led" data-var-name="MsgBox:MessageBox.Buttons5.StatusDP" data-set-value="1" data-reset-value="0"
+                    data-led-true="msg-btn-hidden" data-led-false="msg-btn-visible">
+						<button type="button" class="btn btn-default webhmi-btn-set btn2" data-var-name="MsgBox:MessageBox.Buttons5.CMD">
+							<div class="webhmi-text-value" data-var-name="MsgBox:MessageBox.TextSnippets.Buttons5">Button 3</div>
+                        </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End -->
+
+<script>    
+    var modalPopUp = function () {
+        if ( machine["MsgBox:MessageBox"] === undefined || machine["MsgBox:MessageBox"].Layer === undefined ) {
+            return;
+        } else if (machine["MsgBox:MessageBox"].Layer.Active && !$('body').hasClass('modal-open')) {
+            if ( !$('#ModalPopUp').hasClass('in') ) {
+                $('#ModalPopUp').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }
+        } else if (!machine["MsgBox:MessageBox"].Layer.Active && $('body').hasClass('modal-open')) {
+            if ( $('#ModalPopUp').hasClass('in') ) {
+                $('#ModalPopUp').modal('hide');            
+            }
+        }
+    }
+    WEBHMI.on({ 'update-hmi': modalPopUp });
+</script>
