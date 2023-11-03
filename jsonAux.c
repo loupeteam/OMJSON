@@ -299,47 +299,77 @@ unsigned long stringify_string(char *pDest, char *pSrc, unsigned long maxLength,
 		}
 		
 		// Check for invalid whitespace characters
-		if (*ptr < 32 && !(*ptr >= 8 && *ptr <= 13 && *ptr != 11)) {
+		if (*ptr < 32 && *ptr > 0 && !(*ptr >= 8 && *ptr <= 13 && *ptr != 11)) {
 			length = stringlcpy(pDest, "Invalid String", maxLength+1);
 			length = length > maxLength ? maxLength : length;
 			return length;
 		}
 		
-		// Copy characters while checking for characters that should be escaped
-		switch (*ptr) {
-			case '\"': *ptr2++ = '\\'; *ptr2++ = '\"'; break;
-			case '\\': *ptr2++ = '\\'; *ptr2++ = '\\'; break;
-			case '\b': *ptr2++ = '\\'; *ptr2++ = 'b'; break;
-			case '\f': *ptr2++ = '\\'; *ptr2++ = 'f'; break;
-			case '\n': *ptr2++ = '\\'; *ptr2++ = 'n'; break;
-			case '\r': *ptr2++ = '\\'; *ptr2++ = 'r'; break;
-			case '\t': *ptr2++ = '\\'; *ptr2++ = 't'; break;
+		if(*ptr < 0x7F) {
+		
+			// Copy characters while checking for characters that should be escaped
+			switch (*ptr) {
+				case '\"': *ptr2++ = '\\'; *ptr2++ = '\"'; break;
+				case '\\': *ptr2++ = '\\'; *ptr2++ = '\\'; break;
+				case '\b': *ptr2++ = '\\'; *ptr2++ = 'b'; break;
+				case '\f': *ptr2++ = '\\'; *ptr2++ = 'f'; break;
+				case '\n': *ptr2++ = '\\'; *ptr2++ = 'n'; break;
+				case '\r': *ptr2++ = '\\'; *ptr2++ = 'r'; break;
+				case '\t': *ptr2++ = '\\'; *ptr2++ = 't'; break;
 
-			//				case '\u':	 /* transcode utf16 to utf8. */
-			//					uc=parse_hex4(ptr+1);ptr+=4;	/* get the unicode char. */
-			//
-			//					if ((uc>=0xDC00 && uc<=0xDFFF) || uc==0)	break;	/* check for invalid.	*/
-			//
-			//					if (uc>=0xD800 && uc<=0xDBFF)	/* UTF16 surrogate pairs.	*/
-			//					{
-			//						if (ptr[1]!='\\' || ptr[2]!='u')	break;	/* missing second-half of surrogate.	*/
-			//						uc2=parse_hex4(ptr+3);ptr+=6;
-			//						if (uc2<0xDC00 || uc2>0xDFFF)		break;	/* invalid second-half of surrogate.	*/
-			//						uc=0x10000 + (((uc&0x3FF)<<10) | (uc2&0x3FF));
-			//					}
-			//
-			//					len=4;if (uc<0x80) len=1;else if (uc<0x800) len=2;else if (uc<0x10000) len=3; ptr2+=len;
-			//					
-			//					switch (len) {
-			//						case 4: *--ptr2 =((uc | 0x80) & 0xBF); uc >>= 6;
-			//						case 3: *--ptr2 =((uc | 0x80) & 0xBF); uc >>= 6;
-			//						case 2: *--ptr2 =((uc | 0x80) & 0xBF); uc >>= 6;
-			//						case 1: *--ptr2 =(uc | firstByteMark[len]);
-			//					}
-			//					ptr2+=len;
-			//					break;
+				//				case '\u':	 /* transcode utf16 to utf8. */
+				//					uc=parse_hex4(ptr+1);ptr+=4;	/* get the unicode char. */
+				//
+				//					if ((uc>=0xDC00 && uc<=0xDFFF) || uc==0)	break;	/* check for invalid.	*/
+				//
+				//					if (uc>=0xD800 && uc<=0xDBFF)	/* UTF16 surrogate pairs.	*/
+				//					{
+				//						if (ptr[1]!='\\' || ptr[2]!='u')	break;	/* missing second-half of surrogate.	*/
+				//						uc2=parse_hex4(ptr+3);ptr+=6;
+				//						if (uc2<0xDC00 || uc2>0xDFFF)		break;	/* invalid second-half of surrogate.	*/
+				//						uc=0x10000 + (((uc&0x3FF)<<10) | (uc2&0x3FF));
+				//					}
+				//
+				//					len=4;if (uc<0x80) len=1;else if (uc<0x800) len=2;else if (uc<0x10000) len=3; ptr2+=len;
+				//					
+				//					switch (len) {
+				//						case 4: *--ptr2 =((uc | 0x80) & 0xBF); uc >>= 6;
+				//						case 3: *--ptr2 =((uc | 0x80) & 0xBF); uc >>= 6;
+				//						case 2: *--ptr2 =((uc | 0x80) & 0xBF); uc >>= 6;
+				//						case 1: *--ptr2 =(uc | firstByteMark[len]);
+				//					}
+				//					ptr2+=len;
+				//					break;
 			
-			default:  *ptr2++ = *ptr; break;		
+				default:  *ptr2++ = *ptr; break;		
+			}
+		}
+		else { // multi-byte character, assume unicode 
+			if(*ptr & 0x11100000 == 0x11000000) { // 2 bytes
+				*ptr2++ = *ptr;
+				ptr++;
+				*ptr2++ = *ptr;
+			}
+			else if(*ptr & 0x11110000 == 0x11100000) {// 3 bytes
+				if(length < (maxLength - 2)) {
+					*ptr2++ = *ptr;
+					ptr++;
+					*ptr2++ = *ptr;
+					ptr++;
+					*ptr2++ = *ptr;
+				}
+			}
+			else if(*ptr & 0x11111000 == 0x11110000) {// 4 bytes
+				if(length < (maxLength - 2)) {
+					*ptr2++ = *ptr;
+					ptr++;
+					*ptr2++ = *ptr;
+					ptr++;
+					*ptr2++ = *ptr;
+					ptr++;
+					*ptr2++ = *ptr;
+				}
+			}
 		}
 		
 		ptr++;
