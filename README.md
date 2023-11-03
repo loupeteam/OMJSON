@@ -12,7 +12,7 @@ For more documentation and examples, see https://loupeteam.github.io/LoupeDocs/l
 # Installation
 To install using the Loupe Package Manager (LPM), in an initialized Automation Studio project directory run `lpm install omjson`. For more information about LPM, see https://loupeteam.github.io/LoupeDocs/tools/lpm.html.
 
-Note that there is a wrapper package available that serves to deploy this library as an executable task in a project: [WebHmiServer](https://github.com/loupeteam/WebHmiServer).
+Note that there is a wrapper package available that serves to deploy this library as an executable program in a project. The source logic is included in the `examples` folder, and it can be installed using LPM by running `lpm install webhmiprog`. This will also install OMJSON as a dependency automatically. 
 
 ## Licensing
 
