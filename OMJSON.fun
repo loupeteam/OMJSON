@@ -31,57 +31,6 @@ FUNCTION_BLOCK jsonWebSocketServer (*Serve variables via JSON and WebSockets*) (
 	END_VAR
 END_FUNCTION_BLOCK
 
-FUNCTION_BLOCK jsonWSConnect (*Negotiate a new WebSocket connection*) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
-	VAR_INPUT
-		pInputMessage : UDINT;
-		pOutputMessage : UDINT;
-		MaxOutputMessageLength : UDINT;
-	END_VAR
-	VAR_OUTPUT
-		Status : UINT;
-		OutputMessageLength : UDINT;
-	END_VAR
-	VAR
-		internal : jsonWSConnect_Internal_typ;
-	END_VAR
-END_FUNCTION_BLOCK
-
-FUNCTION_BLOCK jsonWSDecode (*Decode a WebSocket frame*) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
-	VAR_INPUT
-		pFrame : UDINT;
-	END_VAR
-	VAR_OUTPUT
-		Status : UINT;
-		FIN : BOOL;
-		RSV : USINT;
-		OpCode : USINT;
-		MASK : BOOL;
-		MaskingKey : ARRAY[0..3] OF USINT;
-		pPayloadData : UDINT;
-		HeaderLength : UDINT;
-		PayloadLength : UDINT;
-		FrameLength : UDINT;
-	END_VAR
-END_FUNCTION_BLOCK
-
-FUNCTION_BLOCK jsonWSEncode (*Encode data into a WebSocket frame*) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
-	VAR_INPUT
-		pFrame : UDINT;
-		MaxFrameLength : UDINT;
-		FIN : BOOL;
-		RSV : USINT;
-		OpCode : USINT;
-		MASK : BOOL; (*NOT SUPPORTED*)
-		PayloadLength : UDINT;
-		MaskingKey : ARRAY[0..3] OF USINT; (*NOT SUPPORTED*)
-		pPayloadData : UDINT;
-	END_VAR
-	VAR_OUTPUT
-		Status : UINT;
-		FrameLength : UDINT;
-	END_VAR
-END_FUNCTION_BLOCK
-
 FUNCTION_BLOCK jsonHTTPServer (*Serve variables via JSON and HTTP*) (*$GROUP=User*)
 	VAR_INPUT
 		pCache : UDINT; (*Address of the variable cache*)

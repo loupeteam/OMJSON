@@ -7,14 +7,9 @@
     <File Description="Exported data types">OMJSON.typ</File>
     <File Description="Exported constants">OMJSON.var</File>
     <File Description="Exported functions and function blocks">OMJSON.fun</File>
-    <File>sha1.h</File>
-    <File>sha1.c</File>
     <File>jsonAux.h</File>
     <File>jsonAux.c</File>
     <File Description="Serve variables via JSON and WebSockets">jsonWebSocketServer.c</File>
-    <File>jsonWSConnect.c</File>
-    <File>jsonWSDecode.c</File>
-    <File>jsonWSEncode.c</File>
     <File Description="Serve variables via JSON and HTTP">jsonHTTPServer.c</File>
     <File Description="Write variable values received as a JSON object">jsonWriteVariable.c</File>
     <File Description="Convert a list of variables into a JSON object">jsonReadVariableList.c</File>
@@ -43,5 +38,6 @@
     <Dependency ObjectName="BodyGuard" FromVersion="0.03.0" ToVersion="0.03.9" />
     <Dependency ObjectName="AsGuard" />
     <Dependency ObjectName="StringExt" FromVersion="0.14.0" ToVersion="0.14.9" />
+    <Dependency ObjectName="WebSocket" />
   </Dependencies>
 </Library>
