@@ -1,0 +1,138 @@
+<div class="" data-read-group="Configuration">
+    <table class="table">
+        <thead>
+            {{!-- <col width='3000'>
+            <col width='160'>
+            <col width='160'> --}}
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td class="h5">HMI Configuration</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Server Address:</td>
+                <td><input type="text" class="rigidbtnWidth webhmi-text-value" data-machine-name="Configuration"
+                        data-var-name="ipAddress" /></td>
+                <td><input type="text" class="rigidbtnWidth webhmi-num-value" data-machine-name="Configuration"
+                        data-var-name="port" /></td>
+            </tr>
+            <tr>
+                <td>CNC Folder:</td>
+                <td><input type="text" class="rigidbtnWidth webhmi-text-value" data-machine-name="Configuration"
+                        data-var-name="cncFolder" /></td>
+                <td><td>
+            </tr>
+            <tr>
+                <td>Robot Folder:</td>
+                <td><input type="text" class="rigidbtnWidth webhmi-text-value" data-machine-name="Configuration"
+                        data-var-name="robotFolder" /></td>
+                <td><td>
+            </tr>
+            <tr>
+                <td></td>
+                <td> <button type="button" class="btn btn-default" onclick="Configuration.exportConfiguration()">Export HMI Configuration</button></td>
+                <td> <button type="button" class="btn btn-default" onclick="Configuration.forceLoadConfiguration()">Reload Default Configuration</button></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="h5">System Configuration</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>System Data:</td>
+                <td>
+                    <div class="btn-success webhmi-show" data-var-name-hide="gDataValid[0]">Valid</div>
+                    <div class="btn-danger webhmi-hide" data-var-name-hide="gDataValid[0]">Invalid</div>
+                </td>
+                <td>                  
+                    <button type="button" class="btn btn-default webhmi-btn-set webhmi-show" data-var-name-hide="gDataValid[0]" data-set-value="0" data-var-name="gDataValid[0]">Clear Valid to reload</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Size:</td>
+                <td>
+                    Old: <span class="webhmi-num-value" data-var-name="gPermDataSize[0]"> </span>
+                </td>
+                <td></tr>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    New: <span class="webhmi-num-value" data-var-name="gPersister[0].OUT.STAT.RequiredMemory"> </span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default webhmi-btn-set" data-var-name="PermMemory:AcknowledgeSizeChange[0]">Acknowledge New Size</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Homing Data:</td>
+                <td>
+                    <div class="btn-success webhmi-show" data-var-name-hide="gDataValid[1]">Valid</div>
+                    <div class="btn-danger webhmi-hide" data-var-name-hide="gDataValid[1]">Invalid</div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default webhmi-btn-set webhmi-show" data-var-name-hide="gDataValid[1]" data-set-value="0" data-var-name="gDataValid[1]">Clear Valid to reload</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Size:</td>
+                <td>
+                    Old Size: <span class="webhmi-num-value" data-var-name="gPermDataSize[1]"> </span>
+                </td>
+                <td><td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    New Size: <span class="webhmi-num-value" data-var-name="gPersister[1].OUT.STAT.RequiredMemory"> </span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default webhmi-btn-set" data-var-name="PermMemory:AcknowledgeSizeChange[1]">Acknowledge New Size</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Files:</td>
+                <td>
+                    <button type="button" class="btn btn-default webhmi-btn-set" data-var-name="PermMemory:backupAll">Backup All</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default webhmi-btn-set" data-var-name="PermMemory:forceGood">Force Overwrite All Backups</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Reboot to reload data from file for items that are invalid</td>
+                <td>
+                    <button type="button" class="btn btn-default webhmi-btn-set" data-var-name="PermMemory:reboot">Reboot</button>
+                </td>
+                <td><td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="h5">Build Information</td>
+                <td><td>
+            </tr>
+            <tr>
+                <td>Build Version:</td>
+                <td><code class="webhmi-text-value" data-var-name="gRevInfo_revision">Hash</code></td>
+                <td><td>
+            </tr>
+            <tr>
+                <td>Branch:</td>
+                <td><code class="webhmi-text-value" data-var-name="gRevInfo_branchName">Branch</code></td>
+                <td><td>
+            </tr>
+            <tr>
+                <td>Author:</td>
+                <td><code class="webhmi-text-value" data-var-name="gRevInfo_revisionAuthor">Author</code></td>
+                <td><td>
+            </tr>
+            <tr>
+                <td>Builder:</td>
+                <td><code class="webhmi-text-value" data-var-name="gRevInfo_builder">Builder</code></td>
+                <td><td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,6 @@
+0.01.1 - Remove gconfig dependecy
+        - Improve dependecy checking
+        - Move user modifiable variables to .options
+        - Add CodeMirror theme and mode to options
+        - Add syntax highlighting for gcode line comment ";"
+0.01.0 - Initial release

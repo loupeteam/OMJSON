@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>title</title>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="drop.css">
+  <script src="drop.js"></script>
+</head>
+
+<body>
+  <div class="dropdown-btn-group">
+    <div class="dropdown">
+      <div data-toggle="dropdownsub">Main 1</div>
+      <div class="dropdown-menu">
+        <div class="dropdown-item">Item 1</div>
+        <div class="dropdown-item dropdown">
+          <div data-toggle="dropdownsub">Item 2 > </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-item">Sub Sub 1</div>
+            <div class="dropdown-item">Sub Sub 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown">
+      <div data-toggle="dropdownsub">Main 2</div>
+      <div class="dropdown-menu">
+        <div class="dropdown-item">Item 1</div>
+        <div class="dropdown-item dropdown">
+          <div class="dropdown-item selected-item" data-toggle="dropdownsub">Item 2 > </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-item">Sub Sub 1</div>
+            <div class="dropdown-item">Sub Sub 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown">
+      <div data-toggle="dropdownsub">Main 3</div>
+      <div class="dropdown-menu">
+        <div class="dropdown-item">Item 1</div>
+        <div class="dropdown-item dropdown dropright">
+          <Input class="dropdown-item selected-item" data-toggle="dropdownsub" >
+          <div class="dropdown-menu">
+            <div class="dropdown-item">Sub Sub 1</div>
+            <div class="dropdown-item">Sub Sub 2</div>
+          </div>
+        </div>
+        <div class="dropdown-item dropdown dropleft">
+          <Input class="dropdown-item selected-item" data-toggle="dropdownsub" >
+          <div class="dropdown-menu">
+            <div class="dropdown-item">Sub Sub 1</div>
+            <div class="dropdown-item">Sub Sub 2</div>
+          </div>
+        </div>
+        <div class="dropdown-item dropup dropright">
+          <Input class="dropdown-item selected-item" data-toggle="dropdownsub" >
+          <div class="dropdown-menu">
+            <div class="dropdown-item">Sub Sub 1</div>
+            <div class="dropdown-item">Sub Sub 2</div>
+          </div>
+        </div>
+        <div class="dropdown-item dropup dropleft">
+          <Input class="dropdown-item selected-item" data-toggle="dropdownsub" >
+          <div class="dropdown-menu">
+            <div class="dropdown-item">Sub Sub 1</div>
+            <div class="dropdown-item">Sub Sub 2</div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- page content -->
+</body>
+
+</html>

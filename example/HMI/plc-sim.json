@@ -1,0 +1,238 @@
+{
+  "MachineProg:StateString": "MACH_ST_SIM",
+  "MachineProg:StatusModule": {
+    "ModuleName": "SIM MODULE",
+    "ModuleStatus": "WAITING"
+  },
+  "gMachine": {
+    "IN": {
+      "CMD": {
+        "Reset": 0,
+        "Stop": 0,
+        "Start": 0,
+        "Abort": 0,
+        "Clear": 0,
+        "Hold": 0,
+        "Unhold": 0
+      }
+    }
+  },
+  "MachineHMI:HMIMachineCMD": {
+    "Reset": {
+      "StatusDP": 0
+    },
+    "Stop": {
+      "StatusDP": 0
+    },
+    "Start": {
+      "StatusDP": 0
+    },
+    "Abort": {
+      "StatusDP": 0
+    },
+    "Clear": {
+      "StatusDP": 0
+    },
+    "Hold": {
+      "StatusDP": 0
+    },
+    "Unhold": {
+      "StatusDP": 0
+    }
+  },
+  "gPermDataSize": [
+    0,
+    0
+  ],
+  "gPersister": [
+    {
+      "OUT": {
+        "STAT": {
+          "RequiredMemory": 0
+        }
+      }
+    },
+    {
+      "OUT": {
+        "STAT": {
+          "RequiredMemory": 0
+        }
+      }
+    }
+  ],
+  "gRevInfo_revision": 0,
+  "gRevInfo_branchName": 0,
+  "gRevInfo_revisionAuthor": 0,
+  "gRevInfo_builder": 0,
+  "gDataValid": [
+    1,
+    1
+  ],
+  "PermMemory:AcknowledgeSizeChange": [
+    false
+  ],
+  "HMI_CNC_Co:f": {
+    "in": {
+      "cwd": 0
+    }
+  },
+  "HMI_CNC_Co:Directory": 0,
+  "Trace:Configuration": {
+    "Trace": [
+      {
+        "Prescale": 1,
+        "Variable": 0
+      },
+      {
+        "Prescale": 0,
+        "Variable": 0
+      },
+      {
+        "Prescale": 0,
+        "Variable": "TestData3"
+      },
+      {
+        "Prescale": 0,
+        "Variable": 0
+      }
+    ]
+  },
+  "Trace:varVariable": [
+    {
+      "dimension": 0
+    },
+    {
+      "dimension": 0
+    },
+    {
+      "dimension": 0
+    },
+    {
+      "dimension": 0
+    }
+  ],
+  "Trace:TraceData1": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "Trace:TraceData2": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "Trace:TraceData3": [
+    4,
+    3,
+    2,
+    3,
+    4
+  ],
+  "Trace:TraceData4": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "gMotorBasic": [
+    {
+      "OUT": {
+        "Position": 0,
+        "Name": 0,
+        "State": {
+          "PowerOn": 0,
+          "Referenced": 0
+        },
+        "PLCOpenDiscrete": {
+          "Errorstop": 0
+        }
+      }
+    },
+    {
+      "OUT": {
+        "Position": 0,
+        "Name": 0,
+        "State": {
+          "PowerOn": 0,
+          "Referenced": 0
+        },
+        "PLCOpenDiscrete": {
+          "Errorstop": 0
+        }
+      }
+    },
+    {
+      "OUT": {
+        "Position": 0,
+        "Name": 0,
+        "State": {
+          "PowerOn": 0,
+          "Referenced": 0
+        },
+        "PLCOpenDiscrete": {
+          "Errorstop": 0
+        }
+      }
+    }
+  ],
+  "gAxisApi": [
+    {
+      "status": {
+        "gearOk": 0
+      }
+    },
+    {
+      "status": {
+        "gearOk": 0
+      }
+    },
+    {
+      "status": {
+        "gearOk": 0
+      }
+    }
+  ],
+  "AlarmWrap:wrapper": {
+    "out": {
+      "activeAlarmInfo": 0,
+      "activeAlarms": 0
+    },
+    "internal": {
+      "uiCoreConnect": {
+        "AlarmList": {
+          "MaxSelection": 0,
+          "SelectedIndex": 0,
+          "StepUp": true,
+          "StepDown": true,
+          "PageUp": true,
+          "PageDown": true
+        },
+        "Details": {
+          "Timestamp": 0,
+          "InstanceID": 0,
+          "Code": 0,
+          "Scope": 0,
+          "Name": 0,
+          "Message": 0,
+          "AdditionalInformation1": 0,
+          "Backtrace": {
+            "Description": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "AcknowledgeAll": true,
+        "Acknowledge": true
+      }
+    }
+  },
+  "AlarmWrap:selectedName": 0
+}

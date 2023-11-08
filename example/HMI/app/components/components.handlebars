@@ -1,0 +1,58 @@
+<script id="structureCommand" type="text/x-handlebars-template">
+    {{#widget 'LabeledColumns' 'Commands'}}        
+        {{#each .. }}
+            <button type="button" class="webhmi-btn-set" data-var-name="{{@delegate}}.command.{{@key}}">{{@key}}</button>
+        {{/each}}
+    {{/widget}}
+</script>
+<script id="structureParameters" type="text/x-handlebars-template">
+    {{#widget 'LabeledColumns' 'Parameters' maxColumns=2 }}        
+        {{#each ..}}
+                <label>{{@key}}</label> : <input class="webhmi-text-value" data-var-name="{{@delegate}}.parameters.{{@key}}"/>
+        {{/each}}
+    {{/widget}}
+</script>
+
+
+<script id="structureStatus" type="text/x-handlebars-template">
+    {{#widget 'LabeledColumns' 'Status'}}
+        <pre class="webhmi-text-value" data-var-name="{{@delegate}}.status">
+        </pre>
+    {{/widget}}
+</script>
+
+
+
+<script id="taskDebug" type="text/x-handlebars-template">
+    {{#widget 'LabeledColumns' task maxColumns=1 }}
+        {{#controller (concat ../task ':task') }}
+            {{> structureCommand command}}
+            {{> structureParameters parameters}}
+            {{> structureStatus}}
+        {{/controller}}
+    {{/widget}}
+</script>
+
+<script id="taskDebugIndex" type="text/x-handlebars-template">
+    {{#widget 'LabeledColumns' task maxColumns=1 }}
+        {{#controllerIndex (concat ../task ':tasks[' ../index ']') }}
+            {{> structureCommand command}}
+            {{> structureParameters parameters}}
+            {{> structureStatus}}
+        {{/controllerIndex}}
+    {{/widget}}
+</script>
+
+<script id="taskIO" type="text/x-handlebars-template">
+    {{#widget 'LabeledColumns' task maxColumns=1 }}
+        {{#controller (concat ../task ':IO') }}
+            {{> structureIO}}
+        {{/controller}}
+    {{/widget}}
+</script>
+
+<script id="structureIO" type="text/x-handlebars-template">
+    {{#widget 'LabeledColumns' 'IO' class='taskIoClass'}}
+        <pre class="webhmi-text-value" data-var-name="{{@delegate}}"></pre>
+    {{/widget}}
+</script>

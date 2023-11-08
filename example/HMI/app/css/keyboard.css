@@ -1,0 +1,8 @@
+.ui-keyboard{
+    width: unset;
+    bottom: unset;
+    border-radius: 5px;
+    border-color: light-gray;
+    border-style: solid;
+    border-width: 3px;
+}

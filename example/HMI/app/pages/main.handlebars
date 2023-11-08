@@ -1,0 +1,20 @@
+{{> msgbox}}
+{{#widget 'Columns' 'Connection Test' maxColumns=1 data-read-group="ConnectionTest"}}
+    <div class="">
+        <button type="button" class="rigidbtnWidth control-btn btn btn-md webhmi-btn-momentary webhmi-led btn-info" data-var-name="counter:reset" data-led-true="btn-warning" data-led-false="btn-primary"><span class="glyphicon glyphicon-repeat"></span> Reset Counter</button>
+        <button type="button" class="rigidbtnWidth control-btn btn btn-md webhmi-btn-toggle webhmi-led " data-var-name="counter:pause" data-led-true="btn-warning" data-led-false="btn-primary"><span class="glyphicon glyphicon-pause"></span> Pause Counter</button>
+        <span class="webhmi-num-value" data-var-name="counter:counter">State</span>
+    </div>
+{{/widget}}
+<div class="row">
+    <div class="col-md-12 col-lg-6">
+        <div class="row">
+            {{> processTabs}}
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-6">
+        <div class="row">
+            {{> serviceTabs}}
+        </div>
+    </div>
+</div>

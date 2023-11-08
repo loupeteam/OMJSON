@@ -1,0 +1,38 @@
+{{> navbar}}
+{{> msgbox}}
+<div class="row">
+    <div class="col-md-12 col-lg-6">
+        <div class="row tab-window">
+            <div class="col-md-12">
+                <div class="panel with-nav-tabs">
+                    <div class="panel-heading">
+                        <div data-toggle="collapse" href="#controls" class='inline-right'></div>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#process" data-toggle="tab">Process</a>
+                            </li>
+                            <li class="">
+                                <a href="#axisService" data-toggle="tab">Axis</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id='controls' class="panel-body collapse in">
+                        <div class="tab-content">
+                            <div class="tab-pane webhmi-tab-pane active" id="process">
+                                {{> process}}
+                            </div>
+                            <div class="tab-pane webhmi-tab-pane" id="axisService">
+                                {{> axisService}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-6 tab-window">
+        <div class="row">
+            {{> serviceTabs}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+    {{W 'PageSelect' "Process" template='process' dom='mainOperationPage' active=true}}
+    {{W 'PageSelect' "CNC Control" template='cnc' dom='mainOperationPage' }}
+    {{W 'PageSelect' "Axis Control" template='axisService' dom='mainOperationPage' }}
+</ul>
+<div class="tab-content col-lg-12" id='mainOperationPage'>
+    {{> process}}
+</div>

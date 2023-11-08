@@ -1,0 +1,29 @@
+<style>
+.alarm-banner{
+    height: 30px;
+    width: 100%;
+} 
+ .alarm-text{
+    font-size: 16pt;
+    font-weight: 700;
+    position: relative;
+    animation: moveText 5s infinite;
+}
+
+@keyframes moveText {
+    from {right: 0px;}
+    to {left: 0px;}
+}
+.alarm-banner-active{
+    background-color: rgb(245, 158, 158);
+    opacity: 100%;
+}
+.alarm-banner-inactive{
+    opacity: 0%;
+}
+
+</style>
+
+<div class="alarm-banner webhmi-led" data-led-true="alarm-banner-active" data-led-false="alarm-banner-inactive" data-var-name="AlarmWrap:alarmWrapper.out.alarmPresent">
+    <marquee class="alarm-text webhmi-text-value" data-var-name="AlarmWrap:alarmWrapper.out.activeAlarmInfo[0].message">test text</marquee>
+</div>
