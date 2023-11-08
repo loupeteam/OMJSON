@@ -1,6 +1,6 @@
 /*
  * File: jsonAux.c
- * Copyright (c) 2023 Loupe
+ * Copyright (c) 2009 - 2023 Loupe, Dave Gamble, and cJSON contributors 
  * https://loupe.team
  * 
  * This file is part of OMJSON, licensed under the MIT License.
