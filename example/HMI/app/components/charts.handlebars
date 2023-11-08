@@ -1,0 +1,103 @@
+<script id="chartTemplate" type="text/x-handlebars-template">
+    <style>
+        .chart-parameters {
+            /* width: calc(100% - 100px); */
+            margin-left: 60px;
+        }
+        .valid-trace {
+            background: #dff0d8;
+        }
+    
+        input.trace-min,
+        input.trace-max {
+            position: absolute;
+            background: #dff0d8;
+            width: 50px;
+        }
+    
+        input.trace-max {
+            background: #dff0d8;
+        }
+    
+        input.trace-min {
+            background: #dff0d8;
+            bottom: 0px;
+        }
+    
+        .glyphicon.input-group-addon {
+            top: 0%;
+        }
+    
+        .input-group .form-control.chart-prescale {
+            width: 50px;
+        }
+    </style>
+    {{#repeat count}}
+    <div class='col-lg-4'>
+        <span data-var-name="Trace:Configuration.Trace[{{@index}}]"></span>
+        <input keyboard="num" class="trace-max" data-target='#chart{{math @index "+" 1}}' data-target-attr="chart-max" placeholder="Max"/>
+        <input keyboard="num" class="trace-min" data-target='#chart{{math @index "+" 1}}' data-target-attr="chart-min" placeholder="Min" />
+        <div class="chart-parameters input-group">
+            
+            <input keyboard="qwerty" class="webhmi-text-value form-control" data-var-name="Trace:Configuration.Trace[{{@index}}].Variable" placeholder="Variable Name"/>
+            <span class='webhmi-led glyphicon input-group-addon' data-var-name="Trace:varVariable[{{@index}}].dimension" data-led-true="glyphicon-ok"
+                data-led-false="glyphicon-remove"></span>
+            <span class='input-group-addon'>Prescale:</span>
+            <input keyboard="num" class="webhmi-num-value form-control chart-prescale" data-var-name="Trace:Configuration.Trace[{{@index}}].Prescale" />
+        </div>
+        <svg id='chart{{math @index "+" 1}}' width="550" height="250" class="webhmi-line-chart" data-var-name='Trace:TraceData{{math @index "+" 1}}' chart-max='' chart-min=''></svg>
+    </div>
+    {{/repeat}}
+</script>
+
+<script id="chartSmallTemplate" type="text/x-handlebars-template">
+    <style>
+        .chart-parameters {
+            /* width: calc(100% - 100px); */
+            margin-left: 60px;
+        }
+        .valid-trace {
+            background: #dff0d8;
+        }
+    
+        input.trace-min,
+        input.trace-max {
+            position: absolute;
+            background: #dff0d8;
+            width: 50px;
+        }
+    
+        input.trace-max {
+            background: #dff0d8;
+        }
+    
+        input.trace-min {
+            background: #dff0d8;
+            bottom: 0px;
+        }
+    
+        .glyphicon.input-group-addon {
+            top: 0%;
+        }
+    
+        .input-group .form-control.chart-prescale {
+            width: 50px;
+        }
+    </style>
+    {{#repeat count}}
+    <div class='col-lg-12'>
+        <span data-var-name="Trace:Configuration.Trace[{{@index}}]"></span>
+        <input keyboard="num" class="trace-max" data-target='#chart{{math @index "+" 1}}' data-target-attr="chart-max" placeholder="Max"/>
+        <input keyboard="num" class="trace-min" data-target='#chart{{math @index "+" 1}}' data-target-attr="chart-min" placeholder="Min" />
+        <div class="chart-parameters input-group">
+            
+            <input keyboard="qwerty" class="webhmi-text-value form-control" data-var-name="Trace:Configuration.Trace[{{@index}}].Variable" placeholder="Variable Name"/>
+            <span class='webhmi-led glyphicon input-group-addon' data-var-name="Trace:varVariable[{{@index}}].dimension" data-led-true="glyphicon-ok"
+                data-led-false="glyphicon-remove"></span>
+            <span class='input-group-addon'>Prescale:</span>
+            <input keyboard="num" class="webhmi-num-value form-control chart-prescale" data-var-name="Trace:Configuration.Trace[{{@index}}].Prescale" />
+        </div>
+        <svg id='chart{{math @index "+" 1}}' width="1200" height="200" class="webhmi-line-chart" data-var-name='Trace:TraceData{{math @index "+" 1}}' chart-max='' chart-min=''></svg>
+    </div>
+    {{/repeat}}
+</script>

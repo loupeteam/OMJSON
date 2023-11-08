@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs">
+    {{W 'PageSelect' "Model" template='robot' dom='services' }}
+    {{W 'PageSelect' "Positions" template='Positions' dom='services'  }}
+    {{W 'PageSelect' "Editor" template='ftpEditor' dom='services'active=true}}
+    {{W 'PageSelect' "Settings" template='settings' dom='services'}}
+    {{W 'PageSelect' "Charts" template='chartsSmall' dom='services'}}
+    {{W 'PageSelect' "Alarms" template='alarms' dom='services'}}
+</ul>
+<div class="tab-content col-lg-12" id="services">
+    {{> ftpEditor}}
+</div>
+
+

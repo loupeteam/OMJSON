@@ -1,0 +1,177 @@
+<style>
+    .alarm-list-grid {
+        display: grid;
+/*        grid-template-columns: 200px 50px 50px 50px 140px 120px 350px;*/
+        grid-template-columns: 200px 50px /*50px*/ 50px /*auto*/ auto auto;
+        /*grid-auto-rows: 40px;*/
+        text-align: left;
+        font-size: medium;
+        border-radius: 5px;
+        /*min-width: 960px;*/
+        /* sum of grid-template-columns */
+    }
+
+    .alarm-grid-header {
+        font-weight: 700;
+        border: 1px solid gray;
+        /* padding: 15px; */
+        text-decoration: underline;
+        background-color: rgb(230, 230, 230);
+    }
+
+    .grid-item {
+        border-bottom: 1px solid gray;
+        padding: 10px;
+        min-height: 40px;
+        text-align: left;
+    }
+
+    .alarm-list {
+        border: 1px solid gray;
+        margin: 10px;
+        border-radius: 5px;
+        background-color: rgb(243, 243, 243);
+        overflow-y: hidden;
+    }
+
+    .alarm-list-item {
+        /* height: calc( 100% - 60px ); */
+    }
+
+    #core-select {
+        margin: 0px 10px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        background-color: rgb(243, 243, 243);
+    }
+</style>
+<div data-read-group="Alarms">
+
+<span data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect" ></span>
+<span data-var-name="AlarmWrap:coreNames" /></span>
+
+<!-- core select -->
+<div id="core-select" class="inline-right">
+</div>
+
+<div class="alarm-list">
+    <div class="alarm-list-grid alarm-grid-header">
+        <span>Timestamp</span>
+        <span>Inst</span>
+        {{!-- <span>Severity</span> --}}
+        <span>Code</span>
+        {{!-- <span>Scope</span> --}}
+        <span>Name</span>
+        <span>Message</span>
+    </div>
+    <div class="alarm-list-item" id="alarm-list-table">
+
+    </div>
+    <div>
+        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.StepUp">Up</button>
+        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.StepDown">Down</button>
+        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.PageUp">Page Up</button>
+        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.PageDown">Page Down</button>
+        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AcknowledgeAll">Acknowledge All</button>
+    </div>
+</div>
+
+<div class="alarm-list">
+    <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Acknowledge">Acknowledge</button>
+    <div class="alarm-grid-header">
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Timestamp">Timestamp</span>
+        <span class="grid-item ">Instance: </span>
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.InstanceID">Inst</span>
+        {{!-- <span class="grid-item webhmi-num-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Severity">Severity</span> --}}
+        <span class="grid-item ">Code: </span>
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Code">Code</span>
+    </div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Scope">Scope</div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Name">Name</div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Message">Message</div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.AdditionalInformation1">Message</div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[0]">Detail 1</div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[1]">Detail 2</div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[2]">Detail 3</div>
+    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[3]">Detail 4</div>
+</div>
+
+</div>
+
+<script id="alarm-list-template" type="text/x-handlebars-template">
+    {{#each alarm}}
+    <div class="alarm-list-grid webhmi-led" data-var-name = "AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.SelectedIndex" data-set-value="{{index}}" data-reset-value="-1" onclick="setDetailIndex( {{index}} )">
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].timeStamp">Timestamp</span>
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].instance">Inst</span>
+        {{!-- <span class="grid-item webhmi-num-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].severity">Severity</span> --}}
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].code">Code</span>
+        {{!-- <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].scope">Scope</span> --}}
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].name">Name</span>
+        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].message">Message</span>        
+    </div>
+    {{/each}}
+</script>
+
+<script>
+    function setDetailIndex(index) {
+        machine.writeVariable("AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.SelectedIndex", index);
+    }
+
+    function UpdateAlarmList() {
+        var num_alarms = 8;
+        var context = {
+            "alarm": []
+        };
+        for (let i = 0; i < num_alarms; i++) {
+            // Define our data object
+            context.alarm.push({
+                index: i
+            })
+        }
+        tmplits.pushTemplate('#alarm-list-table', 'alarm-list-template', context)
+    }
+
+    machine.initCyclicRead("AlarmWrap:wrapper.out.activeAlarmInfo");
+    machine.initCyclicRead("AlarmWrap:wrapper.out.activeAlarms");
+    machine.initCyclicRead("AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.MaxSelection");
+    UpdateAlarmList()
+
+</script>
+
+<!-- Building template with handle bars -->
+<script id="CoreSelectModule" type="text/x-handlebars-template">
+    <div class="input-group">
+	<div class="input-group-btn">
+		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			{{#each cores}}
+			<li>
+				<a class="webhmi-btn-set" data-set-value="{{@index}}" data-reset-value="0" data-var-name="AlarmWrap:selectedIndex">
+					<div class="webhmi-text-value" data-var-name="AlarmWrap:coreNames[{{@index}}]">{{@index}}</div>
+				</a>
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	<span class="form-control webhmi-text-value" placeholder="Select an Alarm Core" data-var-name="AlarmWrap:selectedName" />
+</div>
+</script>
+
+<script>
+        (function () {
+            // Get the template
+            var context = {
+                "cores": []
+            };
+            const NUM_CORES = 1;
+            for (let i = 0; i < NUM_CORES; i++) {
+                // Define our data object
+                context.cores.push({})
+            }
+            // Add the compiled html to the page
+            tmplits.pushTemplate('#core-select', 'CoreSelectModule', context)
+
+        })();
+</script>

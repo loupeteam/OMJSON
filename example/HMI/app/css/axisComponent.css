@@ -1,0 +1,125 @@
+.axis-name {
+    display: inline-block;
+    min-width: 25px;
+}
+
+.axis-readout {
+    display: inline-block;
+    width: 0.55in;
+}
+
+.axis-name-readout {
+    font-size: large;
+}
+
+.axis-position-readout {
+    font-size: large;
+}
+
+.axis-position-header {
+    font-size: large;
+}
+
+button.axis-move {
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+input.axis-move {
+    width: 0.5in;
+    height: 0.3in;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.axis-service {
+    padding: 10px;
+}
+
+.axis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    text-align: left;
+    font-size: medium;
+    border-radius: 5px;
+    border-style: solid;
+    margin: 2px;
+    gap: 5px;
+}
+.axis-grid-1{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    text-align: left;
+    font-size: medium;
+    border-radius: 5px;
+    border-style: solid;
+    margin: 2px;
+    gap: 5px;
+}
+
+.axis-grid-general {
+    display: grid;
+    padding: 10px;
+    margin: 2px;
+    align-items: center;
+    /* gap : 2px; */
+}
+
+.axis-grid-general td {
+    margin: 1px;
+    padding: 5px;
+    justify-self: flex-end;
+    font-size: large;
+}
+
+.axis-list-grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 40px;
+    padding: 10px;
+    text-align: left;
+    font-size: medium;
+    border-radius: 5px;
+    gap: 5px;
+    border-style: solid;
+    margin: 2px;
+    align-items: center
+        /* sum of grid-template-columns */
+}
+
+.sub-grid-4 {
+    display: grid;
+    grid-column: 1 / 5;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+}
+
+.axis-list-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    text-align: left;
+    font-size: medium;
+    border-radius: 5px;
+    gap: 5px;
+    border-style: solid;
+    margin: 2px;
+    /* sum of grid-template-columns */
+}
+
+.axis-grid-header {
+    font-weight: 700;
+    border: 1px solid gray;
+    /* padding: 15px; */
+    text-decoration: underline;
+    background-color: rgb(230, 230, 230);
+}
+
+.axis-grid-item {
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    min-height: 40px;
+    text-align: left;
+}

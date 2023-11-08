@@ -1,0 +1,344 @@
+<script id="axisReadout" type="text/x-handlebars-template">
+    <div class="axis-readout" style="display: inline-block; font-size: large;">
+        <span class="webhmi-text-value" data-var-name="gMotorBasic[{{index}}].OUT.Name">{{index}}</span>
+        <span class="glyphicon glyphicon-off webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.State.PowerOn"></span>
+        <span class="glyphicon glyphicon-screenshot webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.State.Referenced"></span>
+        {{!-- <span class="glyphicon glyphicon-certificate webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.SynchronizedMotion"></span> --}}
+        {{!-- <td class="glyphicon glyphicon-certificate webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.ContinuousMotion"></td> --}}
+        <span class="glyphicon glyphicon-certificate webhmi-led" data-var-name="gAxisApi[{{index}}].status.gearOk"></span>
+        <span class="glyphicon webhmi-led" data-led-true="glyphicon-remove led-off" data-led-false="glyphicon-ok led-on" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.Errorstop"></span>
+        {{#if velocity}}
+        <span> Position: </span>
+        {{/if}}
+        <span class="webhmi-num-value" data-var-name="gMotorBasic[{{index}}].OUT.Position" data-unit-factor="1" data-fixed="3">35.03</span>
+        {{#if units}}
+        <span class="">{{units}}</span>
+        {{/if}}   
+        {{#if velocity}}
+        <span> Velocity: </span>
+        <span class="axis-readout webhmi-num-value" data-var-name="gMotorBasic[{{index}}].OUT.Velocity" data-unit-factor="1" data-fixed="3">35.03</span>
+        {{#if unitsV}}
+        <span class="axis-name">{{unitsV}}</span>
+        {{/if}}
+        {{/if}}    
+    </div>
+</script>
+<script id="axisReadoutTable" type="text/x-handlebars-template">
+	<link href="./app/css/axisComponent.css" rel="stylesheet">
+    <td class="axis-name-readout webhmi-text-value" data-var-name="gMotorBasic[{{index}}].OUT.Name">{{index}}</td>
+    <td class="glyphicon glyphicon-off webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.State.PowerOn"></td>
+    <td class="glyphicon glyphicon-screenshot webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.State.Referenced"></td>
+    {{!-- <td class="glyphicon glyphicon-certificate webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.SynchronizedMotion"></td> --}}
+    {{!-- <td class="glyphicon glyphicon-certificate webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.ContinuousMotion"></td> --}}
+    <td class="glyphicon glyphicon-certificate webhmi-led" data-var-name="gAxisApi[{{index}}].status.gearOk"></td>
+    <td class="glyphicon webhmi-led" data-led-true="glyphicon-remove led-off" data-led-false="glyphicon-ok led-on" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.Errorstop"></td>
+    {{#if velocity}}
+    <td>Position: </td>
+    {{/if}}
+    <td class="axis-position-header">CURRENT POSITION: </td>
+    <td class="axis-position-readout webhmi-num-value" data-var-name="gMotorBasic[{{index}}].OUT.Position" data-unit-factor="1" data-fixed="3">35.03</td>
+    {{#if units}}
+    <td class="">{{units}}</td>   
+    {{/if}}
+    {{#if velocity}}
+    <td> Velocity: </td>
+    <td class="axis-readout webhmi-num-value" data-var-name="gMotorBasic[{{index}}].OUT.Velocity" data-unit-factor="1" data-fixed="3">35.03</td>
+    {{#if unitsV}}
+    <td class="axis-name">{{unitsV}}</td>
+    {{/if}}
+    {{/if}}
+</script>
+<script id="axisSingleReadout" type="text/x-handlebars-template">
+    <table class="table" style="margin: 10px; font-size: large;">
+        <tbody>
+            <tr onclick="{{@delegate}}.selectAxis({{index}})" >
+                {{> axisReadoutTable}}                     
+            </tr>
+        </tbody>
+    </table>
+</script>
+<script id="multiAxisReadout" type="text/x-handlebars-template">
+	<link href="./app/css/axisComponent.css" rel="stylesheet">
+    <table class="table" style="margin: 10px; font-size: large;">
+        <tbody>
+            {{#each axis}}                         
+            <tr class='option' onclick="{{@delegate}}.selectAxis({{@index}})" >
+                {{> axisReadoutTable index=@index}}                     
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+<script id="singleAxisBasic" type="text/x-handlebars-template">
+	<link href="./app/css/axisComponent.css" rel="stylesheet">
+    {{> axisSingleReadout }}
+    {{> AxisCommands }}
+    <div class="axis-list-grid">
+        {{> waypointSelection }}
+        <div></div>
+        {{> waypoint }}
+    </div>
+</script>
+
+<script id="axisSelection" type="text/x-handlebars-template">
+    {{#widget 'Dropdown' }}
+        {{#with ..}}
+        <dropdown>
+        {{> multiAxisReadout  }}                     
+        </dropdown>
+        <field>
+        {{> axisReadout index=selectedAxis velocity=true}}
+        </field>
+        {{/with}}
+    {{/widget}}
+</script>
+<script id="axisJogInterface" type="text/x-handlebars-template">
+    <div style="margin: 10px; font-size: large;">
+        <div class="axisstatusbox">
+            <span class="glyphicon glyphicon-off webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.State.PowerOn"></span>
+            <span class="glyphicon glyphicon-screenshot webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.State.Referenced"></span>
+            <span class="glyphicon glyphicon-certificate webhmi-led" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.SynchronizedMotion"></span>
+            <span class="glyphicon webhmi-led" data-led-true="glyphicon-remove led-off" data-led-false="glyphicon-ok led-on" data-var-name="gMotorBasic[{{index}}].OUT.PLCOpenDiscrete.Errorstop"></span>
+        </div>
+        <span>Position: </span>
+        <span class="axis-readout webhmi-num-value" data-var-name="gMotorBasic[{{index}}].OUT.Position" data-unit-factor="1" data-fixed="3">35.03</span>
+        <span class="axis-name">{{units}} </span>
+        <span> Velocity: </span>
+        <span class="axis-readout webhmi-num-value" data-var-name="gMotorBasic[{{index}}].OUT.Velocity" data-unit-factor="1" data-fixed="3">35.03</span>
+        <span class="axis-name">{{unitsV}}</span>
+    </div>
+    <div class="axis-service">
+        <div class="axis-list-grid-4">
+            <button class="btn webhmi-btn-toggle webhmi-led grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.Power">Power</button>
+            <button class="btn btn-danger webhmi-btn-set grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.Halt">Halt</button>
+            <button class="btn btn-danger webhmi-btn-set grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.Stop">Stop</button>
+            <button class="btn btn-primary webhmi-btn-set grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.ErrorReset">Reset Error</button>
+        </div>
+        <div class="axis-grid">
+            <div class="axis-grid-Column" >
+                <div class="axis-list-grid">
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.SaveParameters"
+                    data-led-true="btn-warning" 
+                    data-led-false="btn-primary">Save Parameters</button>
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.LoadParameters"
+                    data-led-true="btn-warning" 
+                    data-led-false="btn-primary">Load Parameters</button>
+                </div>
+
+                <div class="axis-list-grid">
+                    <span class="axis-grid-item">Jog Velocity</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.JogVelocity" />           
+                    <span class="axis-grid-item">Jog Acceleration</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.JogAcceleration" />           
+                    <span class="axis-grid-item">Jog Deceleration</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.JogDeceleration" />               
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.JogReverse"
+                    data-led-true="btn-warning" 
+                        data-led-false="btn-primary">Jog -</button>
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                        data-var-name="gMotorBasic[{{index}}].IN.CMD.JogForward"
+                        data-led-true="btn-warning" 
+                        data-led-false="btn-primary">Jog +</button>    
+                </div>
+                <div class="axis-list-grid">
+                    <span class="axis-grid-item">Velocity</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Velocity" />           
+                    <span class="axis-grid-item">Acceleration</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Acceleration" />           
+                    <span class="axis-grid-item">Deceleration</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Deceleration" />               
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.MoveAbsolute"
+                    data-led-true="btn-warning" 
+                    data-led-false="btn-primary">Move Absolute</button>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Position" />               
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.MoveAdditive"
+                    data-led-true="btn-warning" 
+                    data-led-false="btn-primary">Move Additive</button>    
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Distance" />               
+                </div>
+
+                <div class="axis-list-grid">
+                    <span class="axis-grid-item">Home Position</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="AxisBasic:Configuration.Axis[{{index}}].CFG.HomingPosition" />           
+                    <span class="axis-grid-item">Home Mode</span>
+                    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="AxisBasic:Configuration.Axis[{{index}}].CFG.HomingMode" />           
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.Reference"
+                    data-led-true="btn-warning" 
+                    data-led-false="btn-primary">Reference</button>
+                </div>
+            </div>
+            <div class="axis-grid-Column" >
+                <div class="axis-list-grid">
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.SaveWaypoints"
+                    data-led-true="btn-warning" 
+                    data-led-false="btn-primary">Save Waypoints</button>
+                    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+                    data-var-name="gMotorBasic[{{index}}].IN.CMD.LoadWaypoints"
+                    data-led-true="btn-warning" 
+                    data-led-false="btn-primary">Load Waypoints</button>
+                </div>
+                <div id="WaypointSelect"></div>
+                <div id="ActiveWaypoint"></div>
+            </div>
+        </div>
+    </div>    
+</script>
+<script id="waypoint" type="text/x-handlebars-template">
+    <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+    data-var-name="gMotorBasic[{{selectedAxis}}].IN.CMD.MoveWaypoint"
+    data-led-true="btn-warning" 
+    data-led-false="btn-primary">Move to waypoint</button>    
+    <button type="button" class="btn btn-md btn-success axis-grid-item" onclick="{{@delegate}}.teachWaypoint()" >Teach waypoint</button>    
+    <span class="axis-grid-item">Position</span>
+    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{selectedAxis}}].IN.Waypoint[{{selectedWaypoint}}].Position" />               
+    <span class="axis-grid-item">Velocity</span>
+    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{selectedAxis}}].IN.Waypoint[{{selectedWaypoint}}].Velocity" />           
+    <span class="axis-grid-item">Acceleration</span>
+    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{selectedAxis}}].IN.Waypoint[{{selectedWaypoint}}].Acceleration" />           
+    <span class="axis-grid-item">Deceleration</span>
+    <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{selectedAxis}}].IN.Waypoint[{{selectedWaypoint}}].Deceleration" />               
+</script>
+
+
+<script id="waypointSelection" type="text/x-handlebars-template">
+    <div class="input-group" selectedAxis="{{selectedAxis}}">
+        {{#widget 'Dropdown' set=false }}
+        {{#with ..}}
+        <dropdown>
+            <table class="table" style="margin: 10px; font-size: large;">
+                <thead>    
+                    <td >Index</td>
+                    <td >Name</td>
+                    <td >Position</td>
+                </thead>
+                <tbody>           
+                {{#repeat 10}}
+                    <tr class='option' onclick="{{@delegate}}.selectWaypoint({{@index}})">
+                        <td >{{@index}} </td>
+                        <td class="webhmi-text-value" data-var-name="gMotorBasic[{{../selectedAxis}}].IN.Waypoint[{{@index}}].Name">{{@index}}</td>
+                        <td class="webhmi-num-value" data-var-name="gMotorBasic[{{../selectedAxis}}].IN.Waypoint[{{@index}}].Position">{{@index}}</td>
+                    </tr>
+                {{/repeat}}
+                </tbody>
+            </table>
+        </dropdown>
+        <field>
+            <input keyboard="qwerty" type="text" class="form-control webhmi-text-value" placeholder="Unnamed" data-var-name="gMotorBasic[{{selectedAxis}}].IN.Waypoint[{{selectedWaypoint}}].Name" />   
+        </field>
+        {{/with}}
+    {{/widget}}
+    </div>
+</script>
+<script id="AxisCommands" type="text/x-handlebars-template">
+    <div class="axis-list-grid-4">
+        <button class="btn webhmi-btn-toggle webhmi-led grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.Power">Power</button>
+        <button class="btn btn-danger webhmi-btn-set grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.Halt">Halt</button>
+        <button class="btn btn-danger webhmi-btn-set grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.Stop">Stop</button>
+        <button class="btn btn-primary webhmi-btn-set grid-item" data-var-name="gMotorBasic[{{index}}].IN.CMD.ErrorReset">Reset Error</button>
+    </div>
+</script>
+<script id="AxisSaveParameters" type="text/x-handlebars-template">
+    <div class="axis-list-grid">
+        <button type="button" class="btn btn-md btn-success webhmi-btn-set axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.SaveParameters">Save Parameters</button>
+        <button type="button" class="btn btn-md btn-success webhmi-btn-set axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.LoadParameters">Load Parameters</button>
+    </div>
+</script>
+<script id="AxisSaveWaypoints" type="text/x-handlebars-template">
+    <div class="axis-list-grid">
+        <button type="button" class="btn btn-md btn-success webhmi-btn-set axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.SaveWaypoints">Save Waypoints</button>
+        <button type="button" class="btn btn-md btn-success webhmi-btn-set axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.LoadWaypoints">Load Waypoints</button>
+    </div>
+
+</script>
+<script id="AxisJog" type="text/x-handlebars-template">
+    <div class="axis-list-grid">
+        <span class="axis-grid-item">Jog Velocity</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.JogVelocity" />           
+        <span class="axis-grid-item">Jog Acceleration</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.JogAcceleration" />           
+        <span class="axis-grid-item">Jog Deceleration</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.JogDeceleration" />               
+        <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.JogReverse"
+        data-led-true="btn-warning" 
+            data-led-false="btn-primary">Jog -</button>
+        <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+            data-var-name="gMotorBasic[{{index}}].IN.CMD.JogForward"
+            data-led-true="btn-warning" 
+            data-led-false="btn-primary">Jog +</button>    
+    </div>
+</script>
+<script id="AxisMove" type="text/x-handlebars-template">
+    <div class="axis-list-grid">
+        <span class="axis-grid-item">Velocity</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Velocity" />           
+        <span class="axis-grid-item">Acceleration</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Acceleration" />           
+        <span class="axis-grid-item">Deceleration</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Deceleration" />               
+        <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.MoveAbsolute"
+        data-led-true="btn-warning" 
+        data-led-false="btn-primary">Move Absolute</button>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Position" />  
+        <span class="axis-grid-item">Distance</span>
+        <input class="form-control webhmi-num-value axis-grid-item" data-var-name="gMotorBasic[{{index}}].IN.PAR.Distance" />                           
+        <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.MoveAdditiveReverse"
+        data-led-true="btn-warning" 
+        data-led-false="btn-primary">Move Additive -</button>  
+        <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.MoveAdditiveForward"
+        data-led-true="btn-warning" 
+        data-led-false="btn-primary">Move Additive +</button>   
+        
+    </div>
+</script>
+<script id="AxisHome" type="text/x-handlebars-template">
+    <div class="axis-list-grid">
+        <span class="axis-grid-item">Home Position</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="AxisBasic:Configuration.Axis[{{index}}].CFG.HomingPosition" />           
+        <span class="axis-grid-item">Home Mode</span>
+        <input   class="form-control webhmi-num-value axis-grid-item" data-var-name="AxisBasic:Configuration.Axis[{{index}}].CFG.HomingMode" />           
+        <button type="button" class="btn btn-md webhmi-btn-momentary webhmi-led btn-success axis-grid-item"
+        data-var-name="gMotorBasic[{{index}}].IN.CMD.Reference"
+        data-led-true="btn-warning" 
+        data-led-false="btn-primary">Reference</button>
+    </div>
+</script>
+
+<script id="axisServiceTemplate" type="text/x-handlebars-template">
+    <div id="AxisSelect"></div>
+    {{> axisSelection}}    
+    <div class="axis-service">
+        {{> AxisCommands index=selectedAxis}}
+        <div class="axis-grid">
+            <div class="axis-grid-Column" >
+                {{> AxisSaveParameters index=selectedAxis}}
+                {{> AxisJog index=selectedAxis}}
+                {{> AxisMove index=selectedAxis}}
+            </div>
+            <div class="axis-grid-Column" >
+                {{> AxisSaveWaypoints index=selectedAxis}}
+                <div class="axis-list-grid">
+                    {{> waypointSelection index=selectedAxis}}
+                    <div></div>
+                    {{> waypoint index=selectedAxis}}  
+                </div>            
+                {{> AxisHome index=selectedAxis}}
+            </div>
+        </div>
+    </div>    
+</script>
+
