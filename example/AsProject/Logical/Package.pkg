@@ -9,6 +9,6 @@
     <Object Type="Package">Diagnostics</Object>
     <Object Type="Package">MachineControl</Object>
     <Object Type="Package">Process</Object>
-    <Object Type="Package" Reference="true">..\..\src\Ar\webHMI\Package.pkg</Object>
+    <Object Type="Package" Reference="true">..\..\src\Ar\Lux\Package.pkg</Object>
   </Objects>
 </Package>

@@ -60,7 +60,7 @@ if(localConfig){
 
 // GLOBAL project variables
 try{
-  machine = new WEBHMI.Machine({
+  machine = new LUX.Machine({
     port: Configuration.port,
     ipAddress: Configuration.ipAddress,
     maxReconnectCount: 5000
@@ -86,21 +86,21 @@ Configuration.readVariable = function (name, value) {
   return Configuration.value(name);
 };
 Configuration.initCyclicRead = function () {};
-WEBHMI.updateHMI();
+LUX.updateHMI();
 }
 
 const refreshMainButtons = function () {
-  $("span.webhmi-apply-children>button").removeClass("disabled");
+  $("span.lux-apply-children>button").removeClass("disabled");
   $("span.child-disabled>button").addClass("disabled");
   $("span.child-disabled>button").blur();
 };
-WEBHMI.hmiRefresh = 5;
+LUX.hmiRefresh = 5;
 
 
 
 //$(document).one({
 //	'readsuccess.arg': function () {
-//		setInterval(WEBHMI.updateHMI, 100);
+//		setInterval(LUX.updateHMI, 100);
 //		setInterval(lifesign, 100);
 //	}
 //});
@@ -114,10 +114,10 @@ $(document).ready(function () {
   // Read variables
   machine.readVariable("buildRevision");
 
-  WEBHMI.updateBindings();
+  LUX.updateBindings();
 
   Snippets.includeFiles(function () {
-    WEBHMI.updateBindings();
+    LUX.updateBindings();
   });
 
   // Prevent navigation from dropped files
@@ -227,9 +227,9 @@ var updatejogselectLEDs = function () {
     }
 
     //set the button class to btn-success if the system mode matches the buttons mode and the button is true
-    var varValue = WEBHMI.getValue($this);
+    var varValue = LUX.getValue($this);
     if (
-      varValue == WEBHMI.getSetValue($this) &&
+      varValue == LUX.getSetValue($this) &&
       jogmode == thisjogmode &&
       jogon
     ) {
@@ -279,7 +279,7 @@ var updateRobot = function () {
   }
 }
 
-WEBHMI.on({
+LUX.on({
   "update-hmi": function () {
     updatejogselectLEDs();
     updatejogselectbuttons();

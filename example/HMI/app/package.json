@@ -12,7 +12,7 @@
   "dependencies": {
     "@loupeteam/tmplit-basic": "*",
     "@loupeteam/tmplits-dropdown": "*",
-    "@loupeteam/webhmi": "*",
+    "@loupeteam/loupe-ux": "*",
     "androidjs": "^2.0.6",
     "app": "file:./",
     "bootstrap": "^3.3.4",

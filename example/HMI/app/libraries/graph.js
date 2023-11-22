@@ -5,31 +5,31 @@
 
 //import * as d3 from "../../d3/dist/d3.js";
 function updateD3(newdata) {
-    $('div.webhmi-chart:visible').each(function (index, element) {
+    $('div.lux-chart:visible').each(function (index, element) {
         var $this = $(this);
-        var varValue = WEBHMI.getValue($this);
+        var varValue = LUX.getValue($this);
         var chart = d3.select($this[0]);
         updateChart(varValue, chart);
     });
-    $('svg.webhmi-line-chart').each(function (index, element) {
+    $('svg.lux-line-chart').each(function (index, element) {
         var $this = $(this);
         // For some reasong svgs are always considered visible so check parent instead 
         if ($this.parent().is(":visible")) {
             var xVariable = $this.data("var-x");
             if ($this.data("buffer-size")) {
                 var maxValues = $this.data("buffer-size") || 100,
-                    varValue = bufferData($this.data("var-name"), maxValues, WEBHMI.getValue($this));
+                    varValue = bufferData($this.data("var-name"), maxValues, LUX.getValue($this));
                 if (xVariable) {
-                    varX = bufferData(xVariable, maxValues, WEBHMI.getMachine($this).value(xVariable));
+                    varX = bufferData(xVariable, maxValues, LUX.getMachine($this).value(xVariable));
                     if (varX.length == 0)
-                        WEBHMI.getMachine($this).initCyclicRead(xVariable);
+                        LUX.getMachine($this).initCyclicRead(xVariable);
                 }
 
             } else {
-                var varValue = WEBHMI.getValue($this),
-                    varX = xVariable ? WEBHMI.getMachine($this).value(xVariable) : null;
+                var varValue = LUX.getValue($this),
+                    varX = xVariable ? LUX.getMachine($this).value(xVariable) : null;
                 if (!varX && xVariable)
-                    WEBHMI.getMachine($this).initCyclicRead(xVariable);
+                    LUX.getMachine($this).initCyclicRead(xVariable);
             }
 
             var chart = d3.select($this[0]);
@@ -38,7 +38,7 @@ function updateD3(newdata) {
             //}
         }
     });
-    $('svg.webhmi-series-line-chart').each(function (index, element) {
+    $('svg.lux-series-line-chart').each(function (index, element) {
         var $this = $(this);
         // For some reasong svgs are always considered visible so check parent instead 
         if ($this.parent().is(":visible")) {
@@ -52,10 +52,10 @@ function updateD3(newdata) {
                 if(xVariables) {
                     if(Array.isArray(xVariables)) {
                         xVariables.forEach((element)=>{
-                            xValues.push(bufferData(element, maxValues, WEBHMI.getMachine($this).value(element)));
+                            xValues.push(bufferData(element, maxValues, LUX.getMachine($this).value(element)));
                         });
                     } else {
-                        var xBuffered = bufferData(xVariables, maxValues, WEBHMI.getMachine($this).value(xVariables))
+                        var xBuffered = bufferData(xVariables, maxValues, LUX.getMachine($this).value(xVariables))
                         yVariables.forEach(()=>{
                             xValues.push(xBuffered);
                         });
@@ -63,12 +63,12 @@ function updateD3(newdata) {
                 }
                 yVariables.forEach((element, i) => {
                     data.push({
-                        y: bufferData(element, maxValues, WEBHMI.getMachine($this).value(element)),
+                        y: bufferData(element, maxValues, LUX.getMachine($this).value(element)),
                         x: xValues[i],
                         class: classes && Array.isArray(classes) && classes.length > i ? classes[i] : ""
                     });
                     if(data[i].y.length == 0) {
-                        WEBHMI.getMachine($this).initCyclicRead(element);
+                        LUX.getMachine($this).initCyclicRead(element);
                     }
                 });
             } else {
@@ -77,12 +77,12 @@ function updateD3(newdata) {
                 classes = $this.data("class");
                 yVariables.forEach((element, i) => {
                     data.push({
-                        y: WEBHMI.getMachine($this).value(element),
-                        x: xVariables ? Array.isArray(xVariables) && xVariables.length > i ? WEBHMI.getMachine($this).value(xVariables[i]) : WEBHMI.getMachine($this).value(xVariables) : null,
+                        y: LUX.getMachine($this).value(element),
+                        x: xVariables ? Array.isArray(xVariables) && xVariables.length > i ? LUX.getMachine($this).value(xVariables[i]) : LUX.getMachine($this).value(xVariables) : null,
                         class: classes && Array.isArray(classes) && classes.length > i ? classes[i] : ""
                     });
                     if(!data[i].y) {
-                        WEBHMI.getMachine($this).initCyclicRead(element);
+                        LUX.getMachine($this).initCyclicRead(element);
                     }
                 });
             }
@@ -91,12 +91,12 @@ function updateD3(newdata) {
             svgUpdateSeriesLineChart(data, chart, $this.attr('chart-min'), $this.attr('chart-max'));
         }
     });
-    $('svg.webhmi-bar-chart').each(function (index, element) {
+    $('svg.lux-bar-chart').each(function (index, element) {
         var $this = $(this);
         // For some reasong svgs are always considered visible so check parent instead 
         if ($this.parent().is(":visible")) {
             var chartData = {};
-            chartData.yValue = checkUndefinedStrings(WEBHMI.getValue($this));
+            chartData.yValue = checkUndefinedStrings(LUX.getValue($this));
             chartData.xValue = checkUndefinedStrings($this.attr('x-values'));
             chartData.xLabel = checkUndefinedStrings($this.attr('x-labels'));
             chartData.class = checkUndefinedStrings($this.attr('class'));
@@ -369,7 +369,7 @@ function svgUpdateBarChart(data, chart,ymin,ymax) {
 }
 
 function initSvgChart() {
-    var svg = d3.selectAll("svg.webhmi-line-chart,svg.webhmi-bar-chart,svg.webhmi-init-chart,svg.webhmi-series-line-chart"),
+    var svg = d3.selectAll("svg.lux-line-chart,svg.lux-bar-chart,svg.lux-init-chart,svg.lux-series-line-chart"),
         margin = 200,
         width = svg.attr("width") - margin,
         height = svg.attr("height") - margin
@@ -407,7 +407,7 @@ function initSvgChart() {
 function initGraphs() {
     initSvgChart();
 
-    WEBHMI.on({
+    LUX.on({
         'update-hmi': function () {
             updateD3();
         }

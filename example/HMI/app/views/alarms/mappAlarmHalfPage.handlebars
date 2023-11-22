@@ -68,46 +68,46 @@
 
     </div>
     <div>
-        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.StepUp">Up</button>
-        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.StepDown">Down</button>
-        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.PageUp">Page Up</button>
-        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.PageDown">Page Down</button>
-        <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AcknowledgeAll">Acknowledge All</button>
+        <button class="btn btn-primary lux-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.StepUp">Up</button>
+        <button class="btn btn-primary lux-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.StepDown">Down</button>
+        <button class="btn btn-primary lux-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.PageUp">Page Up</button>
+        <button class="btn btn-primary lux-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.PageDown">Page Down</button>
+        <button class="btn btn-primary lux-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.AcknowledgeAll">Acknowledge All</button>
     </div>
 </div>
 
 <div class="alarm-list">
-    <button class="btn btn-primary webhmi-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Acknowledge">Acknowledge</button>
+    <button class="btn btn-primary lux-btn-set" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Acknowledge">Acknowledge</button>
     <div class="alarm-grid-header">
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Timestamp">Timestamp</span>
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Timestamp">Timestamp</span>
         <span class="grid-item ">Instance: </span>
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.InstanceID">Inst</span>
-        {{!-- <span class="grid-item webhmi-num-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Severity">Severity</span> --}}
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.InstanceID">Inst</span>
+        {{!-- <span class="grid-item lux-num-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Severity">Severity</span> --}}
         <span class="grid-item ">Code: </span>
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Code">Code</span>
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Code">Code</span>
     </div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Scope">Scope</div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Name">Name</div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Message">Message</div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.AdditionalInformation1">Message</div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[0]">Detail 1</div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[1]">Detail 2</div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[2]">Detail 3</div>
-    <div class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[3]">Detail 4</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Scope">Scope</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Name">Name</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Message">Message</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.AdditionalInformation1">Message</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[0]">Detail 1</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[1]">Detail 2</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[2]">Detail 3</div>
+    <div class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.internal.uiCoreConnect.Details.Backtrace.Description[3]">Detail 4</div>
 </div>
 
 </div>
 
 <script id="alarm-list-template" type="text/x-handlebars-template">
     {{#each alarm}}
-    <div class="alarm-list-grid webhmi-led" data-var-name = "AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.SelectedIndex" data-set-value="{{index}}" data-reset-value="-1" onclick="setDetailIndex( {{index}} )">
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].timeStamp">Timestamp</span>
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].instance">Inst</span>
-        {{!-- <span class="grid-item webhmi-num-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].severity">Severity</span> --}}
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].code">Code</span>
-        {{!-- <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].scope">Scope</span> --}}
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].name">Name</span>
-        <span class="grid-item webhmi-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].message">Message</span>        
+    <div class="alarm-list-grid lux-led" data-var-name = "AlarmWrap:wrapper.internal.uiCoreConnect.AlarmList.SelectedIndex" data-set-value="{{index}}" data-reset-value="-1" onclick="setDetailIndex( {{index}} )">
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].timeStamp">Timestamp</span>
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].instance">Inst</span>
+        {{!-- <span class="grid-item lux-num-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].severity">Severity</span> --}}
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].code">Code</span>
+        {{!-- <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].scope">Scope</span> --}}
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].name">Name</span>
+        <span class="grid-item lux-text-value" data-var-name="AlarmWrap:wrapper.out.activeAlarmInfo[{{index}}].message">Message</span>        
     </div>
     {{/each}}
 </script>
@@ -148,14 +148,14 @@
 		<ul class="dropdown-menu">
 			{{#each cores}}
 			<li>
-				<a class="webhmi-btn-set" data-set-value="{{@index}}" data-reset-value="0" data-var-name="AlarmWrap:selectedIndex">
-					<div class="webhmi-text-value" data-var-name="AlarmWrap:coreNames[{{@index}}]">{{@index}}</div>
+				<a class="lux-btn-set" data-set-value="{{@index}}" data-reset-value="0" data-var-name="AlarmWrap:selectedIndex">
+					<div class="lux-text-value" data-var-name="AlarmWrap:coreNames[{{@index}}]">{{@index}}</div>
 				</a>
 			</li>
 			{{/each}}
 		</ul>
 	</div>
-	<span class="form-control webhmi-text-value" placeholder="Select an Alarm Core" data-var-name="AlarmWrap:selectedName" />
+	<span class="form-control lux-text-value" placeholder="Select an Alarm Core" data-var-name="AlarmWrap:selectedName" />
 </div>
 </script>
 
