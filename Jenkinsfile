@@ -6,5 +6,5 @@ buildPublishPipeline(
     asProjectVersion: "main", 
     asProjectPath: "example/AsProject",
     skipLpmInstall: true,
-    packagesToPublish: ['src/Ar/OMJSON', 'src/Ar/webHMI']
+    packagesToPublish: ['src/Ar/OMJSON', 'src/Ar/Lux']
 )

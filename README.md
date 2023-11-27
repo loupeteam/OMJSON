@@ -6,7 +6,7 @@ info@loupe.team
 
 # Description
 
-This repo provides packages for communicating with a B&R PLC using WebSockets and a JSON interface. This allows the PLC to act as a server for Loupe's webHMI client. 
+This repo provides packages for communicating with a B&R PLC using WebSockets and a JSON interface. This allows the PLC to act as a server for a Loupe UX client. 
 
 ### Library Package
 The OMJSON library package bundles up the function blocks needed in order to run the WebSocket server and read/write to PLC variables.  
@@ -16,7 +16,7 @@ This repo also contains a program package that can be deployed to run the OMJSON
 
 # Installation
 
-To install the program package using the Loupe Package Manager (LPM), in an initialized Automation Studio project directory run `lpm install webhmiprog`. Note that this will also pull in the library package as a dependency. 
+To install the program package using the Loupe Package Manager (LPM), in an initialized Automation Studio project directory run `lpm install luxprog`. Note that this will also pull in the library package as a dependency. 
 If you only want to install the library package, run `lpm install omjson`. 
 
 For more information about LPM, see https://loupeteam.github.io/LoupeDocs/tools/lpm.html.

@@ -170,23 +170,23 @@ table#windows-names td,  table#windows-names th {
     border-top: none !important;
     border-bottom: none;
 }
-div.webhmi-num-value{
+div.lux-num-value{
   display: inline-block;
 }
-.webhmi-btn-set{
+.lux-btn-set{
   /*background: lightcoral;*/
   min-height: 30px;
 }
-.webhmi-btn-momentary{
+.lux-btn-momentary{
   /*background: salmon;*/
   min-height: 30px;
 }
-.webhmi-btn-toggle{
+.lux-btn-toggle{
   /*background: lightsalmon;*/
   min-height: 30px;
 }
 
-/* button.webhmi-btn-toggle.webhmi-led.toggle-active.btn-success {} */
+/* button.lux-btn-toggle.lux-led.toggle-active.btn-success {} */
 
 .btn.disabled {
 	background-color: lightgrey;
@@ -217,7 +217,7 @@ a.list-group-item.led-on:focus
 li a{
   color: #0d0d0d;
 }
-input[type="range"].webhmi-num-value{/* width: 75%; */display: inline-block;}
+input[type="range"].lux-num-value{/* width: 75%; */display: inline-block;}
 
 .toggle.btn{
   width: 120px;

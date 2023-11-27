@@ -1,7 +1,7 @@
 {
-    "name": "@loupeteam/webhmiprog",
-    "version": "0.1.0",
-    "description": "This is a program package. It includes a task that runs the OMJSON FUB and acts as a server on the PLC for the webHMI application",
+    "name": "@loupeteam/luxprog",
+    "version": "0.2.0",
+    "description": "This is a program package. It includes a task that runs the OMJSON FUB and acts as a server on the PLC for the Loupe UX application",
     "author": "Loupe",
     "license": "MIT",
     "repository": {
@@ -16,12 +16,12 @@
       "type": "program",
       "logical": {
         "source": "*",
-        "destination": "webHMI"
+        "destination": "Lux"
       },
       "physical": {
         "cpu": [
           {
-            "source": "webHMIProg",
+            "source": "LuxProg",
             "destination": "TC8"
           }
         ]

@@ -39,13 +39,13 @@
         <input keyboard="num" class="trace-min" data-target='#chart{{math @index "+" 1}}' data-target-attr="chart-min" placeholder="Min" />
         <div class="chart-parameters input-group">
             
-            <input keyboard="qwerty" class="webhmi-text-value form-control" data-var-name="Trace:Configuration.Trace[{{@index}}].Variable" placeholder="Variable Name"/>
-            <span class='webhmi-led glyphicon input-group-addon' data-var-name="Trace:varVariable[{{@index}}].dimension" data-led-true="glyphicon-ok"
+            <input keyboard="qwerty" class="lux-text-value form-control" data-var-name="Trace:Configuration.Trace[{{@index}}].Variable" placeholder="Variable Name"/>
+            <span class='lux-led glyphicon input-group-addon' data-var-name="Trace:varVariable[{{@index}}].dimension" data-led-true="glyphicon-ok"
                 data-led-false="glyphicon-remove"></span>
             <span class='input-group-addon'>Prescale:</span>
-            <input keyboard="num" class="webhmi-num-value form-control chart-prescale" data-var-name="Trace:Configuration.Trace[{{@index}}].Prescale" />
+            <input keyboard="num" class="lux-num-value form-control chart-prescale" data-var-name="Trace:Configuration.Trace[{{@index}}].Prescale" />
         </div>
-        <svg id='chart{{math @index "+" 1}}' width="550" height="250" class="webhmi-line-chart" data-var-name='Trace:TraceData{{math @index "+" 1}}' chart-max='' chart-min=''></svg>
+        <svg id='chart{{math @index "+" 1}}' width="550" height="250" class="lux-line-chart" data-var-name='Trace:TraceData{{math @index "+" 1}}' chart-max='' chart-min=''></svg>
     </div>
     {{/repeat}}
 </script>
@@ -91,13 +91,13 @@
         <input keyboard="num" class="trace-min" data-target='#chart{{math @index "+" 1}}' data-target-attr="chart-min" placeholder="Min" />
         <div class="chart-parameters input-group">
             
-            <input keyboard="qwerty" class="webhmi-text-value form-control" data-var-name="Trace:Configuration.Trace[{{@index}}].Variable" placeholder="Variable Name"/>
-            <span class='webhmi-led glyphicon input-group-addon' data-var-name="Trace:varVariable[{{@index}}].dimension" data-led-true="glyphicon-ok"
+            <input keyboard="qwerty" class="lux-text-value form-control" data-var-name="Trace:Configuration.Trace[{{@index}}].Variable" placeholder="Variable Name"/>
+            <span class='lux-led glyphicon input-group-addon' data-var-name="Trace:varVariable[{{@index}}].dimension" data-led-true="glyphicon-ok"
                 data-led-false="glyphicon-remove"></span>
             <span class='input-group-addon'>Prescale:</span>
-            <input keyboard="num" class="webhmi-num-value form-control chart-prescale" data-var-name="Trace:Configuration.Trace[{{@index}}].Prescale" />
+            <input keyboard="num" class="lux-num-value form-control chart-prescale" data-var-name="Trace:Configuration.Trace[{{@index}}].Prescale" />
         </div>
-        <svg id='chart{{math @index "+" 1}}' width="1200" height="200" class="webhmi-line-chart" data-var-name='Trace:TraceData{{math @index "+" 1}}' chart-max='' chart-min=''></svg>
+        <svg id='chart{{math @index "+" 1}}' width="1200" height="200" class="lux-line-chart" data-var-name='Trace:TraceData{{math @index "+" 1}}' chart-max='' chart-min=''></svg>
     </div>
     {{/repeat}}
 </script>
