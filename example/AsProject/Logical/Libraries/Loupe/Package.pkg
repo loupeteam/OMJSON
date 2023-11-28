@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio FileVersion="4.9"?>
 <Package xmlns="http://br-automation.co.at/AS/Package">
-  <Objects />
+  <Objects>
+    <Object Type="Library" Language="Binary">vartools</Object>
+    <Object Type="Library" Language="Binary">databuffer</Object>
+    <Object Type="Library" Language="Binary">persist</Object>
+    <Object Type="Library" Language="Binary">csvfilelib</Object>
+    <Object Type="Library" Language="Binary">fiowrap</Object>
+    <Object Type="Library" Language="Binary" Description="A new source library">piper</Object>
+    <Object Type="Library" Language="Binary">errorlib</Object>
+    <Object Type="Library" Language="Binary">hmitools</Object>
+    <Object Type="Library" Language="Binary">ringbuflib</Object>
+    <Object Type="Library" Language="Binary">logthat</Object>
+    <Object Type="Library" Language="Binary">websocket</Object>
+    <Object Type="Library" Language="Binary">tcpcomm</Object>
+    <Object Type="Library" Language="Binary">stringext</Object>
+    <Object Type="Library" Language="ANSIC" Reference="true">C:\Projects\Loupe\opensource\repo\OMJSON\src\Ar\OMJSON\ANSIC.lby</Object>
+  </Objects>
 </Package>

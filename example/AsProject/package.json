@@ -1,0 +1,28 @@
+{
+  "name": "asproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "lpmConfig": {
+    "deploymentConfigs": [
+      "Intel",
+      "ARM"
+    ],
+    "gitClient": "GitExtensions"
+  },
+  "dependencies": {
+    "@loupeteam/csvfilelib": "^1.2.2",
+    "@loupeteam/databuffer": "^0.1.1",
+    "@loupeteam/errorlib": "^0.23.3",
+    "@loupeteam/persist": "^0.0.7",
+    "@loupeteam/piper": "^0.1.9",
+    "@loupeteam/vartools": "^0.11.3",
+    "@loupeteam/websocket": "^0.2.0"
+  }
+}

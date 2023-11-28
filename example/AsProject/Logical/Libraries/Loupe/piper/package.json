@@ -1,0 +1,21 @@
+{
+  "name": "@loupeteam/piper",
+  "version": "0.1.9",
+  "description": "A new source library",
+  "homepage": "https://loupeteam.github.io/LoupeDocs/libraries/piper.html",
+  "scripts": {},
+  "keywords": [],
+  "author": "Loupe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loupeteam/piper"
+  },
+  "lpm": {
+    "type": "library"
+  },
+  "dependencies": {
+    "@loupeteam/logthat": ">=0.5.0 <=0.5.9",
+    "@loupeteam/stringext": ">=0.14.0 <=0.14.9"
+  }
+}
