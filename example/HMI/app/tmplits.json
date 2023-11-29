@@ -1,0 +1,91 @@
+{
+    "startPage" : {
+        "container" : "main",
+        "name": "main"
+    },
+    "pages": [
+            {
+                "name": "main",
+                "file":"../pages/main.handlebars"
+            },
+            {
+                "name": "service",
+                "file":"../pages/service.handlebars"
+            },
+            {
+                "name": "robot",
+                "file":"../views/robot.handlebars"
+            },
+            {
+                "name": "cnc",
+                "file":"../views/cnc.handlebars"
+            },
+            {
+                "name": "Piper",
+                "file":"../views/Piper.handlebars"
+            },
+            {
+                "name": "charts",
+                "file":"../views/charts.handlebars"
+            },
+            {
+                "name": "chartsSmall",
+                "file":"../views/chartsSmall.handlebars"
+            },
+            {
+                "name": "settings",
+                "file":"../views/settings.handlebars"
+            },
+            {
+                "name": "alarms",
+                "file":"../views/alarms/mappAlarmHalfPage.handlebars"
+            },    
+            {
+                "name": "serviceTabs",
+                "file":"../views/serviceTabs.handlebars"
+            },
+            {
+                "name": "Positions",
+                "file":"../views/Positions.handlebars"
+            },
+            {
+                "name": "msgbox",
+                "file":"../views/popup/msgBox.handlebars"
+            },
+            {
+                "name": "ftpEditor",
+                "file":"../libraries/ftpEditor/ftpEditor.handlebars"
+            },
+            {
+                "name": "alarmsTemplate",
+                "file":"../pages/alarmsTemplate.handlebars"
+            },
+            {
+                "name": "mainLayout",
+                "file":"../pages/mainLayout.handlebars"
+            },
+            {
+                "name": "processTabs",
+                "file":"../views/processTabs.handlebars"
+            },
+            {
+                "name": "process",
+                "file":"../views/process.handlebars"
+            },
+            {
+                "name": "axisService",
+                "file":"../views/AxisService.handlebars"
+            },
+            {
+                "name": "components",
+                "file":"../views/components.handlebars"
+            }
+      
+    ],
+    "libraries":[
+        "../components/CncUtilities.handlebars",
+        "../components/components.handlebars",
+        "../components/AxisUtilities.handlebars",
+        "../components/charts.handlebars"
+    ]
+}

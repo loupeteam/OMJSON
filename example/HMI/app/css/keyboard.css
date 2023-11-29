@@ -1,0 +1,16 @@
+/*
+ * File: keyboard.css
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of StarterHmiProject, licensed under the MIT License.
+*/
+
+.ui-keyboard{
+    width: unset;
+    bottom: unset;
+    border-radius: 5px;
+    border-color: light-gray;
+    border-style: solid;
+    border-width: 3px;
+}

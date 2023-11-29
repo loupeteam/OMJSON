@@ -1,0 +1,13 @@
+<!--
+ * File: Positions.handlebars
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of StarterHmiProject, licensed under the MIT License.
+-->
+
+<div id="PositionsReadout" data-read-group="Axis">
+    {{#controller 'serviceAxis'}}
+    {{> multiAxisReadout}}
+    {{/controller }}
+</div>
