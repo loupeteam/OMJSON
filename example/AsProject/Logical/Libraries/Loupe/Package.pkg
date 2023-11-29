@@ -15,6 +15,6 @@
     <Object Type="Library" Language="Binary">websocket</Object>
     <Object Type="Library" Language="Binary">tcpcomm</Object>
     <Object Type="Library" Language="Binary">stringext</Object>
-    <Object Type="Library" Language="ANSIC" Reference="true">C:\Projects\Loupe\opensource\repo\OMJSON\src\Ar\OMJSON\ANSIC.lby</Object>
+    <Object Type="Library" Language="ANSIC" Reference="true">..\..\src\Ar\OMJSON\ANSIC.lby</Object>
   </Objects>
 </Package>
