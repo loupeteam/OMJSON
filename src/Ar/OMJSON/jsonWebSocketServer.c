@@ -471,6 +471,9 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 			t->internal.client[index].wsStream.in.cmd.close = 1;
 			t->internal.client[index].wsConnected = 0;
 			t->internal.client[index].debug.socketDisconnectCountTimeout++;
+			// Reset request timer
+			t->internal.client[index].requestTimer.IN = 0;
+			TON_10ms(&t->internal.client[index].requestTimer);			
 			continue;
 		}
 		
