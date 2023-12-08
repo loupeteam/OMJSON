@@ -1,5 +1,7 @@
 # Change log
 
+1.4.1 - Fix request timer not resetting properly after timeout
+
 1.4.0 - Remove technology guarding license requirement
 
 1.3.8 - Fix iClient not being populated cyclically
