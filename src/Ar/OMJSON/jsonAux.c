@@ -14,6 +14,8 @@
 #endif
 
 	#include "OMJSON.h"
+	#include "vartools.h"
+	#include "databuffer.h"
 	#include <string.h>
 	#include "jsonAux.h"
 	#include "StringExt.h"
@@ -514,3 +516,129 @@ char *parse_value(varVariable_typ *pVariable, char *value)
 	return value;
 	
 } // parse_value
+
+unsigned short varValueToJsonString(varVariable_typ *pVariable, datbufBuffer_typ *buffer)
+{
+	unsigned short appendStatus = 0;
+	// Append value
+	switch (pVariable->dataType)
+	{
+
+	case VAR_TYPE_STRING:
+	{
+		// Stringify - Do not use variable.value. It is limited to 120 characters, which is not enough
+		// for strings.
+		// TODO: This can cause a stack overflow if variable.length is very large.
+		//		Maybe add a max size
+		STRING tempString[pVariable->length + 50];
+		char *reentry;
+		stringify_string(tempString, (char *)pVariable->address, sizeof(tempString) - 1, &reentry);
+
+		// Append ""tempString""
+		appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\""), 1);
+		appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT)&tempString, strlen(tempString));
+		if (reentry != 0)
+		{
+			stringify_string(tempString, reentry, sizeof(tempString) - 1, &reentry);
+			appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT)&tempString, strlen(tempString));
+		}
+		appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\""), 1);
+	}
+	break;
+
+	case VAR_TYPE_WSTRING:
+	{
+		// Stringify - Do not use variable.value. It is limited to 120 characters, which is not enough
+		// for strings.
+		// TODO: This can cause a stack overflow if variable.length is very large.
+		//		Maybe add a max size
+		char tempString[pVariable->length + 50];
+		// NOTE: Because length is in bytes, tempString will contain 2x the number of characters
+		// We can change this to length/2 but if we do support UTF-8 in the future this will need to be just length
+		// This is because WSTRING to UTF-8 may result in the same number of characters
+		WSTRING *reentry;
+		stringify_wstring(tempString, (UINT *)pVariable->address, sizeof(tempString) - 1, &reentry);
+
+		// Append ""tempString""
+		appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\""), 1);
+		appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT)&tempString, strlen(tempString));
+		if (reentry != 0)
+		{
+			stringify_wstring(tempString, reentry, sizeof(tempString) - 1, &reentry);
+			appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT)&tempString, strlen(tempString));
+		}
+		appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\""), 1);
+	}
+	break;
+
+	case VAR_TYPE_REAL:
+	case VAR_TYPE_LREAL:
+	{
+		// TODO: Test this for performance
+		REAL value;
+
+		if (pVariable->dataType == VAR_TYPE_LREAL)
+		{
+			value = (REAL) * (LREAL *)(pVariable->address);
+		}
+		else
+		{
+			value = *(REAL *)(pVariable->address);
+		}
+
+		if (isnan(value))
+		{
+
+			// Append ""NaN""
+			appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\"NaN\""), 5); // 5 = strlen("\"NaN\"")
+		}
+		else if (isinf(value))
+		{
+
+			if (value > 0)
+			{
+				// Append ""Infinity""
+				appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\"Infinity\""), 10); // 10 = strlen("\"Infinity\"")
+			}
+			else
+			{
+				// Append ""-Infinity""
+				appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\"-Infinity\""), 11); // 11 = strlen("\"-Infinity\"")
+			}
+		}
+		else
+		{
+
+			// Append value
+			appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & (pVariable->value), strlen(pVariable->value));
+		}
+	}
+	break;
+
+	case VAR_TYPE_UNDEFINED:
+
+		// Append ""undefined""
+		appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\"undefined\""), 11); // 11 = strlen("\"undefined\"")
+
+		break;
+
+	default:
+
+		if (pVariable->value[0] != '\0')
+		{
+			// Append value
+			appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & (pVariable->value), strlen(pVariable->value));
+		}
+		else
+		{
+			// Type or value is not supported
+			// We need to provide something to be valid json
+			// Append dummy value: ""undefined""
+			appendStatus = datbufAppendToBuffer((UDINT) buffer, (UDINT) & ("\"undefined\""), 11); // 11 = strlen("\"undefined\"")
+		}
+		break;
+
+	} // switch(dataType)
+
+	return appendStatus;
+}

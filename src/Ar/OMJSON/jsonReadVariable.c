@@ -13,6 +13,8 @@
 #endif
 
 #include "OMJSON.h"
+#include "databuffer.h"
+#include "vartools.h"
 #include <string.h>
 #include <math.h>
 #include "jsonAux.h"
@@ -137,116 +139,7 @@ void jsonReadVariable(struct jsonReadVariable* t)
 		varGetValue((UDINT)&(pCache->item[i].variable));
 		
 		// Append value
-		switch (pCache->item[i].variable.dataType) {
-		
-			case VAR_TYPE_STRING:
-				{
-					// Stringify - Do not use variable.value. It is limited to 120 characters, which is not enough
-					// for strings.
-					// TODO: This can cause a stack overflow if variable.length is very large.
-					//		Maybe add a max size
-					STRING tempString[pCache->item[i].variable.length + 50];
-					char* reentry;
-					stringify_string(tempString, (char*)pCache->item[i].variable.address, sizeof(tempString) - 1, &reentry);
-			
-					// Append ""tempString""
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\""), 1);
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&tempString, strlen(tempString));
-					if(reentry != 0) {
-						stringify_string(tempString, reentry, sizeof(tempString) - 1, &reentry);
-						appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&tempString, strlen(tempString));
-					}
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\""), 1);
-					
-				}
-				break;
-			
-			case VAR_TYPE_WSTRING:
-				{
-					// Stringify - Do not use variable.value. It is limited to 120 characters, which is not enough
-					// for strings.
-					// TODO: This can cause a stack overflow if variable.length is very large.
-					//		Maybe add a max size
-					char tempString[pCache->item[i].variable.length + 50]; 
-					// NOTE: Because length is in bytes, tempString will contain 2x the number of characters
-					// We can change this to length/2 but if we do support UTF-8 in the future this will need to be just length
-					// This is because WSTRING to UTF-8 may result in the same number of characters
-					WSTRING* reentry;
-					stringify_wstring(tempString, (UINT*)pCache->item[i].variable.address, sizeof(tempString) - 1, &reentry);
-			
-					// Append ""tempString""
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\""), 1);
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&tempString, strlen(tempString));
-					if(reentry != 0) {
-						stringify_wstring(tempString, reentry, sizeof(tempString) - 1, &reentry);
-						appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&tempString, strlen(tempString));
-					}
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\""), 1);
-					
-				}
-				break;
-				
-			case VAR_TYPE_REAL:
-			case VAR_TYPE_LREAL:
-				{
-					// TODO: Test this for performance
-					REAL value;
-					
-					if (pCache->item[i].variable.dataType == VAR_TYPE_LREAL) {
-						value = (REAL)*(LREAL*)(pCache->item[i].variable.address);
-					}
-					else {
-						value = *(REAL*)(pCache->item[i].variable.address);
-					}
-					
-					if (isnan(value)) {
-				
-						// Append ""NaN""
-						appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\"NaN\""), 5); // 5 = strlen("\"NaN\"")
-				
-					} else if (isinf(value)) {
-				
-						if (value > 0) {
-							// Append ""Infinity""
-							appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\"Infinity\""), 10); // 10 = strlen("\"Infinity\"")
-						} else {
-							// Append ""-Infinity""
-							appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\"-Infinity\""), 11); // 11 = strlen("\"-Infinity\"")
-						}
-				
-					} else {
-				
-						// Append value
-						appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&(pCache->item[i].variable.value), strlen(pCache->item[i].variable.value));
-				
-					}
-				}
-				break;
-			
-			
-			case VAR_TYPE_UNDEFINED:
-				
-				// Append ""undefined""
-				appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\"undefined\""), 11); // 11 = strlen("\"undefined\"")
-			
-				break;
-			
-			default:
-			
-				if(pCache->item[i].variable.value[0] != '\0') {
-					// Append value
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&(pCache->item[i].variable.value), strlen(pCache->item[i].variable.value));
-				}
-				else {
-					// Type or value is not supported
-					// We need to provide something to be valid json
-					// Append dummy value: ""undefined""
-					appendStatus = datbufAppendToBuffer((UDINT)&(t->internal.outputBuffer), (UDINT)&("\"undefined\""), 11); // 11 = strlen("\"undefined\"")
-				}
-				break;
-				
-		} // switch(dataType)
-				
+		appendStatus = varValueToJsonString( &pCache->item[i].variable, &t->internal.outputBuffer);
 		
 //		if (pCache->item[i].variable.dataType == VAR_TYPE_STRING) {
 //	

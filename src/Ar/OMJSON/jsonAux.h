@@ -53,4 +53,7 @@ char *parse_number(char *pDest, char *pSrc);
 // Parser core - when encountering text, process appropriately
 char *parse_value(varVariable_typ *pVariable, char *value);
 
+// Converts value of variable to JSON representation
+unsigned short varValueToJsonString(varVariable_typ *pVariable, datbufBuffer_typ *buffer);
+
 #endif
