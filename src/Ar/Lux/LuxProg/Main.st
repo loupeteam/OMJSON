@@ -28,7 +28,7 @@ PROGRAM _CYCLIC
 	// Call jsonWebSocketServer cyclically to serve variables
 	jsonWebSocketServer_0();
 	
-	IF NOT gSimulation THEN
+	IF NOT SimulationStatus(0) THEN
 		gWSTimeout := FALSE;
 		FOR i:=0 TO JSON_MAI_CLIENTS DO
 			// On any client disconnect
