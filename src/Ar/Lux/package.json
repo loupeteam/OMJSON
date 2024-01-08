@@ -1,6 +1,6 @@
 {
     "name": "@loupeteam/luxprog",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "This is a program package. It includes a task that runs the OMJSON FUB and acts as a server on the PLC for the Loupe UX application",
     "author": "Loupe",
     "license": "MIT",
