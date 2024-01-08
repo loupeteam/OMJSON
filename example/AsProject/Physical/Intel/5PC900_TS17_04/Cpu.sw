@@ -58,8 +58,6 @@
     <LibraryObject Name="DataObj" Source="Libraries._AS.DataObj.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="dvframe" Source="Libraries._AS.dvframe.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="FileIO" Source="Libraries._AS.FileIO.lby" Memory="UserROM" Language="binary" Debugging="true" />
-    <LibraryObject Name="MTBasics" Source="Libraries.MTBasics.lby" Memory="UserROM" Language="binary" Debugging="true" />
-    <LibraryObject Name="MTLookUp" Source="Libraries.MTLookUp.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="MTTypes" Source="Libraries._AS.MTTypes.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="LoopConR" Source="Libraries._AS.LoopConR.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="operator" Source="Libraries._AS.operator.lby" Memory="UserROM" Language="binary" Debugging="true" />
@@ -80,5 +78,7 @@
     <LibraryObject Name="websocket" Source="Libraries.Loupe.websocket.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="tcpcomm" Source="Libraries.Loupe.tcpcomm.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="OMJSON" Source="Libraries.Loupe.OMJSON.lby" Memory="UserROM" Language="ANSIC" Debugging="true" />
+    <LibraryObject Name="hammers" Source="Libraries.Loupe.hammers.lby" Memory="UserROM" Language="Binary" Debugging="true" />
+    <LibraryObject Name="MTLookUp" Source="Libraries._AS.MTLookUp.lby" Memory="UserROM" Language="binary" Debugging="true" />
   </Libraries>
 </SwConfiguration>
