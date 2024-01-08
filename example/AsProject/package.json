@@ -19,6 +19,7 @@
   "dependencies": {
     "@loupeteam/csvfilelib": "^1.2.2",
     "@loupeteam/databuffer": "^0.1.1",
+    "@loupeteam/hammers": "^0.10.0",
     "@loupeteam/persist": "^0.0.7",
     "@loupeteam/piper": "^0.1.9",
     "@loupeteam/vartools": "^0.11.3",
