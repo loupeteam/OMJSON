@@ -2,7 +2,6 @@
 <?AutomationStudio FileVersion="4.9"?>
 <SwConfiguration CpuAddress="SL1" xmlns="http://br-automation.co.at/AS/SwConfiguration">
   <TaskClass Name="Cyclic#1">
-    <Task Name="FirstInitP" Source="Infrastructure.FirstInitProg.prg" Memory="UserROM" Language="ANSIC" Debugging="true" />
     <Task Name="counter" Source="Process.counter.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#2" />
@@ -14,7 +13,6 @@
   <TaskClass Name="Cyclic#6" />
   <TaskClass Name="Cyclic#7" />
   <TaskClass Name="Cyclic#8">
-    <Task Name="ErrorProg" Source="Diagnostics.ErrorProg.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="MachineHMI" Source="MachineControl.MachineHMI.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="LuxProg" Source="Lux.LuxProg.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
@@ -79,7 +77,6 @@
     <LibraryObject Name="ringbuflib" Source="Libraries.Loupe.ringbuflib.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="logthat" Source="Libraries.Loupe.logthat.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="piper" Source="Libraries.Loupe.piper.lby" Memory="UserROM" Language="Binary" Debugging="true" />
-    <LibraryObject Name="errorlib" Source="Libraries.Loupe.errorlib.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="websocket" Source="Libraries.Loupe.websocket.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="tcpcomm" Source="Libraries.Loupe.tcpcomm.lby" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="OMJSON" Source="Libraries.Loupe.OMJSON.lby" Memory="UserROM" Language="ANSIC" Debugging="true" />
