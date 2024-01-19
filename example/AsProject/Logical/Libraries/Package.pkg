@@ -6,7 +6,5 @@
     <Object Type="Package">Loupe</Object>
     <Object Type="Package">Mapp</Object>
     <Object Type="Package">Motion</Object>
-    <Object Type="Library" Language="binary" Description="This mechatronics library contains basic control function blocks.">MTBasics</Object>
-    <Object Type="Library" Language="binary" Description="This mechatronics library contains lookup table function blocks.">MTLookUp</Object>
   </Objects>
 </Package>
