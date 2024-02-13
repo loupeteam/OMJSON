@@ -1,4 +1,5 @@
 # Change log
+1.4.2 - Expand StringExt dependency
 
 1.4.1 - Fix request timer not resetting properly after timeout
 
