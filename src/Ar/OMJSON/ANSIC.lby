@@ -33,6 +33,6 @@
     <Dependency ObjectName="standard" />
     <Dependency ObjectName="AsBrStr" />
     <Dependency ObjectName="StringExt" FromVersion="0.14.0" ToVersion="0.15.9" />
-    <Dependency ObjectName="WebSocket" />
+    <Dependency ObjectName="WebSocket" FromVersion="0.02.2" ToVersion="0.99.9"/>
   </Dependencies>
 </Library>
