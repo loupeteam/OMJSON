@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Library xmlns="http://br-automation.co.at/AS/Library" Version="0.02.0" SubType="Binary">
+<Library xmlns="http://br-automation.co.at/AS/Library" Version="0.02.2" SubType="Binary">
   <Files>
     <File>Types.typ</File>
     <File Description="Exported data types">WSMgr.typ</File>
@@ -12,7 +12,7 @@
   </Files>
   <Dependencies>
     <Dependency ObjectName="TCPComm" FromVersion="0.10.0" ToVersion="0.10.9" />
-    <Dependency ObjectName="StringExt" FromVersion="0.14.0" ToVersion="0.14.9" />
+    <Dependency ObjectName="StringExt" FromVersion="0.14.0" ToVersion="0.15.9" />
     <Dependency ObjectName="AsHttp" />
     <Dependency ObjectName="sys_lib" />
   </Dependencies>
