@@ -166,15 +166,16 @@ void jsonWebSocketServer(struct jsonWebSocketServer* t)
 		// So make sure this stays near the top
 		t->internal.iClient = index;
 
-		// Start timer by default. It is reset when a request is properly processed.
-		t->internal.client[index].requestTimer.IN = 1;
-		
 		if(t->internal.client[index].wsStream.out.active) t->internal.connectedClients++;
 		
 		t->internal.client[index].debug.oldDataReceived = t->internal.client[index].wsStream.out.dataReceived;
 	
 		wsReceive(&t->internal.client[index].wsStream);
 		t->internal.client[index].wsConnected = t->internal.client[index].wsStream.out.connected;
+		
+		// Start timer by default. It is reset when a request is properly processed.
+		t->internal.client[index].requestTimer.IN = t->internal.client[index].wsConnected;
+		
 	
 		if (t->internal.client[index].debug.oldDataReceived && t->internal.client[index].wsStream.out.dataReceived) {
 			// Break here to figure out what happens
