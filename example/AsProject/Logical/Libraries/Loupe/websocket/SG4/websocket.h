@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* websocket 0.02.0 */
+/* websocket 0.02.2 */
 
 #ifndef _WEBSOCKET_
 #define _WEBSOCKET_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _websocket_VERSION
-#define _websocket_VERSION 0.02.0
+#define _websocket_VERSION 0.02.2
 #endif
 
 #include <bur/plctypes.h>
@@ -218,7 +218,11 @@ typedef struct WSStream_OUT_typ
 } WSStream_OUT_typ;
 
 typedef struct WSStream_Int_Debug_typ
-{	unsigned char New_Member;
+{	unsigned long websocketPacketTooBig;
+	unsigned long receiveBufferShiftFull;
+	unsigned long receiveBufferReset;
+	unsigned long receiveBufferShift;
+	plcbit receiveBufferIsShifted;
 } WSStream_Int_Debug_typ;
 
 typedef struct wsDecode
@@ -296,7 +300,7 @@ typedef struct WSStream_Internal_typ
 	unsigned short connectionState;
 	unsigned long bufferSize;
 	unsigned long sendBuffer;
-	unsigned long recieveBuffer;
+	unsigned long receiveBuffer;
 	plcbit prevSend;
 } WSStream_Internal_typ;
 

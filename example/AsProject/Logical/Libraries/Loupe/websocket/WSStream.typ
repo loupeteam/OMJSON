@@ -5,8 +5,8 @@
  * 
  * This file is part of WebSocket, licensed under the MIT License.
  *)
-
 (*For each client lets instantiate an interface*)
+
 TYPE
 	WSStream_typ : 	STRUCT 
 		in : WSStream_IN_typ;
@@ -66,11 +66,15 @@ TYPE
 		connectionState : UINT;
 		bufferSize : UDINT;
 		sendBuffer : UDINT;
-		recieveBuffer : UDINT;
+		receiveBuffer : UDINT;
 		prevSend : BOOL;
 	END_STRUCT;
 	WSStream_Int_Debug_typ : 	STRUCT 
-		New_Member : USINT;
+		websocketPacketTooBig : UDINT;
+		receiveBufferShiftFull : UDINT;
+		receiveBufferReset : UDINT;
+		receiveBufferShift : UDINT;
+		receiveBufferIsShifted : BOOL;
 	END_STRUCT;
 	WSStream_Int_FUB_typ : 	STRUCT 
 		tcpStream : TCPStream_typ;
