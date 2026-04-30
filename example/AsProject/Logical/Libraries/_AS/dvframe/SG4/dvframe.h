@@ -15,65 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define ARG_BAUD 0U
- #define ARG_MISC 16U
- #define frmERR_OK 0U
- #define ARG_PVPOLLADR 15U
- #define frmERR_MAXOPEN 8254U
- #define frmERR_NOINPUT 60U
- #define ARG_TXPVPOLLADR 17U
- #define frmERR_NOBUFFER 8071U
- #define frmERR_PA_DB_SB 8256U
- #define MISC_RECEIVE_ALL 2U
- #define frmERR_NOTOPENED 8251U
- #define frmERR_INPUTERROR 8079U
- #define frmERR_NORESOURCES 8258U
- #define ARG_EVSEND_TASKEVENT 18U
- #define ARG_EVSEND_TASKIDENT 14U
- #define frmERR_INIT_IN_PROGRESS 8068U
- #define frmERR_IF_UNREACHABLE 8067U
- #define frmERR_INVALIDBUFFER 8072U
- #define frmERR_IOCTL_NOTVALID 8073U
- #define frmERR_MODEDESCRIPTION 8253U
- #define frmERR_TRANSMITOVERRUN 8078U
- #define frmERR_FUB_ENABLE_FALSE 65534U
- #define frmERR_DEVICEDESCRIPTION 8252U
- #define frmERR_IOCTL_NOTSUPPORTED 8257U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned long ARG_BAUD;
- _GLOBAL_CONST unsigned long ARG_MISC;
- _GLOBAL_CONST unsigned short frmERR_OK;
- _GLOBAL_CONST unsigned long ARG_PVPOLLADR;
- _GLOBAL_CONST unsigned short frmERR_MAXOPEN;
- _GLOBAL_CONST unsigned short frmERR_NOINPUT;
- _GLOBAL_CONST unsigned long ARG_TXPVPOLLADR;
- _GLOBAL_CONST unsigned short frmERR_NOBUFFER;
- _GLOBAL_CONST unsigned short frmERR_PA_DB_SB;
- _GLOBAL_CONST unsigned long MISC_RECEIVE_ALL;
- _GLOBAL_CONST unsigned short frmERR_NOTOPENED;
- _GLOBAL_CONST unsigned short frmERR_INPUTERROR;
- _GLOBAL_CONST unsigned short frmERR_NORESOURCES;
- _GLOBAL_CONST unsigned long ARG_EVSEND_TASKEVENT;
- _GLOBAL_CONST unsigned long ARG_EVSEND_TASKIDENT;
- _GLOBAL_CONST unsigned short frmERR_INIT_IN_PROGRESS;
- _GLOBAL_CONST unsigned short frmERR_IF_UNREACHABLE;
- _GLOBAL_CONST unsigned short frmERR_INVALIDBUFFER;
- _GLOBAL_CONST unsigned short frmERR_IOCTL_NOTVALID;
- _GLOBAL_CONST unsigned short frmERR_MODEDESCRIPTION;
- _GLOBAL_CONST unsigned short frmERR_TRANSMITOVERRUN;
- _GLOBAL_CONST unsigned short frmERR_FUB_ENABLE_FALSE;
- _GLOBAL_CONST unsigned short frmERR_DEVICEDESCRIPTION;
- _GLOBAL_CONST unsigned short frmERR_IOCTL_NOTSUPPORTED;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct XOPENCONFIG
 {	unsigned short idle;
@@ -239,6 +180,62 @@ _BUR_PUBLIC void FRM_write(struct FRM_write* inst);
 _BUR_PUBLIC void FRM_writeAcknowledged(struct FRM_writeAcknowledged* inst);
 _BUR_PUBLIC void FRM_read(struct FRM_read* inst);
 _BUR_PUBLIC void FRM_xopen(struct FRM_xopen* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define ARG_BAUD 0U
+ #define ARG_MISC 16U
+ #define frmERR_OK 0U
+ #define ARG_PVPOLLADR 15U
+ #define frmERR_MAXOPEN 8254U
+ #define frmERR_NOINPUT 60U
+ #define ARG_TXPVPOLLADR 17U
+ #define frmERR_NOBUFFER 8071U
+ #define frmERR_PA_DB_SB 8256U
+ #define MISC_RECEIVE_ALL 2U
+ #define frmERR_NOTOPENED 8251U
+ #define frmERR_INPUTERROR 8079U
+ #define frmERR_NORESOURCES 8258U
+ #define ARG_EVSEND_TASKEVENT 18U
+ #define ARG_EVSEND_TASKIDENT 14U
+ #define frmERR_INIT_IN_PROGRESS 8068U
+ #define frmERR_IF_UNREACHABLE 8067U
+ #define frmERR_INVALIDBUFFER 8072U
+ #define frmERR_IOCTL_NOTVALID 8073U
+ #define frmERR_MODEDESCRIPTION 8253U
+ #define frmERR_TRANSMITOVERRUN 8078U
+ #define frmERR_FUB_ENABLE_FALSE 65534U
+ #define frmERR_DEVICEDESCRIPTION 8252U
+ #define frmERR_IOCTL_NOTSUPPORTED 8257U
+#else
+ _GLOBAL_CONST unsigned long ARG_BAUD;
+ _GLOBAL_CONST unsigned long ARG_MISC;
+ _GLOBAL_CONST unsigned short frmERR_OK;
+ _GLOBAL_CONST unsigned long ARG_PVPOLLADR;
+ _GLOBAL_CONST unsigned short frmERR_MAXOPEN;
+ _GLOBAL_CONST unsigned short frmERR_NOINPUT;
+ _GLOBAL_CONST unsigned long ARG_TXPVPOLLADR;
+ _GLOBAL_CONST unsigned short frmERR_NOBUFFER;
+ _GLOBAL_CONST unsigned short frmERR_PA_DB_SB;
+ _GLOBAL_CONST unsigned long MISC_RECEIVE_ALL;
+ _GLOBAL_CONST unsigned short frmERR_NOTOPENED;
+ _GLOBAL_CONST unsigned short frmERR_INPUTERROR;
+ _GLOBAL_CONST unsigned short frmERR_NORESOURCES;
+ _GLOBAL_CONST unsigned long ARG_EVSEND_TASKEVENT;
+ _GLOBAL_CONST unsigned long ARG_EVSEND_TASKIDENT;
+ _GLOBAL_CONST unsigned short frmERR_INIT_IN_PROGRESS;
+ _GLOBAL_CONST unsigned short frmERR_IF_UNREACHABLE;
+ _GLOBAL_CONST unsigned short frmERR_INVALIDBUFFER;
+ _GLOBAL_CONST unsigned short frmERR_IOCTL_NOTVALID;
+ _GLOBAL_CONST unsigned short frmERR_MODEDESCRIPTION;
+ _GLOBAL_CONST unsigned short frmERR_TRANSMITOVERRUN;
+ _GLOBAL_CONST unsigned short frmERR_FUB_ENABLE_FALSE;
+ _GLOBAL_CONST unsigned short frmERR_DEVICEDESCRIPTION;
+ _GLOBAL_CONST unsigned short frmERR_IOCTL_NOTSUPPORTED;
+#endif
+
+
 
 
 #ifdef __cplusplus

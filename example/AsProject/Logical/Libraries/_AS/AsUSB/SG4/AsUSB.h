@@ -15,69 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define asusbERR_NULLPOINTER 32902U
- #define asusbERR_BUFSIZE 32901U
- #define asusbERR_USB_NOTFOUND 32900U
- #define asusb_USB_UNICODE_ENGLISH 1033U
- #define asusb_USB_DESCR_ENDPOINT 5U
- #define asusb_USB_DESCR_INTERFACE 4U
- #define asusb_USB_DESCR_STRING 3U
- #define asusb_USB_DESCR_CONFIG 2U
- #define asusb_USB_DESCR_DEVICE 1U
- #define asusb_USB_RT_VENDOR 64U
- #define asusb_USB_RT_CLASS 32U
- #define asusb_USB_RT_STANDARD 0U
- #define asusb_USB_RT_ENDPOINT 2U
- #define asusb_USB_RT_INTERFACE 1U
- #define asusb_USB_RT_DEVICE 0U
- #define asusb_DEVICENAMELENGTH 128U
- #define asusb_SUBCLASS_SCSI_COMMAND_SET 6U
- #define asusb_SUBCLASS_UFI_COMMAND_SET 4U
- #define asusb_SUBCLASS_HID_BOOT 1U
- #define asusb_SUBCLASS_PRINTER 1U
- #define asusb_CLASS_VENDOR_SPECIFIC 255U
- #define asusb_CLASS_HUB 9U
- #define asusb_CLASS_MASS_STORAGE 8U
- #define asusb_CLASS_PRINTER 7U
- #define asusb_CLASS_HID 3U
- #define asusb_CLASS_CDC 2U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned short asusbERR_NULLPOINTER;
- _GLOBAL_CONST unsigned short asusbERR_BUFSIZE;
- _GLOBAL_CONST unsigned short asusbERR_USB_NOTFOUND;
- _GLOBAL_CONST unsigned short asusb_USB_UNICODE_ENGLISH;
- _GLOBAL_CONST unsigned char asusb_USB_DESCR_ENDPOINT;
- _GLOBAL_CONST unsigned char asusb_USB_DESCR_INTERFACE;
- _GLOBAL_CONST unsigned char asusb_USB_DESCR_STRING;
- _GLOBAL_CONST unsigned char asusb_USB_DESCR_CONFIG;
- _GLOBAL_CONST unsigned char asusb_USB_DESCR_DEVICE;
- _GLOBAL_CONST unsigned char asusb_USB_RT_VENDOR;
- _GLOBAL_CONST unsigned char asusb_USB_RT_CLASS;
- _GLOBAL_CONST unsigned char asusb_USB_RT_STANDARD;
- _GLOBAL_CONST unsigned char asusb_USB_RT_ENDPOINT;
- _GLOBAL_CONST unsigned char asusb_USB_RT_INTERFACE;
- _GLOBAL_CONST unsigned char asusb_USB_RT_DEVICE;
- _GLOBAL_CONST unsigned char asusb_DEVICENAMELENGTH;
- _GLOBAL_CONST unsigned char asusb_SUBCLASS_SCSI_COMMAND_SET;
- _GLOBAL_CONST unsigned char asusb_SUBCLASS_UFI_COMMAND_SET;
- _GLOBAL_CONST unsigned char asusb_SUBCLASS_HID_BOOT;
- _GLOBAL_CONST unsigned char asusb_SUBCLASS_PRINTER;
- _GLOBAL_CONST unsigned char asusb_CLASS_VENDOR_SPECIFIC;
- _GLOBAL_CONST unsigned char asusb_CLASS_HUB;
- _GLOBAL_CONST unsigned char asusb_CLASS_MASS_STORAGE;
- _GLOBAL_CONST unsigned char asusb_CLASS_PRINTER;
- _GLOBAL_CONST unsigned char asusb_CLASS_HID;
- _GLOBAL_CONST unsigned char asusb_CLASS_CDC;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct usbNode_typ
 {	unsigned short interfaceClass;
@@ -224,6 +161,66 @@ _BUR_PUBLIC void UsbNodeListGet(struct UsbNodeListGet* inst);
 _BUR_PUBLIC void UsbNodeGet(struct UsbNodeGet* inst);
 _BUR_PUBLIC void UsbDescriptorGet(struct UsbDescriptorGet* inst);
 _BUR_PUBLIC void UsbMsDeviceReady(struct UsbMsDeviceReady* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define asusbERR_NULLPOINTER 32902U
+ #define asusbERR_BUFSIZE 32901U
+ #define asusbERR_USB_NOTFOUND 32900U
+ #define asusb_USB_UNICODE_ENGLISH 1033U
+ #define asusb_USB_DESCR_ENDPOINT 5U
+ #define asusb_USB_DESCR_INTERFACE 4U
+ #define asusb_USB_DESCR_STRING 3U
+ #define asusb_USB_DESCR_CONFIG 2U
+ #define asusb_USB_DESCR_DEVICE 1U
+ #define asusb_USB_RT_VENDOR 64U
+ #define asusb_USB_RT_CLASS 32U
+ #define asusb_USB_RT_STANDARD 0U
+ #define asusb_USB_RT_ENDPOINT 2U
+ #define asusb_USB_RT_INTERFACE 1U
+ #define asusb_USB_RT_DEVICE 0U
+ #define asusb_DEVICENAMELENGTH 128U
+ #define asusb_SUBCLASS_SCSI_COMMAND_SET 6U
+ #define asusb_SUBCLASS_UFI_COMMAND_SET 4U
+ #define asusb_SUBCLASS_HID_BOOT 1U
+ #define asusb_SUBCLASS_PRINTER 1U
+ #define asusb_CLASS_VENDOR_SPECIFIC 255U
+ #define asusb_CLASS_HUB 9U
+ #define asusb_CLASS_MASS_STORAGE 8U
+ #define asusb_CLASS_PRINTER 7U
+ #define asusb_CLASS_HID 3U
+ #define asusb_CLASS_CDC 2U
+#else
+ _GLOBAL_CONST unsigned short asusbERR_NULLPOINTER;
+ _GLOBAL_CONST unsigned short asusbERR_BUFSIZE;
+ _GLOBAL_CONST unsigned short asusbERR_USB_NOTFOUND;
+ _GLOBAL_CONST unsigned short asusb_USB_UNICODE_ENGLISH;
+ _GLOBAL_CONST unsigned char asusb_USB_DESCR_ENDPOINT;
+ _GLOBAL_CONST unsigned char asusb_USB_DESCR_INTERFACE;
+ _GLOBAL_CONST unsigned char asusb_USB_DESCR_STRING;
+ _GLOBAL_CONST unsigned char asusb_USB_DESCR_CONFIG;
+ _GLOBAL_CONST unsigned char asusb_USB_DESCR_DEVICE;
+ _GLOBAL_CONST unsigned char asusb_USB_RT_VENDOR;
+ _GLOBAL_CONST unsigned char asusb_USB_RT_CLASS;
+ _GLOBAL_CONST unsigned char asusb_USB_RT_STANDARD;
+ _GLOBAL_CONST unsigned char asusb_USB_RT_ENDPOINT;
+ _GLOBAL_CONST unsigned char asusb_USB_RT_INTERFACE;
+ _GLOBAL_CONST unsigned char asusb_USB_RT_DEVICE;
+ _GLOBAL_CONST unsigned char asusb_DEVICENAMELENGTH;
+ _GLOBAL_CONST unsigned char asusb_SUBCLASS_SCSI_COMMAND_SET;
+ _GLOBAL_CONST unsigned char asusb_SUBCLASS_UFI_COMMAND_SET;
+ _GLOBAL_CONST unsigned char asusb_SUBCLASS_HID_BOOT;
+ _GLOBAL_CONST unsigned char asusb_SUBCLASS_PRINTER;
+ _GLOBAL_CONST unsigned char asusb_CLASS_VENDOR_SPECIFIC;
+ _GLOBAL_CONST unsigned char asusb_CLASS_HUB;
+ _GLOBAL_CONST unsigned char asusb_CLASS_MASS_STORAGE;
+ _GLOBAL_CONST unsigned char asusb_CLASS_PRINTER;
+ _GLOBAL_CONST unsigned char asusb_CLASS_HID;
+ _GLOBAL_CONST unsigned char asusb_CLASS_CDC;
+#endif
+
+
 
 
 #ifdef __cplusplus

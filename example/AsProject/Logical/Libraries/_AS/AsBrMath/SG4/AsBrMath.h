@@ -13,6 +13,23 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
+
+
+
+/* Prototyping of functions and function blocks */
+_BUR_PUBLIC float brmatan2(float y, float x);
+_BUR_PUBLIC float brmceil(float x);
+_BUR_PUBLIC float brmcosh(float x);
+_BUR_PUBLIC float brmfloor(float x);
+_BUR_PUBLIC float brmfmod(float x, float y);
+_BUR_PUBLIC float brmfrexp(float x, unsigned long pExp);
+_BUR_PUBLIC float brmldexp(float x, signed long exp_val);
+_BUR_PUBLIC float brmmodf(float x, unsigned long plp);
+_BUR_PUBLIC float brmpow(float x, float y);
+_BUR_PUBLIC float brmsinh(float x);
+_BUR_PUBLIC float brmtanh(float x);
+
+
 /* Constants */
 #ifdef _REPLACE_CONST
  #define brmE 2.71828f
@@ -38,9 +55,6 @@ extern "C"
  #define brmSQRT1_2 0.707107f
  #define brm2_SQRTPI 1.12838f
 #else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
  _GLOBAL_CONST float brmE;
  _GLOBAL_CONST float brmPI;
  _GLOBAL_CONST float brmLN2;
@@ -66,23 +80,6 @@ extern "C"
 #endif
 
 
-
-
-
-
-
-/* Prototyping of functions and function blocks */
-_BUR_PUBLIC float brmatan2(float y, float x);
-_BUR_PUBLIC float brmceil(float x);
-_BUR_PUBLIC float brmcosh(float x);
-_BUR_PUBLIC float brmfloor(float x);
-_BUR_PUBLIC float brmfmod(float x, float y);
-_BUR_PUBLIC float brmfrexp(float x, unsigned long pExp);
-_BUR_PUBLIC float brmldexp(float x, signed long exp_val);
-_BUR_PUBLIC float brmmodf(float x, unsigned long plp);
-_BUR_PUBLIC float brmpow(float x, float y);
-_BUR_PUBLIC float brmsinh(float x);
-_BUR_PUBLIC float brmtanh(float x);
 
 
 #ifdef __cplusplus

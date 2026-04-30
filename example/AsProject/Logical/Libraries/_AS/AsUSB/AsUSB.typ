@@ -1,13 +1,13 @@
                                                                       
 TYPE
     usbNode_typ			: STRUCT		(* statistics *)
-	interfaceClass		: UINT;			(* Interface Class des USB Gerätes *)
-	interfaceSubClass	: UINT;			(* Interface SubClass des USB Gerätes *)
-	interfaceProtocol	: UINT;			(* Interface Protocol des USB Gerätes *)
-	vendorId			: UINT;			(* Device Vendor ID *)
-	productId			: UINT;			(* Device Product ID *)
+	interfaceClass		: UINT;			(* interface class of USB device *)
+	interfaceSubClass	: UINT;			(* interface subclass of USB device *)
+	interfaceProtocol	: UINT;			(* interface protocol of USB device *)
+	vendorId			: UINT;			(* device Vendor ID *)
+	productId			: UINT;			(* device Product ID *)
 	bcdDevice			: UINT;			(* USB device release version binary coded decimal *)
-	ifName				: STRING[127];	(* USB IF Name *)
+	ifName				: STRING[127];	(* USB interface name *)
 	END_STRUCT;
 END_TYPE
 

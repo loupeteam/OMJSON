@@ -1,7 +1,7 @@
 {
   "name": "@loupeteam/tcpcomm",
-  "version": "0.10.0",
-  "description": "Loupe's tcpcomm library for Automation Runtime",
+  "version": "1.0.0",
+  "description": "TCP communication library for B&R Automation Studio",
   "homepage": "https://loupeteam.github.io/LoupeDocs/libraries/tcpcomm.html",
   "scripts": {},
   "keywords": [],
@@ -9,7 +9,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/loupeteam/tcpcomm"
+    "url": "https://github.com/loupeteam/TCPComm"
   },
   "lpm": {
     "type": "library"

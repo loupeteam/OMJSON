@@ -78,6 +78,7 @@ VAR CONSTANT
 	profERR_DATMODREAD				: UINT := 31017;				(*error read from data module*)
 	profERR_NOTCYCCTX				: UINT := 31018;				(*error called outside of cyclic context*)
 	profERR_DATMODINVALID			: UINT := 31019;				(*error invalid data module*)
+	profERR_VERSION_NOT_SUPPORTED	: UINT := 31020;				(*error version not supported*)
 
 	profERR_PARAMETER				: UINT := 31050;				(*error fub parameter*)
 END_VAR

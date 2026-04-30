@@ -15,43 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define asio_INVERTED_FLAG 64U
- #define asio_PV_NOT_FOUND 32U
- #define asio_TYPE_MISMATCH 16U
- #define asio_UNRES_IO_FLAG 128U
- #define asio_IO_SIMULATION_FLAG 64U
- #define asio_IO_OUTPUT_FLAG 32U
- #define asio_IO_INPUT_FLAG 16U
- #define asio_UNRES_LINK_FLAG 8U
- #define asio_F_ACT_FLAG 4U
- #define asio_P_ACT_FLAG 2U
- #define asio_VALID_FLAG 1U
- #define asioERR_NOSUCH_DP 30151U
- #define asioERR_INTERNAL 30150U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned char asio_INVERTED_FLAG;
- _GLOBAL_CONST unsigned char asio_PV_NOT_FOUND;
- _GLOBAL_CONST unsigned char asio_TYPE_MISMATCH;
- _GLOBAL_CONST unsigned char asio_UNRES_IO_FLAG;
- _GLOBAL_CONST unsigned char asio_IO_SIMULATION_FLAG;
- _GLOBAL_CONST unsigned char asio_IO_OUTPUT_FLAG;
- _GLOBAL_CONST unsigned char asio_IO_INPUT_FLAG;
- _GLOBAL_CONST unsigned char asio_UNRES_LINK_FLAG;
- _GLOBAL_CONST unsigned char asio_F_ACT_FLAG;
- _GLOBAL_CONST unsigned char asio_P_ACT_FLAG;
- _GLOBAL_CONST unsigned char asio_VALID_FLAG;
- _GLOBAL_CONST unsigned short asioERR_NOSUCH_DP;
- _GLOBAL_CONST unsigned short asioERR_INTERNAL;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct AsIODPStatus
 {
@@ -192,6 +155,46 @@ _BUR_PUBLIC void AsIOGlobalDisableForcing(struct AsIOGlobalDisableForcing* inst)
 _BUR_PUBLIC void AsIOFListDP(struct AsIOFListDP* inst);
 _BUR_PUBLIC void AsIOListDP(struct AsIOListDP* inst);
 _BUR_PUBLIC void AsIOPVInfo(struct AsIOPVInfo* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define asio_DIAGNOSTICS_DATAPOINT_FLAG 1024U
+ #define asio_IO_INPUT_OR_OUTPUT_FLAG 512U
+ #define asio_UNRES_FLAG 256U
+ #define asio_INVERTED_FLAG 64U
+ #define asio_PV_NOT_FOUND 32U
+ #define asio_TYPE_MISMATCH 16U
+ #define asio_UNRES_IO_FLAG 128U
+ #define asio_IO_SIMULATION_FLAG 64U
+ #define asio_IO_OUTPUT_FLAG 32U
+ #define asio_IO_INPUT_FLAG 16U
+ #define asio_UNRES_LINK_FLAG 8U
+ #define asio_F_ACT_FLAG 4U
+ #define asio_P_ACT_FLAG 2U
+ #define asio_VALID_FLAG 1U
+ #define asioERR_NOSUCH_DP 30151U
+ #define asioERR_INTERNAL 30150U
+#else
+ _GLOBAL_CONST unsigned long asio_DIAGNOSTICS_DATAPOINT_FLAG;
+ _GLOBAL_CONST unsigned long asio_IO_INPUT_OR_OUTPUT_FLAG;
+ _GLOBAL_CONST unsigned long asio_UNRES_FLAG;
+ _GLOBAL_CONST unsigned char asio_INVERTED_FLAG;
+ _GLOBAL_CONST unsigned char asio_PV_NOT_FOUND;
+ _GLOBAL_CONST unsigned char asio_TYPE_MISMATCH;
+ _GLOBAL_CONST unsigned char asio_UNRES_IO_FLAG;
+ _GLOBAL_CONST unsigned char asio_IO_SIMULATION_FLAG;
+ _GLOBAL_CONST unsigned char asio_IO_OUTPUT_FLAG;
+ _GLOBAL_CONST unsigned char asio_IO_INPUT_FLAG;
+ _GLOBAL_CONST unsigned char asio_UNRES_LINK_FLAG;
+ _GLOBAL_CONST unsigned char asio_F_ACT_FLAG;
+ _GLOBAL_CONST unsigned char asio_P_ACT_FLAG;
+ _GLOBAL_CONST unsigned char asio_VALID_FLAG;
+ _GLOBAL_CONST unsigned short asioERR_NOSUCH_DP;
+ _GLOBAL_CONST unsigned short asioERR_INTERNAL;
+#endif
+
+
 
 
 #ifdef __cplusplus

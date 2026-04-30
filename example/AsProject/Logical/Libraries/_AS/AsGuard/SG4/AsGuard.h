@@ -15,79 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define guardCUSTOMER_OP_TIME_COUNTER 2U
- #define guardGENERAL_OP_TIME_COUNTER 1U
- #define guardREGISTER_IF_AVAILABLE 2U
- #define guardREGISTER_ALWAYS 1U
- #define guardLIC_REACT_SERVICE 8U
- #define guardLIC_REACT_BOOT_SERVICE 4U
- #define guardLIC_REACT_BLINK_CPU_LED 2U
- #define guardLIC_REACT_LOGBOOK 1U
- #define guardLIC_REACT_NONE 0U
- #define guardBR_FIRMCODE 101652U
- #define guardERR_ALREADY_STARTED 37323U
- #define guardERR_LICENSE_STATUS_UNKNOWN 37322U
- #define guardERR_DATA_SIZE 37321U
- #define guardERR_UNAVAILABLE 37317U
- #define guardERR_INVALID_PARAM 37316U
- #define guardERR_CONTEXT_SIZE 37315U
- #define guardERR_DONGLE_NOT_FOUND 37314U
- #define guardERR_TASK 37313U
- #define guardERR_LIC_NOT_INITIALIZED 37312U
- #define guardERR_FILE_NOT_FOUND 37311U
- #define guardERR_EXECUTE_UPDATE 37310U
- #define guardERR_CREATE_CONTEXT_FILE 37309U
- #define guardERR_CREATE_UPDATE_CONTEXT 37308U
- #define guardERR_SERVICE_VIOLATION 37307U
- #define guardERR_VIOLATION 37306U
- #define guardERR_ACCESS 37305U
- #define guardERR_NOT_STARTED 37304U
- #define guardERR_MEMORY 37303U
- #define guardERR_BUFFERSIZE 37302U
- #define guardERR_GENERAL 37301U
- #define guardERR_NULLPOINTER 37300U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned long guardCUSTOMER_OP_TIME_COUNTER;
- _GLOBAL_CONST unsigned long guardGENERAL_OP_TIME_COUNTER;
- _GLOBAL_CONST plcdword guardREGISTER_IF_AVAILABLE;
- _GLOBAL_CONST plcdword guardREGISTER_ALWAYS;
- _GLOBAL_CONST plcdword guardLIC_REACT_SERVICE;
- _GLOBAL_CONST plcdword guardLIC_REACT_BOOT_SERVICE;
- _GLOBAL_CONST plcdword guardLIC_REACT_BLINK_CPU_LED;
- _GLOBAL_CONST plcdword guardLIC_REACT_LOGBOOK;
- _GLOBAL_CONST plcdword guardLIC_REACT_NONE;
- _GLOBAL_CONST unsigned long guardBR_FIRMCODE;
- _GLOBAL_CONST unsigned short guardERR_ALREADY_STARTED;
- _GLOBAL_CONST unsigned short guardERR_LICENSE_STATUS_UNKNOWN;
- _GLOBAL_CONST unsigned short guardERR_DATA_SIZE;
- _GLOBAL_CONST unsigned short guardERR_UNAVAILABLE;
- _GLOBAL_CONST unsigned short guardERR_INVALID_PARAM;
- _GLOBAL_CONST unsigned short guardERR_CONTEXT_SIZE;
- _GLOBAL_CONST unsigned short guardERR_DONGLE_NOT_FOUND;
- _GLOBAL_CONST unsigned short guardERR_TASK;
- _GLOBAL_CONST unsigned short guardERR_LIC_NOT_INITIALIZED;
- _GLOBAL_CONST unsigned short guardERR_FILE_NOT_FOUND;
- _GLOBAL_CONST unsigned short guardERR_EXECUTE_UPDATE;
- _GLOBAL_CONST unsigned short guardERR_CREATE_CONTEXT_FILE;
- _GLOBAL_CONST unsigned short guardERR_CREATE_UPDATE_CONTEXT;
- _GLOBAL_CONST unsigned short guardERR_SERVICE_VIOLATION;
- _GLOBAL_CONST unsigned short guardERR_VIOLATION;
- _GLOBAL_CONST unsigned short guardERR_ACCESS;
- _GLOBAL_CONST unsigned short guardERR_NOT_STARTED;
- _GLOBAL_CONST unsigned short guardERR_MEMORY;
- _GLOBAL_CONST unsigned short guardERR_BUFFERSIZE;
- _GLOBAL_CONST unsigned short guardERR_GENERAL;
- _GLOBAL_CONST unsigned short guardERR_NULLPOINTER;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct dongleInfo_t
 {	unsigned short boxMask;
@@ -359,6 +286,76 @@ _BUR_PUBLIC void guardGetStatus(struct guardGetStatus* inst);
 _BUR_PUBLIC void guardGetLicenses(struct guardGetLicenses* inst);
 _BUR_PUBLIC void guardGetDongleLicenses(struct guardGetDongleLicenses* inst);
 _BUR_PUBLIC void guardGetNeededLicenses(struct guardGetNeededLicenses* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define guardCUSTOMER_OP_TIME_COUNTER 2U
+ #define guardGENERAL_OP_TIME_COUNTER 1U
+ #define guardREGISTER_IF_AVAILABLE 2U
+ #define guardREGISTER_ALWAYS 1U
+ #define guardLIC_REACT_SERVICE 8U
+ #define guardLIC_REACT_BOOT_SERVICE 4U
+ #define guardLIC_REACT_BLINK_CPU_LED 2U
+ #define guardLIC_REACT_LOGBOOK 1U
+ #define guardLIC_REACT_NONE 0U
+ #define guardBR_FIRMCODE 101652U
+ #define guardERR_ALREADY_STARTED 37323U
+ #define guardERR_LICENSE_STATUS_UNKNOWN 37322U
+ #define guardERR_DATA_SIZE 37321U
+ #define guardERR_UNAVAILABLE 37317U
+ #define guardERR_INVALID_PARAM 37316U
+ #define guardERR_CONTEXT_SIZE 37315U
+ #define guardERR_DONGLE_NOT_FOUND 37314U
+ #define guardERR_TASK 37313U
+ #define guardERR_LIC_NOT_INITIALIZED 37312U
+ #define guardERR_FILE_NOT_FOUND 37311U
+ #define guardERR_EXECUTE_UPDATE 37310U
+ #define guardERR_CREATE_CONTEXT_FILE 37309U
+ #define guardERR_CREATE_UPDATE_CONTEXT 37308U
+ #define guardERR_SERVICE_VIOLATION 37307U
+ #define guardERR_VIOLATION 37306U
+ #define guardERR_ACCESS 37305U
+ #define guardERR_NOT_STARTED 37304U
+ #define guardERR_MEMORY 37303U
+ #define guardERR_BUFFERSIZE 37302U
+ #define guardERR_GENERAL 37301U
+ #define guardERR_NULLPOINTER 37300U
+#else
+ _GLOBAL_CONST unsigned long guardCUSTOMER_OP_TIME_COUNTER;
+ _GLOBAL_CONST unsigned long guardGENERAL_OP_TIME_COUNTER;
+ _GLOBAL_CONST plcdword guardREGISTER_IF_AVAILABLE;
+ _GLOBAL_CONST plcdword guardREGISTER_ALWAYS;
+ _GLOBAL_CONST plcdword guardLIC_REACT_SERVICE;
+ _GLOBAL_CONST plcdword guardLIC_REACT_BOOT_SERVICE;
+ _GLOBAL_CONST plcdword guardLIC_REACT_BLINK_CPU_LED;
+ _GLOBAL_CONST plcdword guardLIC_REACT_LOGBOOK;
+ _GLOBAL_CONST plcdword guardLIC_REACT_NONE;
+ _GLOBAL_CONST unsigned long guardBR_FIRMCODE;
+ _GLOBAL_CONST unsigned short guardERR_ALREADY_STARTED;
+ _GLOBAL_CONST unsigned short guardERR_LICENSE_STATUS_UNKNOWN;
+ _GLOBAL_CONST unsigned short guardERR_DATA_SIZE;
+ _GLOBAL_CONST unsigned short guardERR_UNAVAILABLE;
+ _GLOBAL_CONST unsigned short guardERR_INVALID_PARAM;
+ _GLOBAL_CONST unsigned short guardERR_CONTEXT_SIZE;
+ _GLOBAL_CONST unsigned short guardERR_DONGLE_NOT_FOUND;
+ _GLOBAL_CONST unsigned short guardERR_TASK;
+ _GLOBAL_CONST unsigned short guardERR_LIC_NOT_INITIALIZED;
+ _GLOBAL_CONST unsigned short guardERR_FILE_NOT_FOUND;
+ _GLOBAL_CONST unsigned short guardERR_EXECUTE_UPDATE;
+ _GLOBAL_CONST unsigned short guardERR_CREATE_CONTEXT_FILE;
+ _GLOBAL_CONST unsigned short guardERR_CREATE_UPDATE_CONTEXT;
+ _GLOBAL_CONST unsigned short guardERR_SERVICE_VIOLATION;
+ _GLOBAL_CONST unsigned short guardERR_VIOLATION;
+ _GLOBAL_CONST unsigned short guardERR_ACCESS;
+ _GLOBAL_CONST unsigned short guardERR_NOT_STARTED;
+ _GLOBAL_CONST unsigned short guardERR_MEMORY;
+ _GLOBAL_CONST unsigned short guardERR_BUFFERSIZE;
+ _GLOBAL_CONST unsigned short guardERR_GENERAL;
+ _GLOBAL_CONST unsigned short guardERR_NULLPOINTER;
+#endif
+
+
 
 
 #ifdef __cplusplus

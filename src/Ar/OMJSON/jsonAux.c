@@ -302,7 +302,7 @@ unsigned long stringify_string(char *pDest, char *pSrc, unsigned long maxLength,
 		
 		// Check for invalid whitespace characters
 		if (*ptr < 32 && *ptr > 0 && !(*ptr >= 8 && *ptr <= 13 && *ptr != 11)) {
-			length = stringlcpy(pDest, "Invalid String", maxLength+1);
+			length = stringlcpy((UDINT)pDest, (UDINT)"Invalid String", maxLength+1);
 			length = length > maxLength ? maxLength : length;
 			return length;
 		}
@@ -415,7 +415,7 @@ unsigned long stringify_wstring(char *pDest, unsigned short *pSrc, unsigned long
 		// Check for invalid whitespace characters
 		tempWChar = wchar2char(*ptr);
 		if (tempWChar < 32 && !(tempWChar >= 8 && tempWChar <= 13 && tempWChar != 11)) {
-			length = stringlcpy(pDest, "Invalid String", maxLength+1);
+			length = stringlcpy((UDINT)pDest, (UDINT)"Invalid String", maxLength+1);
 			length = length > maxLength ? maxLength : length;
 			return length;
 		}

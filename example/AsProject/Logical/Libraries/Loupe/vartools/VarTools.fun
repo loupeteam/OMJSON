@@ -72,7 +72,7 @@ FUNCTION_BLOCK varVariableWatch
 	END_VAR
 END_FUNCTION_BLOCK
 
-FUNCTION_BLOCK variableBrowser (*TODO: Add your comment here*) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
+FUNCTION_BLOCK variableBrowser (* *) (*$GROUP=User,$CAT=User,$GROUPICON=User.png,$CATICON=User.png*)
 	VAR_INPUT
 		VariableName : STRING[VAR_STRLEN_VALUE];
 		MemberIndex : INT;
@@ -92,5 +92,23 @@ FUNCTION_BLOCK variableBrowser (*TODO: Add your comment here*) (*$GROUP=User,$CA
 		iLevel : ARRAY[0..19] OF STRING[32];
 		iLevelIndex : USINT;
 		iMemberIndex : USINT;
+	END_VAR
+END_FUNCTION_BLOCK
+(*Experimental*)
+
+FUNCTION_BLOCK varGetAllVars (*Get all varaiables on system*)
+	VAR_INPUT
+		Execute : BOOL; (*Starts searching variables on rising edge*)
+		AcknowledgeError : BOOL; (*Clears errors*)
+		PrimitivesOnly : BOOL; (*Return primitives only *)
+		ExpandStructs : BOOL; (*Search through structures*)
+		CondenseArrays : BOOL; (*Return one element per array *)
+	END_VAR
+	VAR_OUTPUT
+		Status : UINT; (*Status*)
+		Variable : varVariable_typ; (*Found varaible info *)
+	END_VAR
+	VAR
+		Internal : varGetAllVars_internal_typ;
 	END_VAR
 END_FUNCTION_BLOCK
