@@ -12,6 +12,7 @@
     <Object Type="Package">AccessAndSecurity</Object>
     <Object Type="Package">mappControl</Object>
     <Object Type="Package">mappMotion</Object>
+    <Object Type="Package">mapp6D</Object>
     <Object Type="Package">mappServices</Object>
     <Object Type="Package">mappSafety</Object>
     <Object Type="Package">mappView</Object>
@@ -19,9 +20,9 @@
     <Object Type="Package">mappCockpit</Object>
   </Objects>
   <Configuration ModuleId="X20CP0484">
-    <AutomationRuntime Version="B4.91" />
-    <Build GccVersion="6.3.0" />
+    <AutomationRuntime Version="6.6.2" />
+    <Build GccVersion="11.3.0" />
     <DefaultTargetMemory Tasks="UserROM" />
-    <Vc FirmwareVersion="V4.72.3" />
+    <Vc FirmwareVersion="6.0.0" />
   </Configuration>
 </Cpu>

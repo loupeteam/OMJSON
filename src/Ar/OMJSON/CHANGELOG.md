@@ -1,5 +1,9 @@
 # Change log
 
+2.0.0 - Migrate to Automation Studio 6 (AS6)
+        Bump all Loupe dependency versions to AS6 releases (VarTools, DataBuffer, TCPComm, StringExt, WebSocket >=1.0.0)
+        Apply (UDINT) casts to stringlcpy calls for AS6/StringExt 1.0.0 API compatibility
+
 1.4.3 - Update Websocket dependency to fix connection issue 
 		Fix clients being disconnect due to timeout immediately after connecting
 

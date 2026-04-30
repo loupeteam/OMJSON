@@ -15,161 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define cfgDHCP_OPTION_VENDOR_CLASS_ID 60U
- #define cfgSDM_COLOR_DEFAULT 2147483648U
- #define cfgSTATUS_NTP_INACTIVE 0U
- #define cfgSTATUS_NTP_ACTIVE 1U
- #define cfgNTP_STOP 0U
- #define cfgNTP_START 1U
- #define cfgOPTION_DNS_ON_DHCP 2U
- #define cfgOPTION_DNS_ON_CONFIG 1U
- #define cfgOPTION_DNS_OFF 0U
- #define cfgWEB_MODE_ENABLED 1U
- #define cfgWEB_MODE_DISABLED 0U
- #define cfgWEB_MODE_MIME_ADD 1U
- #define cfgWEB_MODE_MIME_DEL 0U
- #define cfgWEB_MODE_GOFORM_NO_WRITE 2U
- #define cfgWEB_MODE_GOFORM_ENABLE 1U
- #define cfgWEB_MODE_GOFORM_DISABLE 0U
- #define cfgSTATUS_SDM_DISABLED 2U
- #define cfgSTATUS_SDM_ENABLED 1U
- #define cfgOPTION_DISABLE_SDM 2U
- #define cfgOPTION_ENABLE_SDM 1U
- #define cfgOPTION_NON_WORKGROUP 0U
- #define cfgOPTION_WORKGROUP 1U
- #define cfgOPTION_ENABLE 1U
- #define cfgOPTION_DISABLE 0U
- #define cfgCONFIGMODE_DHCPCLIENT 1U
- #define cfgCONFIGMODE_MANUALLY 0U
- #define cfgOPTION_VOLATILE 0U
- #define cfgOPTION_NON_VOLATILE 1U
- #define cfgETHBAUDRATE_1000FD 1001U
- #define cfgETHBAUDRATE_100AUTO 102U
- #define cfgETHBAUDRATE_100FD 101U
- #define cfgETHBAUDRATE_100 100U
- #define cfgETHBAUDRATE_10AUTO 12U
- #define cfgETHBAUDRATE_10FD 11U
- #define cfgETHBAUDRATE_10 10U
- #define cfgETHBAUDRATE_AUTO 0U
- #define cfgERR_DST 29035U
- #define cfgERR_ROUTE_TABLE 29034U
- #define cfgERR_NTP_CLIENT 29033U
- #define cfgERR_NTP_SERVER 29032U
- #define cfgERR_DHCP_NO_DHCP_IP_OBTAINED 29031U
- #define cfgERR_WEBSERV_DISABLED 29030U
- #define cfgERR_SDM_DISABLED 29029U
- #define cfgERR_FUNCTION_NOT_FOUND 29028U
- #define cfgERR_CLEAR_NV_DATA 29027U
- #define cfgERR_SDM_FUNCTION_NOT_FOUND 29026U
- #define cfgERR_DHCP_CONFIG 29025U
- #define cfgERR_LEASE_TIMEOUT 29024U
- #define cfgERR_LEASE_EXISTS 29023U
- #define cfgERR_LEASES_BUFFER 29022U
- #define cfgERR_INTERFACELIST_BUFFER 29021U
- #define cfgERR_DHCP_SERVER_STARTED 29020U
- #define cfgERR_CIFS_DEFAULTPW_INVALID 29019U
- #define cfgERR_INANODE_NUMBER_SET 29018U
- #define cfgERR_CIFS_DEFAULTUSER_INVALID 29017U
- #define cfgERR_CIFS_DOMAIN_INVALID 29016U
- #define cfgERR_YEAR_INVALID 29015U
- #define cfgERR_TIMEZONE 29014U
- #define cfgERR_SYSTEM 29013U
- #define cfgERR_SNTP_INTERVAL 29012U
- #define cfgERR_SNTP_CLIENT 29011U
- #define cfgERR_SNTP_SERVER 29010U
- #define cfgERR_PARAM_NOT_SET 29009U
- #define cfgERR_FTP_SDOWN 29008U
- #define cfgERR_FTP_SINIT 29007U
- #define cfgERR_INANODE_NOT_SUPPORTED 29006U
- #define cfgERR_ARREG 29005U
- #define cfgERR_SET_NOT_POSSIBLE 29004U
- #define cfgERR_VALUE_INVALID 29003U
- #define cfgERR_OPTION_INVALID 29002U
- #define cfgERR_DEVICE_INVALID 29001U
- #define cfgERR_DEVICE_NOT_EXIST 29000U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned char cfgDHCP_OPTION_VENDOR_CLASS_ID;
- _GLOBAL_CONST unsigned long cfgSDM_COLOR_DEFAULT;
- _GLOBAL_CONST unsigned short cfgSTATUS_NTP_INACTIVE;
- _GLOBAL_CONST unsigned short cfgSTATUS_NTP_ACTIVE;
- _GLOBAL_CONST unsigned short cfgNTP_STOP;
- _GLOBAL_CONST unsigned short cfgNTP_START;
- _GLOBAL_CONST unsigned char cfgOPTION_DNS_ON_DHCP;
- _GLOBAL_CONST unsigned char cfgOPTION_DNS_ON_CONFIG;
- _GLOBAL_CONST unsigned char cfgOPTION_DNS_OFF;
- _GLOBAL_CONST unsigned short cfgWEB_MODE_ENABLED;
- _GLOBAL_CONST unsigned short cfgWEB_MODE_DISABLED;
- _GLOBAL_CONST unsigned short cfgWEB_MODE_MIME_ADD;
- _GLOBAL_CONST unsigned short cfgWEB_MODE_MIME_DEL;
- _GLOBAL_CONST unsigned short cfgWEB_MODE_GOFORM_NO_WRITE;
- _GLOBAL_CONST unsigned short cfgWEB_MODE_GOFORM_ENABLE;
- _GLOBAL_CONST unsigned short cfgWEB_MODE_GOFORM_DISABLE;
- _GLOBAL_CONST unsigned char cfgSTATUS_SDM_DISABLED;
- _GLOBAL_CONST unsigned char cfgSTATUS_SDM_ENABLED;
- _GLOBAL_CONST unsigned char cfgOPTION_DISABLE_SDM;
- _GLOBAL_CONST unsigned char cfgOPTION_ENABLE_SDM;
- _GLOBAL_CONST unsigned char cfgOPTION_NON_WORKGROUP;
- _GLOBAL_CONST unsigned char cfgOPTION_WORKGROUP;
- _GLOBAL_CONST unsigned long cfgOPTION_ENABLE;
- _GLOBAL_CONST unsigned long cfgOPTION_DISABLE;
- _GLOBAL_CONST unsigned long cfgCONFIGMODE_DHCPCLIENT;
- _GLOBAL_CONST unsigned long cfgCONFIGMODE_MANUALLY;
- _GLOBAL_CONST unsigned long cfgOPTION_VOLATILE;
- _GLOBAL_CONST unsigned long cfgOPTION_NON_VOLATILE;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_1000FD;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_100AUTO;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_100FD;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_100;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_10AUTO;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_10FD;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_10;
- _GLOBAL_CONST unsigned long cfgETHBAUDRATE_AUTO;
- _GLOBAL_CONST unsigned short cfgERR_DST;
- _GLOBAL_CONST unsigned short cfgERR_ROUTE_TABLE;
- _GLOBAL_CONST unsigned short cfgERR_NTP_CLIENT;
- _GLOBAL_CONST unsigned short cfgERR_NTP_SERVER;
- _GLOBAL_CONST unsigned short cfgERR_DHCP_NO_DHCP_IP_OBTAINED;
- _GLOBAL_CONST unsigned short cfgERR_WEBSERV_DISABLED;
- _GLOBAL_CONST unsigned short cfgERR_SDM_DISABLED;
- _GLOBAL_CONST unsigned short cfgERR_FUNCTION_NOT_FOUND;
- _GLOBAL_CONST unsigned short cfgERR_CLEAR_NV_DATA;
- _GLOBAL_CONST unsigned short cfgERR_SDM_FUNCTION_NOT_FOUND;
- _GLOBAL_CONST unsigned short cfgERR_DHCP_CONFIG;
- _GLOBAL_CONST unsigned short cfgERR_LEASE_TIMEOUT;
- _GLOBAL_CONST unsigned short cfgERR_LEASE_EXISTS;
- _GLOBAL_CONST unsigned short cfgERR_LEASES_BUFFER;
- _GLOBAL_CONST unsigned short cfgERR_INTERFACELIST_BUFFER;
- _GLOBAL_CONST unsigned short cfgERR_DHCP_SERVER_STARTED;
- _GLOBAL_CONST unsigned short cfgERR_CIFS_DEFAULTPW_INVALID;
- _GLOBAL_CONST unsigned short cfgERR_INANODE_NUMBER_SET;
- _GLOBAL_CONST unsigned short cfgERR_CIFS_DEFAULTUSER_INVALID;
- _GLOBAL_CONST unsigned short cfgERR_CIFS_DOMAIN_INVALID;
- _GLOBAL_CONST unsigned short cfgERR_YEAR_INVALID;
- _GLOBAL_CONST unsigned short cfgERR_TIMEZONE;
- _GLOBAL_CONST unsigned short cfgERR_SYSTEM;
- _GLOBAL_CONST unsigned short cfgERR_SNTP_INTERVAL;
- _GLOBAL_CONST unsigned short cfgERR_SNTP_CLIENT;
- _GLOBAL_CONST unsigned short cfgERR_SNTP_SERVER;
- _GLOBAL_CONST unsigned short cfgERR_PARAM_NOT_SET;
- _GLOBAL_CONST unsigned short cfgERR_FTP_SDOWN;
- _GLOBAL_CONST unsigned short cfgERR_FTP_SINIT;
- _GLOBAL_CONST unsigned short cfgERR_INANODE_NOT_SUPPORTED;
- _GLOBAL_CONST unsigned short cfgERR_ARREG;
- _GLOBAL_CONST unsigned short cfgERR_SET_NOT_POSSIBLE;
- _GLOBAL_CONST unsigned short cfgERR_VALUE_INVALID;
- _GLOBAL_CONST unsigned short cfgERR_OPTION_INVALID;
- _GLOBAL_CONST unsigned short cfgERR_DEVICE_INVALID;
- _GLOBAL_CONST unsigned short cfgERR_DEVICE_NOT_EXIST;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct cfgLease_typ
 {	plcstring name[9];
@@ -358,22 +203,6 @@ typedef struct CfgGetBroadcastAddr
 	plcbit enable;
 } CfgGetBroadcastAddr_typ;
 
-typedef struct CfgSetBroadcastAddr
-{
-	/* VAR_INPUT (analog) */
-	unsigned long pDevice;
-	unsigned long pBroadcastAddr;
-	unsigned long Option;
-	/* VAR_OUTPUT (analog) */
-	unsigned short status;
-	/* VAR (analog) */
-	unsigned short i_state;
-	unsigned short i_result;
-	unsigned long i_tmp;
-	/* VAR_INPUT (digital) */
-	plcbit enable;
-} CfgSetBroadcastAddr_typ;
-
 typedef struct CfgGetEthBaudrate
 {
 	/* VAR_INPUT (analog) */
@@ -528,6 +357,62 @@ typedef struct CfgSetFTPServer
 	plcbit enable;
 } CfgSetFTPServer_typ;
 
+typedef struct CfgGetFTPServerPort
+{
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	unsigned short port;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgGetFTPServerPort_typ;
+
+typedef struct CfgSetFTPServerPort
+{
+	/* VAR_INPUT (analog) */
+	unsigned short port;
+	unsigned long option;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgSetFTPServerPort_typ;
+
+typedef struct CfgGetFTPServerBaseDataPort
+{
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	unsigned short port;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgGetFTPServerBaseDataPort_typ;
+
+typedef struct CfgSetFTPServerBaseDataPort
+{
+	/* VAR_INPUT (analog) */
+	unsigned short port;
+	unsigned long option;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgSetFTPServerBaseDataPort_typ;
+
 typedef struct CfgGetTimeOffset
 {
 	/* VAR_OUTPUT (analog) */
@@ -555,71 +440,6 @@ typedef struct CfgSetTimeOffset
 	/* VAR_INPUT (digital) */
 	plcbit enable;
 } CfgSetTimeOffset_typ;
-
-typedef struct CfgSetSntpServer
-{
-	/* VAR_INPUT (analog) */
-	unsigned long start;
-	unsigned long option;
-	/* VAR_OUTPUT (analog) */
-	unsigned short status;
-	/* VAR (analog) */
-	unsigned short i_state;
-	unsigned short i_result;
-	unsigned long i_tmp;
-	/* VAR_INPUT (digital) */
-	plcbit enable;
-} CfgSetSntpServer_typ;
-
-typedef struct CfgSetSntpClient
-{
-	/* VAR_INPUT (analog) */
-	unsigned long run;
-	unsigned long pServerAddr;
-	unsigned short sntpcInterval;
-	unsigned short rtcInterval;
-	unsigned long option;
-	/* VAR_OUTPUT (analog) */
-	unsigned short status;
-	unsigned char syncStatus;
-	/* VAR (analog) */
-	unsigned short i_state;
-	unsigned short i_result;
-	unsigned long i_tmp;
-	/* VAR_INPUT (digital) */
-	plcbit enable;
-} CfgSetSntpClient_typ;
-
-typedef struct CfgGetSntpcData
-{
-	/* VAR_INPUT (analog) */
-	unsigned long pServerAddr;
-	unsigned char Len;
-	/* VAR_OUTPUT (analog) */
-	unsigned short status;
-	unsigned long run;
-	unsigned short sntpcInterval;
-	unsigned short rtcInterval;
-	/* VAR (analog) */
-	unsigned short i_state;
-	unsigned short i_result;
-	unsigned long i_tmp;
-	/* VAR_INPUT (digital) */
-	plcbit enable;
-} CfgGetSntpcData_typ;
-
-typedef struct CfgGetSntpsData
-{
-	/* VAR_OUTPUT (analog) */
-	unsigned short status;
-	unsigned long run;
-	/* VAR (analog) */
-	unsigned short i_state;
-	unsigned short i_result;
-	unsigned long i_tmp;
-	/* VAR_INPUT (digital) */
-	plcbit enable;
-} CfgGetSntpsData_typ;
 
 typedef struct CfgSetNtpServer
 {
@@ -1175,6 +995,25 @@ typedef struct CfgSetWebServerStatus
 	plcbit enable;
 } CfgSetWebServerStatus_typ;
 
+typedef struct CfgSetDns
+{
+	/* VAR_INPUT (analog) */
+	unsigned short mode;
+	unsigned long pSuffix;
+	unsigned long pDnsAddr1;
+	unsigned long pDnsAddr2;
+	unsigned long pDnsAddr3;
+	unsigned long option;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgSetDns_typ;
+
 typedef struct CfgGetDnsMode
 {
 	/* VAR_OUTPUT (analog) */
@@ -1298,6 +1137,89 @@ typedef struct CfgRouteDelete
 	plcbit enable;
 } CfgRouteDelete_typ;
 
+typedef struct CfgSetSnmpMode
+{
+	/* VAR_INPUT (analog) */
+	unsigned long pDevice;
+	unsigned short mode;
+	unsigned long option;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgSetSnmpMode_typ;
+
+typedef struct CfgGetSnmpMode
+{
+	/* VAR_INPUT (analog) */
+	unsigned long pDevice;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	unsigned short mode;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgGetSnmpMode_typ;
+
+typedef struct CfgSetSnmpCredentials
+{
+	/* VAR_INPUT (analog) */
+	unsigned long pDevice;
+	unsigned long pUserName;
+	unsigned long pAuthPassphrase;
+	unsigned long pPrivPassphrase;
+	unsigned long option;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+} CfgSetSnmpCredentials_typ;
+
+typedef struct CfgSetNetworkInstallMode
+{
+	/* VAR_INPUT (analog) */
+	unsigned long pDevice;
+	unsigned long netInstTimeout;
+	unsigned long option;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+	plcbit netInstEnable;
+} CfgSetNetworkInstallMode_typ;
+
+typedef struct CfgGetNetworkInstallMode
+{
+	/* VAR_INPUT (analog) */
+	unsigned long pDevice;
+	/* VAR_OUTPUT (analog) */
+	unsigned short status;
+	unsigned long netInstTimeout;
+	/* VAR (analog) */
+	unsigned short i_state;
+	unsigned short i_result;
+	unsigned long i_tmp;
+	/* VAR_INPUT (digital) */
+	plcbit enable;
+	/* VAR_OUTPUT (digital) */
+	plcbit netInstEnabled;
+} CfgGetNetworkInstallMode_typ;
+
 
 
 /* Prototyping of functions and function blocks */
@@ -1312,7 +1234,6 @@ _BUR_PUBLIC void CfgSetClusterIPAddr(struct CfgSetClusterIPAddr* inst);
 _BUR_PUBLIC void CfgGetDefaultGateway(struct CfgGetDefaultGateway* inst);
 _BUR_PUBLIC void CfgSetDefaultGateway(struct CfgSetDefaultGateway* inst);
 _BUR_PUBLIC void CfgGetBroadcastAddr(struct CfgGetBroadcastAddr* inst);
-_BUR_PUBLIC void CfgSetBroadcastAddr(struct CfgSetBroadcastAddr* inst);
 _BUR_PUBLIC void CfgGetEthBaudrate(struct CfgGetEthBaudrate* inst);
 _BUR_PUBLIC void CfgSetEthBaudrate(struct CfgSetEthBaudrate* inst);
 _BUR_PUBLIC void CfgGetEthConfigMode(struct CfgGetEthConfigMode* inst);
@@ -1323,12 +1244,12 @@ _BUR_PUBLIC void CfgGetHostNameIf(struct CfgGetHostNameIf* inst);
 _BUR_PUBLIC void CfgSetHostNameIf(struct CfgSetHostNameIf* inst);
 _BUR_PUBLIC void CfgGetMacAddr(struct CfgGetMacAddr* inst);
 _BUR_PUBLIC void CfgSetFTPServer(struct CfgSetFTPServer* inst);
+_BUR_PUBLIC void CfgGetFTPServerPort(struct CfgGetFTPServerPort* inst);
+_BUR_PUBLIC void CfgSetFTPServerPort(struct CfgSetFTPServerPort* inst);
+_BUR_PUBLIC void CfgGetFTPServerBaseDataPort(struct CfgGetFTPServerBaseDataPort* inst);
+_BUR_PUBLIC void CfgSetFTPServerBaseDataPort(struct CfgSetFTPServerBaseDataPort* inst);
 _BUR_PUBLIC void CfgGetTimeOffset(struct CfgGetTimeOffset* inst);
 _BUR_PUBLIC void CfgSetTimeOffset(struct CfgSetTimeOffset* inst);
-_BUR_PUBLIC void CfgSetSntpServer(struct CfgSetSntpServer* inst);
-_BUR_PUBLIC void CfgSetSntpClient(struct CfgSetSntpClient* inst);
-_BUR_PUBLIC void CfgGetSntpcData(struct CfgGetSntpcData* inst);
-_BUR_PUBLIC void CfgGetSntpsData(struct CfgGetSntpsData* inst);
 _BUR_PUBLIC void CfgSetNtpServer(struct CfgSetNtpServer* inst);
 _BUR_PUBLIC void CfgGetNtpsData(struct CfgGetNtpsData* inst);
 _BUR_PUBLIC void CfgSetNtpClient(struct CfgSetNtpClient* inst);
@@ -1364,6 +1285,7 @@ _BUR_PUBLIC void CfgGetWebAspGoform(struct CfgGetWebAspGoform* inst);
 _BUR_PUBLIC void CfgSetWebAspGoform(struct CfgSetWebAspGoform* inst);
 _BUR_PUBLIC void CfgGetWebServerStatus(struct CfgGetWebServerStatus* inst);
 _BUR_PUBLIC void CfgSetWebServerStatus(struct CfgSetWebServerStatus* inst);
+_BUR_PUBLIC void CfgSetDns(struct CfgSetDns* inst);
 _BUR_PUBLIC void CfgGetDnsMode(struct CfgGetDnsMode* inst);
 _BUR_PUBLIC void CfgSetDnsMode(struct CfgSetDnsMode* inst);
 _BUR_PUBLIC void CfgGetDnsSuffix(struct CfgGetDnsSuffix* inst);
@@ -1372,7 +1294,174 @@ _BUR_PUBLIC void CfgGetDnsAddress(struct CfgGetDnsAddress* inst);
 _BUR_PUBLIC void CfgSetDnsAddress(struct CfgSetDnsAddress* inst);
 _BUR_PUBLIC void CfgRouteAdd(struct CfgRouteAdd* inst);
 _BUR_PUBLIC void CfgRouteDelete(struct CfgRouteDelete* inst);
+_BUR_PUBLIC void CfgSetSnmpMode(struct CfgSetSnmpMode* inst);
+_BUR_PUBLIC void CfgGetSnmpMode(struct CfgGetSnmpMode* inst);
+_BUR_PUBLIC void CfgSetSnmpCredentials(struct CfgSetSnmpCredentials* inst);
+_BUR_PUBLIC void CfgSetNetworkInstallMode(struct CfgSetNetworkInstallMode* inst);
+_BUR_PUBLIC void CfgGetNetworkInstallMode(struct CfgGetNetworkInstallMode* inst);
 _BUR_PUBLIC unsigned short CfgClearNV(void);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define cfgTIMEOUT_WAITFOREVER 4294967295U
+ #define cfgSNMP_MODE_READ_WRITE_SECURE 4U
+ #define cfgSNMP_MODE_READ_ONLY_SECURE 3U
+ #define cfgSNMP_MODE_READ_WRITE 2U
+ #define cfgSNMP_MODE_READ_ONLY 1U
+ #define cfgSNMP_MODE_DISABLED 0U
+ #define cfgDHCP_OPTION_CLIENT_ID 61U
+ #define cfgDHCP_OPTION_VENDOR_CLASS_ID 60U
+ #define cfgSDM_COLOR_DEFAULT 2147483648U
+ #define cfgSTATUS_NTP_INACTIVE 0U
+ #define cfgSTATUS_NTP_ACTIVE 1U
+ #define cfgNTP_STOP 0U
+ #define cfgNTP_START 1U
+ #define cfgOPTION_DNS_ON_DHCP 2U
+ #define cfgOPTION_DNS_ON_CONFIG 1U
+ #define cfgOPTION_DNS_OFF 0U
+ #define cfgWEB_MODE_ENABLED 1U
+ #define cfgWEB_MODE_DISABLED 0U
+ #define cfgWEB_MODE_MIME_ADD 1U
+ #define cfgWEB_MODE_MIME_DEL 0U
+ #define cfgWEB_MODE_GOFORM_NO_WRITE 2U
+ #define cfgWEB_MODE_GOFORM_ENABLE 1U
+ #define cfgWEB_MODE_GOFORM_DISABLE 0U
+ #define cfgSTATUS_SDM_DISABLED 2U
+ #define cfgSTATUS_SDM_ENABLED 1U
+ #define cfgOPTION_DISABLE_SDM 2U
+ #define cfgOPTION_ENABLE_SDM 1U
+ #define cfgOPTION_NON_WORKGROUP 0U
+ #define cfgOPTION_WORKGROUP 1U
+ #define cfgOPTION_ENABLE 1U
+ #define cfgOPTION_DISABLE 0U
+ #define cfgCONFIGMODE_DHCPCLIENT 1U
+ #define cfgCONFIGMODE_MANUALLY 0U
+ #define cfgOPTION_VOLATILE 0U
+ #define cfgOPTION_NON_VOLATILE 1U
+ #define cfgETHBAUDRATE_1000FD 1001U
+ #define cfgETHBAUDRATE_100AUTO 102U
+ #define cfgETHBAUDRATE_100FD 101U
+ #define cfgETHBAUDRATE_100 100U
+ #define cfgETHBAUDRATE_10AUTO 12U
+ #define cfgETHBAUDRATE_10FD 11U
+ #define cfgETHBAUDRATE_10 10U
+ #define cfgETHBAUDRATE_AUTO 0U
+ #define cfgERR_PORT_INVALID 29036U
+ #define cfgERR_DST 29035U
+ #define cfgERR_ROUTE_TABLE 29034U
+ #define cfgERR_NTP_CLIENT 29033U
+ #define cfgERR_NTP_SERVER 29032U
+ #define cfgERR_DHCP_NO_DHCP_IP_OBTAINED 29031U
+ #define cfgERR_WEBSERV_DISABLED 29030U
+ #define cfgERR_SDM_DISABLED 29029U
+ #define cfgERR_FUNCTION_NOT_FOUND 29028U
+ #define cfgERR_CLEAR_NV_DATA 29027U
+ #define cfgERR_SDM_FUNCTION_NOT_FOUND 29026U
+ #define cfgERR_DHCP_CONFIG 29025U
+ #define cfgERR_LEASE_TIMEOUT 29024U
+ #define cfgERR_LEASE_EXISTS 29023U
+ #define cfgERR_LEASES_BUFFER 29022U
+ #define cfgERR_INTERFACELIST_BUFFER 29021U
+ #define cfgERR_DHCP_SERVER_STARTED 29020U
+ #define cfgERR_CIFS_DEFAULTPW_INVALID 29019U
+ #define cfgERR_INANODE_NUMBER_SET 29018U
+ #define cfgERR_CIFS_DEFAULTUSER_INVALID 29017U
+ #define cfgERR_CIFS_DOMAIN_INVALID 29016U
+ #define cfgERR_YEAR_INVALID 29015U
+ #define cfgERR_TIMEZONE 29014U
+ #define cfgERR_SYSTEM 29013U
+ #define cfgERR_PARAM_NOT_SET 29009U
+ #define cfgERR_FTP_SDOWN 29008U
+ #define cfgERR_FTP_SINIT 29007U
+ #define cfgERR_INANODE_NOT_SUPPORTED 29006U
+ #define cfgERR_ARREG 29005U
+ #define cfgERR_SET_NOT_POSSIBLE 29004U
+ #define cfgERR_VALUE_INVALID 29003U
+ #define cfgERR_OPTION_INVALID 29002U
+ #define cfgERR_DEVICE_INVALID 29001U
+ #define cfgERR_DEVICE_NOT_EXIST 29000U
+#else
+ _GLOBAL_CONST unsigned long cfgTIMEOUT_WAITFOREVER;
+ _GLOBAL_CONST unsigned short cfgSNMP_MODE_READ_WRITE_SECURE;
+ _GLOBAL_CONST unsigned short cfgSNMP_MODE_READ_ONLY_SECURE;
+ _GLOBAL_CONST unsigned short cfgSNMP_MODE_READ_WRITE;
+ _GLOBAL_CONST unsigned short cfgSNMP_MODE_READ_ONLY;
+ _GLOBAL_CONST unsigned short cfgSNMP_MODE_DISABLED;
+ _GLOBAL_CONST unsigned char cfgDHCP_OPTION_CLIENT_ID;
+ _GLOBAL_CONST unsigned char cfgDHCP_OPTION_VENDOR_CLASS_ID;
+ _GLOBAL_CONST unsigned long cfgSDM_COLOR_DEFAULT;
+ _GLOBAL_CONST unsigned short cfgSTATUS_NTP_INACTIVE;
+ _GLOBAL_CONST unsigned short cfgSTATUS_NTP_ACTIVE;
+ _GLOBAL_CONST unsigned short cfgNTP_STOP;
+ _GLOBAL_CONST unsigned short cfgNTP_START;
+ _GLOBAL_CONST unsigned char cfgOPTION_DNS_ON_DHCP;
+ _GLOBAL_CONST unsigned char cfgOPTION_DNS_ON_CONFIG;
+ _GLOBAL_CONST unsigned char cfgOPTION_DNS_OFF;
+ _GLOBAL_CONST unsigned short cfgWEB_MODE_ENABLED;
+ _GLOBAL_CONST unsigned short cfgWEB_MODE_DISABLED;
+ _GLOBAL_CONST unsigned short cfgWEB_MODE_MIME_ADD;
+ _GLOBAL_CONST unsigned short cfgWEB_MODE_MIME_DEL;
+ _GLOBAL_CONST unsigned short cfgWEB_MODE_GOFORM_NO_WRITE;
+ _GLOBAL_CONST unsigned short cfgWEB_MODE_GOFORM_ENABLE;
+ _GLOBAL_CONST unsigned short cfgWEB_MODE_GOFORM_DISABLE;
+ _GLOBAL_CONST unsigned char cfgSTATUS_SDM_DISABLED;
+ _GLOBAL_CONST unsigned char cfgSTATUS_SDM_ENABLED;
+ _GLOBAL_CONST unsigned char cfgOPTION_DISABLE_SDM;
+ _GLOBAL_CONST unsigned char cfgOPTION_ENABLE_SDM;
+ _GLOBAL_CONST unsigned char cfgOPTION_NON_WORKGROUP;
+ _GLOBAL_CONST unsigned char cfgOPTION_WORKGROUP;
+ _GLOBAL_CONST unsigned long cfgOPTION_ENABLE;
+ _GLOBAL_CONST unsigned long cfgOPTION_DISABLE;
+ _GLOBAL_CONST unsigned long cfgCONFIGMODE_DHCPCLIENT;
+ _GLOBAL_CONST unsigned long cfgCONFIGMODE_MANUALLY;
+ _GLOBAL_CONST unsigned long cfgOPTION_VOLATILE;
+ _GLOBAL_CONST unsigned long cfgOPTION_NON_VOLATILE;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_1000FD;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_100AUTO;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_100FD;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_100;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_10AUTO;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_10FD;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_10;
+ _GLOBAL_CONST unsigned long cfgETHBAUDRATE_AUTO;
+ _GLOBAL_CONST unsigned short cfgERR_PORT_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_DST;
+ _GLOBAL_CONST unsigned short cfgERR_ROUTE_TABLE;
+ _GLOBAL_CONST unsigned short cfgERR_NTP_CLIENT;
+ _GLOBAL_CONST unsigned short cfgERR_NTP_SERVER;
+ _GLOBAL_CONST unsigned short cfgERR_DHCP_NO_DHCP_IP_OBTAINED;
+ _GLOBAL_CONST unsigned short cfgERR_WEBSERV_DISABLED;
+ _GLOBAL_CONST unsigned short cfgERR_SDM_DISABLED;
+ _GLOBAL_CONST unsigned short cfgERR_FUNCTION_NOT_FOUND;
+ _GLOBAL_CONST unsigned short cfgERR_CLEAR_NV_DATA;
+ _GLOBAL_CONST unsigned short cfgERR_SDM_FUNCTION_NOT_FOUND;
+ _GLOBAL_CONST unsigned short cfgERR_DHCP_CONFIG;
+ _GLOBAL_CONST unsigned short cfgERR_LEASE_TIMEOUT;
+ _GLOBAL_CONST unsigned short cfgERR_LEASE_EXISTS;
+ _GLOBAL_CONST unsigned short cfgERR_LEASES_BUFFER;
+ _GLOBAL_CONST unsigned short cfgERR_INTERFACELIST_BUFFER;
+ _GLOBAL_CONST unsigned short cfgERR_DHCP_SERVER_STARTED;
+ _GLOBAL_CONST unsigned short cfgERR_CIFS_DEFAULTPW_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_INANODE_NUMBER_SET;
+ _GLOBAL_CONST unsigned short cfgERR_CIFS_DEFAULTUSER_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_CIFS_DOMAIN_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_YEAR_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_TIMEZONE;
+ _GLOBAL_CONST unsigned short cfgERR_SYSTEM;
+ _GLOBAL_CONST unsigned short cfgERR_PARAM_NOT_SET;
+ _GLOBAL_CONST unsigned short cfgERR_FTP_SDOWN;
+ _GLOBAL_CONST unsigned short cfgERR_FTP_SINIT;
+ _GLOBAL_CONST unsigned short cfgERR_INANODE_NOT_SUPPORTED;
+ _GLOBAL_CONST unsigned short cfgERR_ARREG;
+ _GLOBAL_CONST unsigned short cfgERR_SET_NOT_POSSIBLE;
+ _GLOBAL_CONST unsigned short cfgERR_VALUE_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_OPTION_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_DEVICE_INVALID;
+ _GLOBAL_CONST unsigned short cfgERR_DEVICE_NOT_EXIST;
+#endif
+
+
 
 
 #ifdef __cplusplus

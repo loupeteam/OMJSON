@@ -27,7 +27,7 @@ END_FUNCTION_BLOCK
 		NodeVectorX : ARRAY[0..19] OF REAL; (*Lookup table points on the X-Axis*)
 		NodeVectorY : ARRAY[0..19] OF REAL; (*Lookup table points on the Y-Axis*)
 		FcnValues : ARRAY[0..19,0..19] OF REAL; (*Lookup table points on the Z-Axis*)
-		NumberOfNodesX : USINT; (*Number of nodes from the node vector that are used to define the 2D-function 'f(x,y)'. Valid value range: 21> NumberOfNodesX > 1.*)
+		NumberOfNodesX : USINT; (*Number of nodes from the node vector that are used to define the 2D-function 'f(x,y)'. Valid value range: 21 > NumberOfNodesX > 1.*)
 		NumberOfNodesY : USINT; (*Number of nodes from the node vector that are used to define the 2D-function 'f(x,y)'. Valid value range: 21 > NumberOfNodesY > 1.*)
 		Update : BOOL; (*Changes to NumberOfNodesX, NumberOfNodesY and the node vector listed above only go into effect at the positive edge of Update.*)
 		InX : REAL; (*x-coordinate of 'f(x,y)'. Valid value range: X1 <= x <= Xj.*)

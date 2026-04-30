@@ -30,4 +30,18 @@ VAR CONSTANT
    asdiagPLUGGED  	: UDINT :=	1;				(*information about inserted modules*)
    asdiagCONFIGURED : UDINT :=	2;				(*information about configured modules*)
    asdiagALL 	    : UDINT :=	3;				(*information about inserted and configured modules*)
+   
+(* family code of the inserted module. from obsolete FB HWInfo(), BRSystem library *)
+   br2010					: USINT :=	0;		(*series recognition*)
+   br2005					: USINT :=	1; 		(*series recognition*)
+   br2003					: USINT :=	2; 		(*series recognition*)
+   brLOGIGSCANNER			: USINT :=	3; 		(*series recognition*)
+   brAUTOMATION_RUNTIME		: USINT :=	4; 		(*series recognition*)
+   brPOWERPANEL				: USINT :=	5; 		(*series recognition*)
+   brPANEL					: USINT :=	6; 		(*series recognition*)
+   brADDON					: USINT :=	7; 		(*series recognition*)
+   brC300					: USINT :=	8; 		(*series recognition*)
+   brC200					: USINT :=	9; 		(*series recognition*)
+   brX2X					: USINT :=	10;		(*series recognition*)
+   brNO_FAMILY				: USINT :=	255; 	(*series recognition*)
 END_VAR

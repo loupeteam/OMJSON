@@ -10,68 +10,11 @@ extern "C"
 
 #include <bur/plctypes.h>
 
+#include <runtime.h>
+
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define xmlNODE_TYPE_ENDELEMENT 15U
- #define xmlNODE_TYPE_SIGN_WHITESPACE 14U
- #define xmlNODE_TYPE_WHITESPACE 13U
- #define xmlNODE_TYPE_COMMENT 8U
- #define xmlNODE_TYPE_PI 7U
- #define xmlNODE_TYPE_CDATA 4U
- #define xmlNODE_TYPE_TEXT 3U
- #define xmlNODE_TYPE_ELEMENT 1U
- #define xmlERR_DOCUMENT_NOT_OPEN 33825U
- #define xmlERR_UNSUPPORTED_ENCODING 33824U
- #define xmlERR_CONVERT_TEXT 33823U
- #define xmlERR_CONVERT 33822U
- #define xmlERR_INVALID_POSITION 33821U
- #define xmlERR_NO_ELEMENT_OPEN 33820U
- #define xmlERR_INVALID_IDENT 33819U
- #define xmlERR_XML_DATA_INVALID 33818U
- #define xmlERR_NO_ATTRIBUTES 33817U
- #define xmlERR_INVALID_ATTRIBUTE_INDEX 33816U
- #define xmlERR_VALUE_BUFFER_TOO_SMALL 33815U
- #define xmlERR_NAME_BUFFER_TOO_SMALL 33814U
- #define xmlERR_NO_FURTHER_XML_NODE 33813U
- #define xmlERR_GENERAL 33812U
- #define xmlERR_INVALID_PARAMETER 33811U
- #define xmlERR_MEMORY 33810U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_ENDELEMENT;
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_SIGN_WHITESPACE;
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_WHITESPACE;
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_COMMENT;
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_PI;
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_CDATA;
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_TEXT;
- _GLOBAL_CONST unsigned short xmlNODE_TYPE_ELEMENT;
- _GLOBAL_CONST unsigned short xmlERR_DOCUMENT_NOT_OPEN;
- _GLOBAL_CONST unsigned short xmlERR_UNSUPPORTED_ENCODING;
- _GLOBAL_CONST unsigned short xmlERR_CONVERT_TEXT;
- _GLOBAL_CONST unsigned short xmlERR_CONVERT;
- _GLOBAL_CONST unsigned short xmlERR_INVALID_POSITION;
- _GLOBAL_CONST unsigned short xmlERR_NO_ELEMENT_OPEN;
- _GLOBAL_CONST unsigned short xmlERR_INVALID_IDENT;
- _GLOBAL_CONST unsigned short xmlERR_XML_DATA_INVALID;
- _GLOBAL_CONST unsigned short xmlERR_NO_ATTRIBUTES;
- _GLOBAL_CONST unsigned short xmlERR_INVALID_ATTRIBUTE_INDEX;
- _GLOBAL_CONST unsigned short xmlERR_VALUE_BUFFER_TOO_SMALL;
- _GLOBAL_CONST unsigned short xmlERR_NAME_BUFFER_TOO_SMALL;
- _GLOBAL_CONST unsigned short xmlERR_NO_FURTHER_XML_NODE;
- _GLOBAL_CONST unsigned short xmlERR_GENERAL;
- _GLOBAL_CONST unsigned short xmlERR_INVALID_PARAMETER;
- _GLOBAL_CONST unsigned short xmlERR_MEMORY;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct xmlCreateMemoryReader
 {
@@ -340,6 +283,62 @@ _BUR_PUBLIC void xmlWriteCommentEx(struct xmlWriteCommentEx* inst);
 _BUR_PUBLIC void xmlWriteCData(struct xmlWriteCData* inst);
 _BUR_PUBLIC void xmlWriteCDataEx(struct xmlWriteCDataEx* inst);
 _BUR_PUBLIC void xmlWritePI(struct xmlWritePI* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define xmlNODE_TYPE_ENDELEMENT 15U
+ #define xmlNODE_TYPE_SIGN_WHITESPACE 14U
+ #define xmlNODE_TYPE_WHITESPACE 13U
+ #define xmlNODE_TYPE_COMMENT 8U
+ #define xmlNODE_TYPE_PI 7U
+ #define xmlNODE_TYPE_CDATA 4U
+ #define xmlNODE_TYPE_TEXT 3U
+ #define xmlNODE_TYPE_ELEMENT 1U
+ #define xmlERR_DOCUMENT_NOT_OPEN 33825U
+ #define xmlERR_UNSUPPORTED_ENCODING 33824U
+ #define xmlERR_CONVERT_TEXT 33823U
+ #define xmlERR_CONVERT 33822U
+ #define xmlERR_INVALID_POSITION 33821U
+ #define xmlERR_NO_ELEMENT_OPEN 33820U
+ #define xmlERR_INVALID_IDENT 33819U
+ #define xmlERR_XML_DATA_INVALID 33818U
+ #define xmlERR_NO_ATTRIBUTES 33817U
+ #define xmlERR_INVALID_ATTRIBUTE_INDEX 33816U
+ #define xmlERR_VALUE_BUFFER_TOO_SMALL 33815U
+ #define xmlERR_NAME_BUFFER_TOO_SMALL 33814U
+ #define xmlERR_NO_FURTHER_XML_NODE 33813U
+ #define xmlERR_GENERAL 33812U
+ #define xmlERR_INVALID_PARAMETER 33811U
+ #define xmlERR_MEMORY 33810U
+#else
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_ENDELEMENT;
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_SIGN_WHITESPACE;
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_WHITESPACE;
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_COMMENT;
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_PI;
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_CDATA;
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_TEXT;
+ _GLOBAL_CONST unsigned short xmlNODE_TYPE_ELEMENT;
+ _GLOBAL_CONST unsigned short xmlERR_DOCUMENT_NOT_OPEN;
+ _GLOBAL_CONST unsigned short xmlERR_UNSUPPORTED_ENCODING;
+ _GLOBAL_CONST unsigned short xmlERR_CONVERT_TEXT;
+ _GLOBAL_CONST unsigned short xmlERR_CONVERT;
+ _GLOBAL_CONST unsigned short xmlERR_INVALID_POSITION;
+ _GLOBAL_CONST unsigned short xmlERR_NO_ELEMENT_OPEN;
+ _GLOBAL_CONST unsigned short xmlERR_INVALID_IDENT;
+ _GLOBAL_CONST unsigned short xmlERR_XML_DATA_INVALID;
+ _GLOBAL_CONST unsigned short xmlERR_NO_ATTRIBUTES;
+ _GLOBAL_CONST unsigned short xmlERR_INVALID_ATTRIBUTE_INDEX;
+ _GLOBAL_CONST unsigned short xmlERR_VALUE_BUFFER_TOO_SMALL;
+ _GLOBAL_CONST unsigned short xmlERR_NAME_BUFFER_TOO_SMALL;
+ _GLOBAL_CONST unsigned short xmlERR_NO_FURTHER_XML_NODE;
+ _GLOBAL_CONST unsigned short xmlERR_GENERAL;
+ _GLOBAL_CONST unsigned short xmlERR_INVALID_PARAMETER;
+ _GLOBAL_CONST unsigned short xmlERR_MEMORY;
+#endif
+
+
 
 
 #ifdef __cplusplus

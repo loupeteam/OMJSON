@@ -185,3 +185,35 @@ FUNCTION stringpTime : DATE_AND_TIME (*Parse time string*)
 		format : UDINT; (*Assumed format of time string*)
 	END_VAR
 END_FUNCTION
+
+FUNCTION stringdtoa : UDINT
+	VAR_INPUT
+		value : LREAL;
+		buffer : STRING[80];
+		ndigits : UDINT;
+		bufferSize : UDINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION stringftoa : UDINT
+	VAR_INPUT
+		value : REAL;
+		buffer : STRING[80];
+		ndigits : UDINT;
+		bufferSize : UDINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION stringstrtod : LREAL
+	VAR_INPUT
+		value : STRING[80];
+		pEnd : REFERENCE TO STRING[80];
+	END_VAR
+END_FUNCTION
+
+FUNCTION stringstrtof : REAL
+	VAR_INPUT
+		value : STRING[80];
+		pEnd : REFERENCE TO STRING[80];
+	END_VAR
+END_FUNCTION

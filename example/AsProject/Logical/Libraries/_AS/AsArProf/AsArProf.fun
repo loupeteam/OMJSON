@@ -162,8 +162,8 @@ END_FUNCTION_BLOCK
 {REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK LogIdleShow				(*shows the idle time; asynchronous execution*)
 	VAR_INPUT
 		enable				: BOOL;		(*enables execution*)
-		measurementPeriod	: UDINT;	(*period for measurement in ms range: 100 - 60000*)
-		measurementLevel	: UDINT;	(*level of idle measurement range: 1 - 189*)
+		measurementPeriod	: UDINT;	(*milliseconds in range (100 - 60000)*)
+		measurementLevel	: UDINT;	(*priority level in range (1 - 189)*)
 	END_VAR
 
 	VAR
@@ -173,8 +173,23 @@ END_FUNCTION_BLOCK
 
 	VAR_OUTPUT
 		status		: UINT;				(*execution status: ERR_OK, ERR_FUB_ENABLE_FALSE, ERR_FUB_BUSY, 0xXXXX = see help*)
-		totalTime	: UDINT;			(*total time of the measurement [µs]*)
-		idleTime	: UDINT;			(*idle time during the measurement [µs]*)
-		idleRate	: UDINT;			(*idle time during the measurement [%]*)
+		totalTime	: UDINT;			(*total time of the measurement in microseconds*)
+		idleTime	: UDINT;			(*idle time during the measurement in microseconds*)
+		idleRate	: UDINT;			(*idle time during the measurement in percent*)
 	END_VAR
 END_FUNCTION_BLOCK
+
+{REDUND_OK} FUNCTION CpuGetNumberOfCores : UDINT (*get the number of cores of the CPU*)
+END_FUNCTION
+
+{REDUND_OK} FUNCTION CpuGetLoadByCore : UDINT (*get the load of one CPU core. Range: 0..100*)
+	VAR_INPUT
+		core	:UDINT;                     (*the number of the core, starting from 0 *)
+	END_VAR
+END_FUNCTION
+
+{REDUND_OK} FUNCTION CpuIsCoreReserved : BOOL (*returns true when the core is reserved, and thus can only be used for specific IO tasks*)
+	VAR_INPUT
+		core	:UDINT;                     (*the number of the core, starting from 0 *)
+	END_VAR
+END_FUNCTION

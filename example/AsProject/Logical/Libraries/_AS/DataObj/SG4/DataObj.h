@@ -15,65 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define doTEMP 65U
- #define doFIXRAM 5U
- #define doMEMCARD 4U
- #define doUSRRAM 3U
- #define doUSRROM 2U
- #define doNO_CS 1U
- #define doSYSROM 0U
- #define doERR_MODULDELETE_SYSROM 20615U
- #define doERR_BURNINGOBJECT 20614U
- #define doERR_ILLSTATE 20611U
- #define doERR_NOMEMORY 20603U
- #define doERR_BRINSTALL 20604U
- #define doERR_DUPOBJECT 20601U
- #define doERR_ILLOBJECT 20605U
- #define doERR_WRONGTIME 20610U
- #define doERR_ILLMEMTYPE 20602U
- #define doERR_ILLOBJTYPE 20606U
- #define doERR_WRONGOFFSET 20607U
- #define doERR_ILLPARAMETER 20600U
- #define doERR_STARTHANDLER 20612U
- #define doERR_ILLEGALLENGTH 20608U
- #define doERR_MODULNOTFOUND 20609U
- #define doERR_CHECKSUM_WARNING 20630U
- #define doERR_TOOLONG_MODULNAME 20613U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned char doTEMP;
- _GLOBAL_CONST unsigned char doFIXRAM;
- _GLOBAL_CONST unsigned char doMEMCARD;
- _GLOBAL_CONST unsigned char doUSRRAM;
- _GLOBAL_CONST unsigned char doUSRROM;
- _GLOBAL_CONST unsigned char doNO_CS;
- _GLOBAL_CONST unsigned char doSYSROM;
- _GLOBAL_CONST unsigned short doERR_MODULDELETE_SYSROM;
- _GLOBAL_CONST unsigned short doERR_BURNINGOBJECT;
- _GLOBAL_CONST unsigned short doERR_ILLSTATE;
- _GLOBAL_CONST unsigned short doERR_NOMEMORY;
- _GLOBAL_CONST unsigned short doERR_BRINSTALL;
- _GLOBAL_CONST unsigned short doERR_DUPOBJECT;
- _GLOBAL_CONST unsigned short doERR_ILLOBJECT;
- _GLOBAL_CONST unsigned short doERR_WRONGTIME;
- _GLOBAL_CONST unsigned short doERR_ILLMEMTYPE;
- _GLOBAL_CONST unsigned short doERR_ILLOBJTYPE;
- _GLOBAL_CONST unsigned short doERR_WRONGOFFSET;
- _GLOBAL_CONST unsigned short doERR_ILLPARAMETER;
- _GLOBAL_CONST unsigned short doERR_STARTHANDLER;
- _GLOBAL_CONST unsigned short doERR_ILLEGALLENGTH;
- _GLOBAL_CONST unsigned short doERR_MODULNOTFOUND;
- _GLOBAL_CONST unsigned short doERR_CHECKSUM_WARNING;
- _GLOBAL_CONST unsigned short doERR_TOOLONG_MODULNAME;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct DatObjCreate
 {
@@ -241,6 +182,62 @@ _BUR_PUBLIC void DatObjInfo(struct DatObjInfo* inst);
 _BUR_PUBLIC void DatObjChangeDate(struct DatObjChangeDate* inst);
 _BUR_PUBLIC void DatObjAttach(struct DatObjAttach* inst);
 _BUR_PUBLIC void DatObjDetach(struct DatObjDetach* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define doTEMP 65U
+ #define doFIXRAM 5U
+ #define doMEMCARD 4U
+ #define doUSRRAM 3U
+ #define doUSRROM 2U
+ #define doNO_CS 1U
+ #define doSYSROM 0U
+ #define doERR_MODULDELETE_SYSROM 20615U
+ #define doERR_BURNINGOBJECT 20614U
+ #define doERR_ILLSTATE 20611U
+ #define doERR_NOMEMORY 20603U
+ #define doERR_BRINSTALL 20604U
+ #define doERR_DUPOBJECT 20601U
+ #define doERR_ILLOBJECT 20605U
+ #define doERR_WRONGTIME 20610U
+ #define doERR_ILLMEMTYPE 20602U
+ #define doERR_ILLOBJTYPE 20606U
+ #define doERR_WRONGOFFSET 20607U
+ #define doERR_ILLPARAMETER 20600U
+ #define doERR_STARTHANDLER 20612U
+ #define doERR_ILLEGALLENGTH 20608U
+ #define doERR_MODULNOTFOUND 20609U
+ #define doERR_CHECKSUM_WARNING 20630U
+ #define doERR_TOOLONG_MODULNAME 20613U
+#else
+ _GLOBAL_CONST unsigned char doTEMP;
+ _GLOBAL_CONST unsigned char doFIXRAM;
+ _GLOBAL_CONST unsigned char doMEMCARD;
+ _GLOBAL_CONST unsigned char doUSRRAM;
+ _GLOBAL_CONST unsigned char doUSRROM;
+ _GLOBAL_CONST unsigned char doNO_CS;
+ _GLOBAL_CONST unsigned char doSYSROM;
+ _GLOBAL_CONST unsigned short doERR_MODULDELETE_SYSROM;
+ _GLOBAL_CONST unsigned short doERR_BURNINGOBJECT;
+ _GLOBAL_CONST unsigned short doERR_ILLSTATE;
+ _GLOBAL_CONST unsigned short doERR_NOMEMORY;
+ _GLOBAL_CONST unsigned short doERR_BRINSTALL;
+ _GLOBAL_CONST unsigned short doERR_DUPOBJECT;
+ _GLOBAL_CONST unsigned short doERR_ILLOBJECT;
+ _GLOBAL_CONST unsigned short doERR_WRONGTIME;
+ _GLOBAL_CONST unsigned short doERR_ILLMEMTYPE;
+ _GLOBAL_CONST unsigned short doERR_ILLOBJTYPE;
+ _GLOBAL_CONST unsigned short doERR_WRONGOFFSET;
+ _GLOBAL_CONST unsigned short doERR_ILLPARAMETER;
+ _GLOBAL_CONST unsigned short doERR_STARTHANDLER;
+ _GLOBAL_CONST unsigned short doERR_ILLEGALLENGTH;
+ _GLOBAL_CONST unsigned short doERR_MODULNOTFOUND;
+ _GLOBAL_CONST unsigned short doERR_CHECKSUM_WARNING;
+ _GLOBAL_CONST unsigned short doERR_TOOLONG_MODULNAME;
+#endif
+
+
 
 
 #ifdef __cplusplus

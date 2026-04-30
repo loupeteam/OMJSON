@@ -15,31 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define zipERR_FILE_WRITE_ERROR 38066U
- #define zipERR_FILE_NOT_FOUND 38065U
- #define zipERR_SPACE 38064U
- #define zipERR_INTERNAL_ERROR 38063U
- #define zipERR_UNSUPPORTED_EXTENSION 38062U
- #define zipERR_INVALID_DEVICE 38061U
- #define zipERR_NULLPOINTER 38060U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned short zipERR_FILE_WRITE_ERROR;
- _GLOBAL_CONST unsigned short zipERR_FILE_NOT_FOUND;
- _GLOBAL_CONST unsigned short zipERR_SPACE;
- _GLOBAL_CONST unsigned short zipERR_INTERNAL_ERROR;
- _GLOBAL_CONST unsigned short zipERR_UNSUPPORTED_EXTENSION;
- _GLOBAL_CONST unsigned short zipERR_INVALID_DEVICE;
- _GLOBAL_CONST unsigned short zipERR_NULLPOINTER;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct zipArchive
 {
@@ -80,6 +55,28 @@ typedef struct zipExtract
 /* Prototyping of functions and function blocks */
 _BUR_PUBLIC void zipArchive(struct zipArchive* inst);
 _BUR_PUBLIC void zipExtract(struct zipExtract* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define zipERR_FILE_WRITE_ERROR 38066U
+ #define zipERR_FILE_NOT_FOUND 38065U
+ #define zipERR_SPACE 38064U
+ #define zipERR_INTERNAL_ERROR 38063U
+ #define zipERR_UNSUPPORTED_EXTENSION 38062U
+ #define zipERR_INVALID_DEVICE 38061U
+ #define zipERR_NULLPOINTER 38060U
+#else
+ _GLOBAL_CONST unsigned short zipERR_FILE_WRITE_ERROR;
+ _GLOBAL_CONST unsigned short zipERR_FILE_NOT_FOUND;
+ _GLOBAL_CONST unsigned short zipERR_SPACE;
+ _GLOBAL_CONST unsigned short zipERR_INTERNAL_ERROR;
+ _GLOBAL_CONST unsigned short zipERR_UNSUPPORTED_EXTENSION;
+ _GLOBAL_CONST unsigned short zipERR_INVALID_DEVICE;
+ _GLOBAL_CONST unsigned short zipERR_NULLPOINTER;
+#endif
+
+
 
 
 #ifdef __cplusplus

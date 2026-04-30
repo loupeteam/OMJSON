@@ -1,7 +1,7 @@
 {
   "name": "@loupeteam/vartools",
-  "version": "0.11.3",
-  "description": "Loupe's vartools library for Automation Runtime",
+  "version": "1.0.0",
+  "description": "Helper library for getting and setting variable values in B&R Automation Studio",
   "homepage": "https://loupeteam.github.io/LoupeDocs/libraries/vartools.html",
   "scripts": {},
   "keywords": [],
@@ -15,6 +15,6 @@
     "type": "library"
   },
   "dependencies": {
-    "@loupeteam/stringext": ">=0.14.0 <=0.14.9"
+    "@loupeteam/stringext": "*"
   }
 }

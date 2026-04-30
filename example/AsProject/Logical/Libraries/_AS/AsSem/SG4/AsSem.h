@@ -15,27 +15,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define semERR_ALREADY_FREE 33324U
- #define semERR_NOT_FREE 33323U
- #define semERR_NOT_EXIST 33322U
- #define semERR_DELETE 33321U
- #define semERR_CREATE 33320U
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST unsigned short semERR_ALREADY_FREE;
- _GLOBAL_CONST unsigned short semERR_NOT_FREE;
- _GLOBAL_CONST unsigned short semERR_NOT_EXIST;
- _GLOBAL_CONST unsigned short semERR_DELETE;
- _GLOBAL_CONST unsigned short semERR_CREATE;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef struct SemCreate
 {
@@ -87,6 +66,24 @@ _BUR_PUBLIC void SemDelete(struct SemDelete* inst);
 _BUR_PUBLIC void SemGetInfo(struct SemGetInfo* inst);
 _BUR_PUBLIC unsigned short SemAcquire(unsigned long ident);
 _BUR_PUBLIC unsigned short SemRelease(unsigned long ident);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define semERR_ALREADY_FREE 33324U
+ #define semERR_NOT_FREE 33323U
+ #define semERR_NOT_EXIST 33322U
+ #define semERR_DELETE 33321U
+ #define semERR_CREATE 33320U
+#else
+ _GLOBAL_CONST unsigned short semERR_ALREADY_FREE;
+ _GLOBAL_CONST unsigned short semERR_NOT_FREE;
+ _GLOBAL_CONST unsigned short semERR_NOT_EXIST;
+ _GLOBAL_CONST unsigned short semERR_DELETE;
+ _GLOBAL_CONST unsigned short semERR_CREATE;
+#endif
+
+
 
 
 #ifdef __cplusplus

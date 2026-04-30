@@ -1,7 +1,7 @@
 {
   "name": "@loupeteam/stringext",
-  "version": "0.14.4",
-  "description": "Loupe's stringext library for Automation Runtime",
+  "version": "1.0.0",
+  "description": "String manipulation functions for B&R Automation Studio (ANSIC library)",
   "homepage": "https://loupeteam.github.io/LoupeDocs/libraries/stringext.html",
   "scripts": {},
   "keywords": [],

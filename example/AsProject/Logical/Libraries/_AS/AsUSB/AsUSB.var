@@ -14,13 +14,13 @@ VAR CONSTANT
 
 	asusb_DEVICENAMELENGTH			: USINT := 128;		
 
-	asusb_USB_RT_DEVICE				: USINT := 0;		(* Requesttype for device *)
-	asusb_USB_RT_INTERFACE			: USINT := 1;		(* Requesttype for interface *)
-	asusb_USB_RT_ENDPOINT			: USINT := 2;		(* Requesttype for endpoint *)
+	asusb_USB_RT_DEVICE				: USINT := 0;		(* Request type for device *)
+	asusb_USB_RT_INTERFACE			: USINT := 1;		(* Request type for interface *)
+	asusb_USB_RT_ENDPOINT			: USINT := 2;		(* Request type for endpoint *)
 
-	asusb_USB_RT_STANDARD			: USINT := 0;		(* Requesttype standard *)
-	asusb_USB_RT_CLASS				: USINT := 32;		(* Requesttype class-specific *)
-	asusb_USB_RT_VENDOR				: USINT := 64;		(* Requesttype vendor-specific *)
+	asusb_USB_RT_STANDARD			: USINT := 0;		(* Request type standard *)
+	asusb_USB_RT_CLASS				: USINT := 32;		(* Request type class-specific *)
+	asusb_USB_RT_VENDOR				: USINT := 64;		(* Request type vendor-specific *)
 
 	asusb_USB_DESCR_DEVICE			: USINT := 1;		(* Specifies the DEVICE descriptor *)
 	asusb_USB_DESCR_CONFIG			: USINT := 2;		(* Specifies the CONFIGURATION descriptor *)
@@ -30,8 +30,8 @@ VAR CONSTANT
 
 	asusb_USB_UNICODE_ENGLISH		: UINT	:= 1033;	(* languageId unicode english *)
 
-	asusbERR_USB_NOTFOUND			: UINT	:= 32900;   (* Es wurde kein USB Gerät gefunden keine USB Geräte angesteckt *)
-	asusbERR_BUFSIZE				: UINT	:= 32901;	(* Die übergebene Speicherlänge ist zu klein Größeren Speicher reservieren  *)
-	asusbERR_NULLPOINTER			: UINT	:= 32902;	(* pBuffer ist nicht gesetzt pBuffer setzen *)
+	asusbERR_USB_NOTFOUND			: UINT	:= 32900;   (* No USB device found *)
+	asusbERR_BUFSIZE				: UINT	:= 32901;	(* Buffer is too small to fit requested data *)
+	asusbERR_NULLPOINTER			: UINT	:= 32902;	(* Null pointer value is passed as input parameter *)
 
 END_VAR

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio FileVersion="4.9"?>
-<Library Version="1.04.3" SubType="ANSIC" xmlns="http://br-automation.co.at/AS/Library">
+<Library Version="2.0.0" SubType="ANSIC" xmlns="http://br-automation.co.at/AS/Library">
   <Files>
     <File Description="Exported data types">OMJSON.typ</File>
     <File Description="Exported constants">OMJSON.var</File>
@@ -24,15 +24,15 @@
     <File>jsonInternalWrapper.c</File>
   </Files>
   <Dependencies>
-    <Dependency ObjectName="VarTools" FromVersion="0.09.1" ToVersion="0.11.9" />
+    <Dependency ObjectName="VarTools" FromVersion="1.0.0" />
     <Dependency ObjectName="sys_lib" />
-    <Dependency ObjectName="DataBuffer" FromVersion="0.01.0" ToVersion="0.01.9" />
+    <Dependency ObjectName="DataBuffer" FromVersion="1.0.0" />
     <Dependency ObjectName="AsHttp" />
     <Dependency ObjectName="runtime" />
-    <Dependency ObjectName="TCPComm" FromVersion="0.10.0" ToVersion="0.10.9" />
+    <Dependency ObjectName="TCPComm" FromVersion="1.0.0" />
     <Dependency ObjectName="standard" />
     <Dependency ObjectName="AsBrStr" />
-    <Dependency ObjectName="StringExt" FromVersion="0.14.0" ToVersion="0.15.9" />
-    <Dependency ObjectName="WebSocket" FromVersion="0.02.2" ToVersion="0.99.9"/>
+    <Dependency ObjectName="StringExt" FromVersion="1.0.0" />
+    <Dependency ObjectName="WebSocket" FromVersion="1.0.0" />
   </Dependencies>
 </Library>
