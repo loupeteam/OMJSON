@@ -1,16 +1,20 @@
 {
     "name": "@loupeteam/luxprog",
-    "version": "0.2.1",
+    "version": "1.0.0",
     "description": "This is a program package. It includes a task that runs the OMJSON FUB and acts as a server on the PLC for the Loupe UX application",
+    "homepage": "https://loupeteam.github.io/LoupeDocs/programs/luxprog.html",
     "author": "Loupe",
     "license": "MIT",
     "repository": {
       "type": "git",
-      "url": "https://github.com/loupeteam/OMJSON"
+      "url": "git+https://github.com/loupeteam/OMJSON.git"
+    },
+    "publishConfig": {
+      "registry": "https://npm.pkg.github.com"
     },
     "dependencies": {
-      "@loupeteam/omjson": "^1.4.0",
-      "@loupeteam/hammers": "^0.10.0"
+      "@loupeteam/omjson": ">=2.0.0",
+      "@loupeteam/hammers": ">=1.0.0"
     },
     "lpm": {
       "type": "program",
